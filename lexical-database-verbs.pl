@@ -1,0 +1,2 @@
+verb("fica");
+verb("custa");
