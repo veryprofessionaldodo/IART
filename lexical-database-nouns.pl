@@ -1,0 +1,1 @@
+/* nome (N, Num, Gen). */ 
