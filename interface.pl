@@ -1,14 +1,14 @@
-/*------------------------*/
-/* MAIN PROGRAM INTERFACE */
-/*------------------------*/
+/*-----------------------*/
+/* INTERFACE DO PROGRAMA */
+/*-----------------------*/
 
-start:- 
-    write('Write your query! End with "." or "?" for a valid question.\n Query: '),
+inicio:- 
+    write('Escreve a tua pergunta! Termina com "." ou "?" para a questão ser válida.\nPergunta: '),
     read_line(user_input, X), 
-    parse_line(X, [], [], L), 
+    parse_input(X, [], [], L), 
     write(L).
 
-parse_line([Head|Body], CurrWord, TmpList, Words) :-
+parse_input([Head|Body], CurrWord, TmpList, Words) :-
     char_code(Char, Head),
     ( (Head == 32 ; Head == 46 ; Head == 63) -> 
         ( % Is a new Word
@@ -23,10 +23,10 @@ parse_line([Head|Body], CurrWord, TmpList, Words) :-
         )
     ),
 
-    parse_line(Body, NewWord, NewList, Words).
+    parse_input(Body, NewWord, NewList, Words).
 
-parse_line([], [], Words, Words).
+parse_input([], [], Words, Words).
 
-parse_line([],CurrWord, Words, List) :- 
+parse_input([],CurrWord, Words, List) :- 
     atom_chars(TmpWord, CurrWord),
     append(Words, [TmpWord], List).
