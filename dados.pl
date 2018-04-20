@@ -87,6 +87,9 @@ pais(38, Venezuela, 4).
 /*------------------------*/
 
 % cidade(IDCidade, NomeCidade, IDPais).
+cidade(1, 'Tirana', 1).
+cidade(2, 'Durres', 1).
+
 
 /*------------------------*/
 /*        MORADAS         */
@@ -99,12 +102,12 @@ pais(38, Venezuela, 4).
 /*------------------------*/
 
 % servico(Nome).
-serviço(babysitting).
-serviço(limpeza_de_quartos).
-serviço(garagem_privativa).
-serviço(wifi).
-serviço(pequeno_almoço).
-serviço(ginasio).
+servico(babysitting).
+servico(limpeza_de_quartos).
+servico(garagem_privativa).
+servico(wifi).
+servico(pequeno_almoço).
+servico(ginasio).
 
 /*------------------------*/
 /*       TEM QUARTO       */
