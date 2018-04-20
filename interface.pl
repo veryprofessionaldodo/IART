@@ -1,3 +1,5 @@
+:-consult('gramatica.pl').
+
 /*-----------------------*/
 /* INTERFACE DO PROGRAMA */
 /*-----------------------*/
@@ -5,8 +7,11 @@
 inicio:- 
     write('Escreve a tua pergunta! Termina com "." ou "?" para a questão ser válida.\nPergunta: '),
     read_line(user_input, X), 
-    parse_input(X, [], [], L), 
-    write(L).
+    parse_input(X, [], [], ListWords), 
+
+    frase(ListWords, Response),
+
+    write(Response).
 
 parse_input([Head|Body], CurrWord, TmpList, Words) :-
     char_code(Char, Head),

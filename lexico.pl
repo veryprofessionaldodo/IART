@@ -2,6 +2,8 @@
 /*        NOMES         */
 /*----------------------*/
 
+    
+
 /*----------------------*/
 /*     DETERMINANTES    */
 /*----------------------*/
@@ -16,21 +18,36 @@ detereminante(p-m) --> [os].
 /*        VERBOS        */
 /*----------------------*/
 
-%verbo(num, verbo-forma) --> [verbo_conjugado].
-verbo(s, [ter]-s) --> [fica].
-verbo(p, [ter]-s) --> [ficam].
+verbo(ter).
+verbo(custar).
+verbo(haver).
+verbo(existir).
 
-verbo(s, [ter]-n) --> [não,fica].
-verbo(p, [ter]-n) --> [não,ficam].
+/*----------------------*/
+/*     FORMA VERBAL     */
+/*----------------------*/
 
-verbo(s, [custar]-s) --> [custa].
-verbo(p, [custar]-s) --> [custam].
+%forma_verbal(num, verbo-forma) --> [verbo_conjugado].
+forma_verbal(s, ter-s) --> [fica].
+forma_verbal(p, ter-s) --> [ficam].
 
-verbo(s, [custar]-n) --> [não,custa].
-verbo(p, [custar]-n) --> [não,custam].
+forma_verbal(s, ter-n) --> [não,fica].
+forma_verbal(p, ter-n) --> [não,ficam].
 
-verbo(_, [haver]-s) --> [há].
-verbo(_, [haver]-n) --> [não,há].
+forma_verbal(s, custar-s) --> [custa].
+forma_verbal(p, custar-s) --> [custam].
+
+forma_verbal(s, custar-n) --> [não,custa].
+forma_verbal(p, custar-n) --> [não,custam].
+
+forma_verbal(_, haver-s) --> [há].
+forma_verbal(_, haver-n) --> [não,há].
+
+forma_verbal(s, existir-s) --> [existe].
+forma_verbal(p, existir-s) --> [existem].
+
+forma_verbal(s, existir-n) --> [não,existe].
+forma_verbal(p, existir-n) --> [não,existem].
 
 /* 
 \item Quantos (são) os hotéis do Porto?
@@ -76,5 +93,5 @@ preposicao(f-s) --> [da].
 preposicao(m-p) --> [dos].
 preposicao(f-p) --> [das].
 
-
+verbo
 
