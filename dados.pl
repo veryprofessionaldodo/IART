@@ -56,6 +56,7 @@ pais(13, "Holanda", 1).
 pais(14, "Portugal", 1).
 pais(15, "Russia", 1).
 pais(16, "Ucrania", 1).
+pais(17, "Espanha", 1).
 
 pais(17, "Angola", 2).
 pais(18, "Cabo_Verde", 2).
@@ -86,6 +87,8 @@ pais(39, "Australia", 5).
 pais(39, "Fiji", 5).
 pais(39, "Nova Zelandia", 5).
 pais(39, "Vanuatu", 5).
+
+pais(49, )
 
 /*------------------------*/
 /*        CIDADES         */
