@@ -16,6 +16,12 @@ hotel(1, [Hotel, Tipton], 3, 278421134, )
 /*------------------------*/
 
 % prop_hotel(IDProp, NomePropriedade).
+prop_hotel(1, "piscina").
+prop_hotel(2, "praia").
+prop_hotel(3, "parque").
+prop_hotel(4, "natureza").
+prop_hotel(5, "montanha").
+prop_hotel(6, "centro da cidade").
 
 /*------------------------*/
 /*   PROPRIEDADES QUARTO  */
@@ -59,7 +65,7 @@ pais(16, "Ucrania", 1).
 pais(17, "Espanha", 1).
 
 pais(17, "Angola", 2).
-pais(18, "Cabo_Verde", 2).
+pais(18, "Cabo Verde", 2).
 pais(19, "Egito", 2).
 pais(20, "Guine", 2).
 pais(21, "Quenia", 2).
@@ -88,7 +94,20 @@ pais(39, "Fiji", 5).
 pais(39, "Nova Zelandia", 5).
 pais(39, "Vanuatu", 5).
 
-pais(49, )
+pais(49, "Afeganistao", 6).
+pais(49, "Bangladesh, 6).
+pais(49, "China", 6).
+pais(49, "Georgia", 6).
+pais(49, "India", 6).
+pais(49, "Japao", 6).
+pais(49, "Laos", 6).
+pais(49, "Malasia", 6).
+pais(49, "Nepal", 6).
+pais(49, "Coreia do Norte", 6).
+pais(49, "Coreia do Sul", 6).
+pais(49, "Turquia", 6).
+pais(49, "Tailandia", 6).
+
 
 /*------------------------*/
 /*        CIDADES         */
@@ -107,12 +126,14 @@ pais(49, )
 /*------------------------*/
 
 % servico(Nome).
-serviço(babysitting).
-serviço(limpeza_de_quartos).
-serviço(garagem_privativa).
-serviço(wifi).
-serviço(pequeno_almoço).
-serviço(ginasio).
+serviço("babysitting").
+serviço("limpeza de quartos").
+serviço("garagem privativa").
+serviço("wifi").
+serviço("pequeno almoço").
+serviço("ginasio").
+serviço("spa").
+serviço("casino").
 
 /*------------------------*/
 /*       TEM QUARTO       */
