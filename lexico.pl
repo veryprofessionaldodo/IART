@@ -73,7 +73,7 @@ quant(_) --> [onde].
 quant(_) --> [que].
 
 /*----------------------*/
-/*      PROPOSIÇÕES     */
+/*      PREPOSIÇÕES     */
 /*----------------------*/
 
 %preposição(num-gen) --> [prep].
