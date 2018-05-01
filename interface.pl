@@ -5,7 +5,7 @@
 /*-----------------------*/
 
 inicio:- 
-    write('Escreve a tua pergunta! Termina com "." ou "?" para a questão ser válida.\nPergunta: '),
+    write('Escreve a tua pergunta! Termina com '.' ou '?' para a questão ser válida.\nPergunta: '),
     read_line(user_input, X), 
     parse_input(X, [], [], ListWords), 
 

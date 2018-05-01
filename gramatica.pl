@@ -2,8 +2,8 @@
 /* ESTRUTURA DAS FRASES */
 /*----------------------*/
 
-frase(_,_):- retract(erroSem), write("Erro Semantico").
-frase(_,_):- write("erro sintaxe").
+frase(_,_):- retract(erroSem), write('Erro Semantico').
+frase(_,_):- write('erro sintaxe').
 
 frase() --> sintagma_nominal(LSuj, N), 
 			sintagma_verbal(Acao, Obj, N, LSuj), 
