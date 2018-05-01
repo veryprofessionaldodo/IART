@@ -2,8 +2,9 @@
 /*        NOMES         */
 /*----------------------*/
 
-nome(m-s, [hotel]) --> [hotel].
-nome(f-s, [cidade]) --> [cidade].
+nome(m-s, [tipton]-hotel) --> [tipton].
+nome(f-s, [cidade]-cidade) --> [cidade].
+nome(m-s, [spa]-servico) --> [spa].
 
 
 /*----------------------*/
@@ -11,10 +12,10 @@ nome(f-s, [cidade]) --> [cidade].
 /*----------------------*/
 
 %detereminante(num-gen) --> [det].
-detereminante(s-f) --> [a].
-detereminante(s-m) --> [o].
-detereminante(p-f) --> [as].
-detereminante(p-m) --> [os].
+determinante(s-f) --> [a].
+determinante(s-m) --> [o].
+determinante(p-f) --> [as].
+determinante(p-m) --> [os].
 
 /*----------------------*/
 /*        VERBOS        */
@@ -56,15 +57,6 @@ forma_verbal(p, existir-s) --> [existem].
 forma_verbal(s, existir-n) --> [nao,existe].
 forma_verbal(p, existir-n) --> [nao,existem].
 
-/* 
-\item Quantos (são) os hotéis do Porto?
-\item Quais (são) os hotéis de categoria superior a 3 estrelas em Lisboa?
-\item E em Coimbra?
-\item Que/Quais serviços disponibiliza o Hotel X?
-\item Quais os hotéis parisienses que possuem serviço de babysitting?
-\item Quais os hotéis de Faro que possuem categoria inferior a 4 e quartos com vista de mar? 
-\item O Hotel X fica em Faro e possui 4 estrelas.
-*/
 
 
 /*----------------------*/
@@ -80,7 +72,7 @@ quant(_) --> [onde].
 quant(_) --> [que].
 
 /*----------------------*/
-/*      PROPOSIÇÕES     */
+/*      PREPOSIÇÕES     */
 /*----------------------*/
 
 %preposição(num-gen) --> [prep].

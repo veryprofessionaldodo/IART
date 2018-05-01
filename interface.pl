@@ -5,13 +5,13 @@
 /*-----------------------*/
 
 inicio:- 
-    write('Escreve a tua pergunta! Termina com "." ou "?" para a questão ser válida.\nPergunta: '),
+    write('Escreve a tua pergunta! Termina com \'.\' ou \'?\' para a questão ser válida.\nPergunta: '),
     read_line(user_input, X), 
     parse_input(X, [], [], ListWords), 
+    write(ListWords),write('\n'),!,
+    frase(Acao, Suj, Obj, ListWords, _).    
 
-    frase(ListWords, Response),
-
-    write(Response).
+    %write(Response).
 
 parse_input([Head|Body], CurrWord, TmpList, Words) :-
     char_code(Char, Head),
@@ -35,3 +35,9 @@ parse_input([], [], Words, Words).
 parse_input([],CurrWord, Words, List) :- 
     atom_chars(TmpWord, CurrWord),
     append(Words, [TmpWord], List).
+
+teste:- 
+    P=..[teste,hotel,servico],
+    P.
+
+teste(hotel, servico).
