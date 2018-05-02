@@ -1,8 +1,8 @@
-:-consult('gramatica.pl').
-
 /*-----------------------*/
 /* INTERFACE DO PROGRAMA */
 /*-----------------------*/
+
+:-consult('gramatica.pl').
 
 inicio:- 
     write('Escreve a tua pergunta! Termina com \'.\' ou \'?\' para a questão ser válida.\nPergunta: '),

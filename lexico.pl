@@ -2,9 +2,18 @@
 /*        NOMES         */
 /*----------------------*/
 
-nome(m-s, [tipton]-hotel) --> [tipton].
-nome(f-s, [cidade]-cidade) --> [cidade].
+nome(m-s, [hotel]-hotel) --> [hotel].   
+nome(m-s, [hotel,tipton]-hotel) --> [hotel,tipton].   
 nome(m-s, [spa]-servico) --> [spa].
+nome(m-s, [ginasio]-servico) --> [ginasio].
+nome(m-s, [casino]-servico) --> [casino].
+nome(m-s, [wifi]-servico) --> [wifi].
+nome(m-s, [babysitting]-servico) --> [babysitting].
+nome(f-s, [limpeza,de,quartos]-servico) --> [limpeza,de,quartos].
+nome(f-s, [garagem,privativa]-servico) --> [garagem,privativa].
+nome(m-s, [pequeno,almoco]-servico) --> [pequeno,almoco].
+nome(f-s, [cidade]-cidade) --> [cidade].
+nome(m-s, [tirana]-cidade) --> [tirana].
 
 
 /*----------------------*/
@@ -16,6 +25,11 @@ determinante(s-f) --> [a].
 determinante(s-m) --> [o].
 determinante(p-f) --> [as].
 determinante(p-m) --> [os].
+
+determinante(s-f) --> [A].
+determinante(s-m) --> [O].
+determinante(p-f) --> [As].
+determinante(p-m) --> [Os].
 
 /*----------------------*/
 /*        VERBOS        */
@@ -57,17 +71,6 @@ forma_verbal(p, existir-s) --> [existem].
 forma_verbal(s, existir-n) --> [nao,existe].
 forma_verbal(p, existir-n) --> [nao,existem].
 
-/* 
-\item Quantos (são) os hotéis do Porto?
-\item Quais (são) os hotéis de categoria superior a 3 estrelas em Lisboa?
-\item E em Coimbra?
-\item Que/Quais serviços disponibiliza o Hotel X?
-\item Quais os hotéis parisienses que possuem serviço de babysitting?
-\item Quais os hotéis de Faro que possuem categoria inferior a 4 e quartos com vista de mar? 
-\item O Hotel X fica em Faro e possui 4 estrelas.
-*/
-
-
 /*----------------------*/
 /*   QUANTIFICADORES    */  % Utilizado para perguntas, mistura de advérbios e pronomes
 /*----------------------*/
@@ -91,7 +94,7 @@ preposicao(_-p) --> [nuns].
 preposicao(m-s) --> [no].
 preposicao(f-s) --> [na].
 preposicao(m-p) --> [nos].
-preposicao(f-p) --> [nas].z
+preposicao(f-p) --> [nas].
 preposicao(_) --> [com].
 preposicao(_) --> [sem].
 preposicao(_) --> [por].

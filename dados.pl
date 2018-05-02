@@ -167,103 +167,7 @@ cidade(51, 'Murmansk', 15).
 cidade(52, 'Moscovo', 15).
 cidade(53, 'Sao Petersburgo', 15).
 cidade(54, 'Kiev', 16).
-cidade(55, 'Lviv', 16).
-cidade(56, 'Odessa', 16).
-cidade(57, 'Madrid', 17).
-cidade(58, 'Barcelona', 17).
-cidade(58, 'Valencia', 17).
-cidade(60, 'Sevilha', 17).
-cidade(61, 'Granada', 17).
-cidade(62, 'Salamanca', 17).
-cidade(63, 'Luanda', 18).
-cidade(64, 'Lubango', 18).
-cidade(65, 'Malanje', 18).
-cidade(66, 'Praia', 19).
-cidade(67, 'Santa Maria', 19).
-cidade(68, 'Mindelo', 19).
-cidade(69, 'Cairo', 20).
-cidade(70, 'Alexandria', 20).
-cidade(71, 'Gizé', 20).
-cidade(72, 'Bissau', 21).
-cidade(73, 'Bafata', 21). %Bafatá
-cidade(74, 'Gabu', 21). %Gabú
-cidade(75, 'Nairobi', 22). %Nairóbi
-cidade(76, 'Mombaca', 22). %Mombaça
-cidade(77, 'Kisumu', 22).
-cidade(78, 'Antananarivo', 23).
-cidade(79, 'Antsiranana', 23).
-cidade(80, 'Toamasina', 23).
-cidade(81, 'Maputo', 24).
-cidade(82, 'Inhambane', 24).
-cidade(83, 'Tofo', 24).
-cidade(84, 'Lagos', 25).
-cidade(85, 'Calabar', 25).
-cidade(86, 'Abuja', 25).
-cidade(87, 'Kampala', 26).
-cidade(88, 'Jinja', 26).
-cidade(89, 'Tororo', 26).
-cidade(90, 'Nassau', 27).
-cidade(91, 'Freeport', 27).
-cidade(92, 'West End', 27).
-cidade(93, 'Toronto', 28).
-cidade(94, 'Ottawa', 28).
-cidade(95, 'Montreal', 28).
-cidade(96, 'Vancouver', 28).
-cidade(97, 'Banff', 28).
-cidade(98, 'Porto Principe', 29).
-cidade(99, 'Cabo Haitiano', 29).
-cidade(100, 'Jacmel', 29).
-cidade(101, 'Kingston', 30).
-cidade(102, 'Negril', 30).
-cidade(103, 'Montego Bay', 30).
-cidade(104, 'Cancun', 31).
-cidade(105, 'Acapulco', 31).
-cidade(106, 'Cidade do Mexico', 31).
-cidade(107, 'Los Cabos', 31).
-cidade(108, 'Cidade do Panama', 32).
-cidade(109, 'Bocas del Toro', 32).
-cidade(110, 'San Miguelito', 32).
-cidade(111, 'Nova Iorque', 33).
-cidade(112, 'Los Angeles', 33).
-cidade(113, 'Washington DC', 33).
-cidade(114, 'Orlando', 33).
-cidade(115, 'Las Vegas', 33).
-cidade(116, 'Sao Francisco', 33).
-cidade(117, 'Boston', 33).
-cidade(118, 'Filadelfia', 33).
-cidade(119, 'Buenos Aires', 34).
-cidade(120, 'Cordoba', 34). 
-cidade(121, 'Bariloche', 34).
-cidade(122, 'Santa Cruz de la Sierra', 35).
-cidade(123, 'Samaipata', 35).
-cidade(124, 'Sucre', 35).
-cidade(125, 'Rio de Janeiro', 36).
-cidade(126, 'Florianopolis', 36). 
-cidade(127, 'Sao Paulo', 36).
-cidade(128, 'Salvador', 36).
-cidade(129, 'Montanita', 37).
-cidade(130, 'Cuenca', 37).
-cidade(131, 'Quito', 37).
-cidade(132, 'Arequipa', 38).
-cidade(133, 'Cusco', 38).
-cidade(134, 'Lima', 38).
-cidade(135, 'Punta Sal', 38).
-cidade(136, 'Caracas', 39).
-cidade(137, 'Ilha Margarita', 39).
-cidade(138, 'Los Llanos', 39).
-cidade(139, 'Sydney', 40).
-cidade(140, 'Brisbane', 40).
-cidade(141, 'Melbourne', 40).
-cidade(142, 'Suva', 41).
-cidade(143, 'Nadi', 41).
-cidade(144, 'Lautoka', 41).
-cidade(145, 'Auckland', 42).
-cidade(146, 'Wellington', 42).
-cidade(147, 'Christchurch', 42).
-cidade(148, 'Queenstown', 42).
-cidade(149, 'Luganville', 43).
-cidade(150, 'Lamap', 43).
-cidade(151, 'Lakatoro', 43).
+
 
 /*------------------------*/
 /*        MORADAS         */
@@ -281,7 +185,7 @@ servico('babysitting').
 servico('limpeza de quartos').
 servico('garagem privativa').
 servico('wifi').
-servico('pequeno almoço').
+servico('pequeno almoco').
 servico('ginasio').
 servico('spa').
 servico('casino').
@@ -296,4 +200,25 @@ servico('casino').
 /*       TEM SERVIÇO      */
 /*------------------------*/
 
+
+
+/*--------------------------*/
+/* ASSOCIAÇÃO VERBO-FUNÇÃO  */
+/*--------------------------*/
+
 ter(hotel, servico).
+ter(hotel, quarto).
+ficar(hotel, cidade).
+ficar(hotel, pais).
+existir(hotel, cidade).
+existir(hotel, pais).
+
+/* 
+\item Quantos (são) os hotéis do Porto?
+\item Quais (são) os hotéis de categoria superior a 3 estrelas em Lisboa?
+\item E em Coimbra?
+\item Que/Quais serviços disponibiliza o Hotel X?
+\item Quais os hotéis parisienses que possuem serviço de babysitting?
+\item Quais os hotéis de Faro que possuem categoria inferior a 4 e quartos com vista de mar? 
+\item O Hotel X fica em Faro e possui 4 estrelas.
+*/

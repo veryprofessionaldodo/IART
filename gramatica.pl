@@ -1,11 +1,10 @@
-:-reconsult('gramatica.pl').
+:-reconsult('dados.pl').
+:-reconsult('lexico.pl').
 
 /*----------------------*/
 /* ESTRUTURA DAS FRASES */
 /*----------------------*/
 
-:-ensure_loaded([dados, lexico, filtro]).
-:-reconsult('dados.pl').
 /*
 frase(_,_):- retract(erroSem), write("Erro Semantico").
 frase(_,_):- write("erro sintaxe").*/
@@ -13,14 +12,17 @@ frase(_,_):- write("erro sintaxe").*/
 %frase(Acao,Suj,Obj) --> frase_interrogativa(Acao, Suj, Obj), [?].
 frase(Acao,Suj,Obj) --> frase_afirmativa(Acao, Suj, Obj)/*, [.]*/.
 
-frase_afirmativa(Acao,Suj,Obj) --> sintagma_nominal(Suj-Tipo, N), sintagma_verbal(Acao, Obj, N, Suj).
+frase_afirmativa(Acao,Suj,Obj) --> sintagma_nominal(Suj-Tipo, N), 
+	sintagma_verbal(Acao, Obj, N, Tipo). 
 
 % acrescentar mais tarde lista de sujeitos, separados com "e"
 sintagma_nominal(Suj-Tipo, N) --> determinante(N-G), nome(G-N, Suj-Tipo).
 
 %P pode ser afirmativo ou negativo 
-sintagma_verbal(Acao, Obj, N, [Suj]) --> forma_verbal(N, Acao-P), nome(_, Obj-Tipo), 
-									{teste_semantico(Acao, Suj, Tipo)}. 
+sintagma_verbal(Acao, Obj, N, Tipo) --> 
+	forma_verbal(N, Acao-P), 
+	nome(_, Obj-Tipo2),
+	{teste_semantico(Acao, Tipo,Tipo2)}. 
 
 teste_semantico(Acao, Suj, Tipo):-
 	P=..[Acao, Suj, Tipo],
