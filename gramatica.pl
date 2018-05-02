@@ -1,3 +1,5 @@
+:-reconsult('gramatica.pl').
+
 /*----------------------*/
 /* ESTRUTURA DAS FRASES */
 /*----------------------*/

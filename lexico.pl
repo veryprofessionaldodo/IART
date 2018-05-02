@@ -57,6 +57,15 @@ forma_verbal(p, existir-s) --> [existem].
 forma_verbal(s, existir-n) --> [nao,existe].
 forma_verbal(p, existir-n) --> [nao,existem].
 
+/* 
+\item Quantos (são) os hotéis do Porto?
+\item Quais (são) os hotéis de categoria superior a 3 estrelas em Lisboa?
+\item E em Coimbra?
+\item Que/Quais serviços disponibiliza o Hotel X?
+\item Quais os hotéis parisienses que possuem serviço de babysitting?
+\item Quais os hotéis de Faro que possuem categoria inferior a 4 e quartos com vista de mar? 
+\item O Hotel X fica em Faro e possui 4 estrelas.
+*/
 
 
 /*----------------------*/
@@ -82,7 +91,7 @@ preposicao(_-p) --> [nuns].
 preposicao(m-s) --> [no].
 preposicao(f-s) --> [na].
 preposicao(m-p) --> [nos].
-preposicao(f-p) --> [nas].
+preposicao(f-p) --> [nas].z
 preposicao(_) --> [com].
 preposicao(_) --> [sem].
 preposicao(_) --> [por].
