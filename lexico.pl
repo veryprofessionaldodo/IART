@@ -2,19 +2,21 @@
 /*        NOMES         */
 /*----------------------*/
 
-nome(m-s, [hotel]-hotel) --> [hotel].   
-nome(m-s, [hotel,tipton]-hotel) --> [hotel,tipton].   
-nome(m-s, [spa]-servico) --> [spa].
-nome(m-s, [ginasio]-servico) --> [ginasio].
-nome(m-s, [casino]-servico) --> [casino].
-nome(m-s, [wifi]-servico) --> [wifi].
-nome(m-s, [babysitting]-servico) --> [babysitting].
-nome(f-s, [limpeza,de,quartos]-servico) --> [limpeza,de,quartos].
-nome(f-s, [garagem,privativa]-servico) --> [garagem,privativa].
-nome(m-s, [pequeno,almoco]-servico) --> [pequeno,almoco].
-nome(f-s, [cidade]-cidade) --> [cidade].
-nome(m-s, [tirana]-cidade) --> [tirana].
+% NOTA IMPORTANTE -> Para fins de consistencia usa se sempre Numero-Genero
 
+% Para maiúsculas é necessário '' porque senão reconhece uma variável.
+nome(s-m, [hotel]-hotel) --> [hotel].   
+nome(s-m, ['Hotel','Tipton']-hotel) --> ['Hotel','Tipton'].   
+nome(s-m, [spa]-servico) --> [spa].
+nome(s-m, [ginasio]-servico) --> [ginasio].
+nome(s-m, [casino]-servico) --> [casino].
+nome(s-m, [wifi]-servico) --> [wifi].
+nome(s-m, [babysitting]-servico) --> [babysitting].
+nome(s-f, [limpeza,de,quartos]-servico) --> [limpeza,de,quartos].
+nome(s-f, [garagem,privativa]-servico) --> [garagem,privativa].
+nome(s-m, [pequeno,almoco]-servico) --> [pequeno,almoco].
+nome(s-f, [cidade]-cidade) --> [cidade].
+nome(s-_, ['Tirana']-cidade) --> ['Tirana'].
 
 /*----------------------*/
 /*     DETERMINANTES    */
@@ -26,10 +28,10 @@ determinante(s-m) --> [o].
 determinante(p-f) --> [as].
 determinante(p-m) --> [os].
 
-determinante(s-f) --> [A].
-determinante(s-m) --> [O].
-determinante(p-f) --> [As].
-determinante(p-m) --> [Os].
+determinante(s-f) --> ['A'].
+determinante(s-m) --> ['O'].
+determinante(p-f) --> ['As'].
+determinante(p-m) --> ['Os'].
 
 /*----------------------*/
 /*        VERBOS        */
@@ -40,6 +42,7 @@ verbo(custar).
 verbo(haver).
 verbo(existir).
 verbo(ficar).
+verbo(conter).
 
 /*----------------------*/
 /*     FORMA VERBAL     */
@@ -89,20 +92,31 @@ quant(_) --> [que].
 
 %preposição(num-gen) --> [prep].
 preposicao(_) --> [em].
-preposicao(_-s) --> [num].
-preposicao(_-p) --> [nuns].
-preposicao(m-s) --> [no].
-preposicao(f-s) --> [na].
-preposicao(m-p) --> [nos].
-preposicao(f-p) --> [nas].
+preposicao(s-_) --> [num].
+preposicao(p-_) --> [nuns].
+preposicao(s-m) --> [no].
+preposicao(s-f) --> [na].
+preposicao(p-m) --> [nos].
+preposicao(p-f) --> [nas].
 preposicao(_) --> [com].
 preposicao(_) --> [sem].
 preposicao(_) --> [por].
-preposicao(_-s) --> [de].
-preposicao(m-s) --> [do].
-preposicao(f-s) --> [da].
-preposicao(m-p) --> [dos].
-preposicao(f-p) --> [das].
+preposicao(s-_) --> [de].
+preposicao(s-m) --> [do].
+preposicao(s-f) --> [da].
+preposicao(p-m) --> [dos].
+preposicao(p-f) --> [das].
 
 
+/*--------------------------*/
+/* ASSOCIAÇÃO VERBO-FUNÇÃO  */
+/*--------------------------*/
 
+ter(hotel, servico).
+ter(hotel, quarto).
+ficar(hotel, cidade).
+ficar(hotel, pais).
+existir(hotel, cidade).
+existir(hotel, pais).
+conter(hotel, servico).
+conter(hotel, quarto).

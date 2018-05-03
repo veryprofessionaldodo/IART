@@ -200,19 +200,6 @@ servico('casino').
 /*       TEM SERVIÇO      */
 /*------------------------*/
 
-
-
-/*--------------------------*/
-/* ASSOCIAÇÃO VERBO-FUNÇÃO  */
-/*--------------------------*/
-
-ter(hotel, servico).
-ter(hotel, quarto).
-ficar(hotel, cidade).
-ficar(hotel, pais).
-existir(hotel, cidade).
-existir(hotel, pais).
-
 /* 
 \item Quantos (são) os hotéis do Porto?
 \item Quais (são) os hotéis de categoria superior a 3 estrelas em Lisboa?
