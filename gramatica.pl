@@ -10,12 +10,18 @@ frase(_,_):- retract(erroSem), write("Erro Semantico").
 frase(_,_):- write("erro sintaxe").*/
 
 %frase(Acao,Suj,Obj) --> frase_interrogativa(Acao, Suj, Obj), [?].
+
+
 frase(Acao,Suj,Obj) --> frase_afirmativa(Acao, Suj, Obj), [.].
+frase(Acao,Suj,Obj) --> frase_interrogativa(Acao, Suj, Obj), ['?'].
 
 frase_afirmativa(Acao,Suj,Obj) --> afirmativa_assis(Acao, Suj, Obj).
 
 afirmativa_assis(Acao, Suj, Obj) --> sintagma_nominal(Suj-Tipo, N), 
 	sintagma_verbal(Acao, Obj, N, Tipo).
+
+frase_interrogativa(Acao, Suj, Obj) -->
+	 {write('pica')},quantificador(Num-Gen, Tipo).
 
 % acrescentar mais tarde lista de sujeitos, separados com "e"
 sintagma_nominal(Suj-Tipo, N) --> determinante(N-G), nome(N-G, Suj-Tipo).

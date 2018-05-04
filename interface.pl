@@ -32,11 +32,10 @@ parse_input([Head|Body], CurrWord, TmpList, Words) :-
         )
     ),
 
-
-
     parse_input(Body, NewWord, FinalList, Words).
 
 is_ending_char(Head, NewList, FinalList) :-
+    char_code(TmpWord2, Head),
     (Head == 46 ; Head == 63),
     append(NewList, [TmpWord2], FinalList),
     write(FinalList).
