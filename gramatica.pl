@@ -15,17 +15,20 @@ frase(_,_):- write("erro sintaxe").*/
 frase(Acao,Suj,Obj) --> frase_afirmativa(Acao, Suj, Obj), [.].
 frase(Acao,Suj,Obj) --> frase_interrogativa(Acao, Suj, Obj), ['?'].
 
-frase_afirmativa(Acao,Suj,Obj) --> afirmativa_assis(Acao, Suj, Obj).
+frase_afirmativa(Acao,Suj,Obj) --> afirmativa_assis(Acao, LSuj, Obj).
 
-afirmativa_assis(Acao, Suj, Obj) --> sintagma_nominal(Suj-Tipo, N), 
-	sintagma_verbal(Acao, Obj, N, Tipo).
+afirmativa_assis(Acao, LSuj, Obj) --> sintagma_nominal(LSuj, N, NVerbo), 
+	sintagma_verbal(Acao, Obj, NVerbo, LSuj)
+	, {verificacaoAfirmacao(LSuj, Obj, Acao)}.
 
 frase_interrogativa(Acao, Suj, Obj) -->
-	 {write('pica')},quantificador(Num-Gen, Tipo).
+	/*{write('pica')},*/quantificador(Num-Gen, Tipo).
 
 % acrescentar mais tarde lista de sujeitos, separados com "e"
-sintagma_nominal(Suj-Tipo, N) --> determinante(N-G), nome(N-G, Suj-Tipo).
+sintagma_nominal([Suj-Tipo | O], N, p) --> sintagma_nominal_aux(Suj-Tipo, N), [e], sintagma_nominal(O, N).
+sintagma_nominal(LSuj, N, _) --> sintagma_nominal_aux(LSuj, N).
 
+sintagma_nominal_aux(Suj-Tipo, N) --> determinante(N-G), nome(N-G, Suj-Tipo).
 /* 
 \item Quantos (são) os hotéis do Porto?
 \item Quais (são) os hotéis de categoria superior a 3 estrelas em Lisboa?
@@ -36,7 +39,7 @@ sintagma_nominal(Suj-Tipo, N) --> determinante(N-G), nome(N-G, Suj-Tipo).
 \item O Hotel X fica em Faro e possui 4 estrelas.
 */
 
-sintagma_verbal(Acao, Obj, N, Tipo) --> 
+sintagma_verbal(Acao, Obj, N, [_-Tipo | O]) -->  %missing some stuff here
 	verbal_assis(Acao, Obj, N, Tipo).
 
 verbal_assis(Acao, Obj, N, Tipo) -->
@@ -55,6 +58,22 @@ verbal_assis(Acao, Obj, N, Tipo) -->
 teste_semantico(Acao, Suj, Tipo):-
 	P=..[Acao, Suj, Tipo],
 	P.
+
+% verifica frases afirmativas
+verificacaoAfirmacao(Suj-Tipo, [Obj], ficar):-
+	hotel(_ID,Suj,_Estrelas, _Tlm, _Morada, IDCidade, IDRegiao),
+	cidade(IDCidade, Obj, _IDPais),
+	write('Os dados estao de acordo com as nossas base de dados').
+
+verificacaoAfirmacao([Suj-Tipo | Resto], [Obj], ficar):-
+	hotel(_ID,Suj,_Estrelas, _Tlm, _Morada, IDCidade, IDRegiao),
+	cidade(IDCidade, Obj, _IDPais),
+	verificacaoAfirmacao(Resto, [Obj], ficar).
+
+verificacaoAfirmacao([_], _, _):-
+	write('Esta informação nao esta de acordo com a nossa base de dados.'),nl.
+
+
 
 %frase_interrogativa(Acao, Suj, Obj) --> .
 

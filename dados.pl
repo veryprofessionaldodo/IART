@@ -2,8 +2,14 @@
 /*        HOTEIS          */
 /*------------------------*/
 
-% hotel(IDHotel, Nome, Estrelas, Tel, IDMorada, IDCidade, IDRegião). Regiao é do tipo Montanha, Praia...
-hotel(1, [Hotel, Tipton], 3, 278421134, 124, 1, 2).
+% hotel(IDHotel, Nome, 	Estrelas, Tel, IDMorada, IDCidade, IDRegião). Regiao é do tipo Montanha, Praia...
+hotel(1, ['Hotel', 'Tipton'], 3, 278421134, 124, 1, 2).
+hotel(2, ['Hotel', 'Vila', 'Gale'], 4, 278421189, 124, 7, 2).
+hotel(3, ['Hotel', 'Axis'], 4, 278421189, 124, 32, 2).
+hotel(4, ['Hotel', 'Continental'], 4, 278421189, 124, 28, 2).
+hotel(5, ['Hotel', 'Ibis'], 4, 278421189, 124, 8, 2).
+hotel(6, ['Hotel', 'Village'], 4, 278421189, 124, 17, 2).
+hotel(7, ['Hotel', 'Lusitano'], 4, 278421189, 124, 43, 2).
 
 /*------------------------*/
 /*        QUARTOS         */
@@ -63,7 +69,8 @@ pais(14, 'Portugal', 1).
 pais(15, 'Russia', 1).
 pais(16, 'Ucrania', 1).
 pais(17, 'Espanha', 1).
-
+pais(18, 'Estados Unidos da America', 3).
+/*
 pais(18, 'Angola', 2).
 pais(19, 'Cabo Verde', 2).
 pais(20, 'Egito', 2).
@@ -106,7 +113,7 @@ pais(52, 'Nepal', 6).
 pais(53, 'Coreia do Norte', 6).
 pais(54, 'Coreia do Sul', 6).
 pais(55, 'Turquia', 6).
-pais(56, 'Tailandia', 6).
+pais(56, 'Tailandia', 6).*/
 
 /*------------------------*/
 /*        CIDADES         */
@@ -119,7 +126,7 @@ cidade(3, 'Vlore', 1).
 cidade(4, 'Berlim,', 2).
 cidade(5, 'Hamburgo', 2).
 cidade(6, 'Munique', 2).
-cidade(7, 'Antuérpia', 3).
+cidade(7, 'Antuerpia', 3).
 cidade(8, 'Bruges', 3).
 cidade(9, 'Bruxelas', 3).
 cidade(10, 'Zagreb', 4).

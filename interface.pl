@@ -46,8 +46,6 @@ parse_input([],CurrWord, Words, List) :-
     atom_chars(TmpWord, CurrWord),
     append(Words, [TmpWord], List).
 
-teste:- 
-    P=..[teste,hotel,servico],
-    P.
 
-teste(hotel, servico).
+teste:-
+    frase(Acao, Suj, Obj, ['o', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Tipton', 'ficam', 'em', 'Tirana', '.'],_).
