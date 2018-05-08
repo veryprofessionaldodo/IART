@@ -37,8 +37,7 @@ parse_input([Head|Body], CurrWord, TmpList, Words) :-
 is_ending_char(Head, NewList, FinalList) :-
     char_code(TmpWord2, Head),
     (Head == 46 ; Head == 63),
-    append(NewList, [TmpWord2], FinalList),
-    write(FinalList).
+    append(NewList, [TmpWord2], FinalList).
 
 is_ending_char(_, FinalList, FinalList).
 

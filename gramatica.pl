@@ -21,19 +21,30 @@ afirmativa_assis(Acao, Suj, Obj) --> sintagma_nominal(Suj-Tipo, N),
 	sintagma_verbal(Acao, Obj, N, Tipo).
 
 frase_interrogativa(Acao, Suj, Obj) -->
-	 {write('pica')},quantificador(Num-Gen, Tipo).
+	interrogativa_assis(Acao, Suj, Obj).
 
-% acrescentar mais tarde lista de sujeitos, separados com "e"
+% Ex : Que/Quais serviços disponibiliza o Hotel X?
+interrogativa_assis(Acao, Suj, Obj) -->
+	% quantificador indica que tipo de pergunta está a ser feita
+	quantificador(TipoP, N), 
+	sintagma_nominal(Suj-TipoS, N),
+	sintagma_verbal(Acao, Suj, N2, TipoS),
+	sintagma_nominal(_N, N2).
+
+
 sintagma_nominal(Suj-Tipo, N) --> determinante(N-G), nome(N-G, Suj-Tipo).
+sintagma_nominal(Suj-Tipo, N) --> preposicao(N-G), nome(N-G, Suj-Tipo).
+sintagma_nominal(Suj-Tipo, N) --> nome(N-G, Suj-Tipo).
+
 
 /* 
-\item Quantos (são) os hotéis do Porto?
-\item Quais (são) os hotéis de categoria superior a 3 estrelas em Lisboa?
-\item E em Coimbra?
-\item Que/Quais serviços disponibiliza o Hotel X?
-\item Quais os hotéis parisienses que possuem serviço de babysitting?
-\item Quais os hotéis de Faro que possuem categoria inferior a 4 e quartos com vista de mar? 
-\item O Hotel X fica em Faro e possui 4 estrelas.
+Quantos (são) os hotéis do Porto?
+Quais (são) os hotéis de categoria superior a 3 estrelas em Lisboa?
+E em Coimbra?
+Que/Quais serviços disponibiliza o Hotel X?
+Quais os hotéis parisienses que possuem serviço de babysitting?
+Quais os hotéis de Faro que possuem categoria inferior a 4 e quartos com vista de mar? 
+O Hotel X fica em Faro e possui 4 estrelas.
 */
 
 sintagma_verbal(Acao, Obj, N, Tipo) --> 

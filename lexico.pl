@@ -75,23 +75,24 @@ forma_verbal(s, existir-n) --> [nao,existe].
 forma_verbal(p, existir-n) --> [nao,existem].
 
 /*----------------------*/
-/*   QUANTIFICADORES    */  % Utilizado para perguntas, mistura de advérbios e pronomes
+/*   QUANTIFICADORES    */  
 /*----------------------*/
+% Utilizado para perguntas, mistura de advérbios e pronomes
 
 %quantificador(num-gen, tipo) --> [quantificador]
-quantificador(s-_, qual) --> [qual].
-quantificador(p-_, qual) --> [quais].
-quantificador(p-f, quanto) --> [quantas].
-quantificador(p-m, quanto) --> [quantos].
-quantificador(_, onde) --> [onde].
-quantificador(_, que) --> [que].
+quantificador(qual,s-_) --> [qual].
+quantificador(qual, p-_) --> [quais].
+quantificador(quanto, p-f) --> [quantas].
+quantificador(quanto, p-m) --> [quantos].
+quantificador(onde,_) --> [onde].
+quantificador(que,_) --> [que].
 
-quantificador(s-_, qual) --> ['Qual'].
-quantificador(p-_, qual) --> ['Quais'].
-quantificador(p-f, quanto) --> ['Quantas'].
-quantificador(p-m, quanto) --> ['Quantos'].
-quantificador(_, onde) --> ['Onde'].
-quantificador(_, que) --> ['Que'].
+quantificador(qual, s-_) --> ['Qual'].
+quantificador(qual, p-_) --> ['Quais'].
+quantificador(quanto, p-f) --> ['Quantas'].
+quantificador(quanto, p-m) --> ['Quantos'].
+quantificador(onde, _) --> ['Onde'].
+quantificador(que, _) --> ['Que'].
 
 /*----------------------*/
 /*      PREPOSIÇÕES     */
