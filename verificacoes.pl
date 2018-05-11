@@ -1,5 +1,7 @@
 % verifica frases afirmativas
 
+% TODO FALTA FICAR RUA
+
 % FICAR Cidade
 verificacaoAfirmacao(Suj-Tipo, [Obj], ficar):-
     write('Ficar '),write(Suj), write(Tipo), write('\n'),
@@ -46,19 +48,18 @@ verificacaoAfirmacao([Suj-Tipo | Resto], [Obj], ficar):-
 	verificacaoAfirmacao(Resto, [Obj], ficar).
 
 
-% TEM 
-% verifica frases afirmativas
-verificacaoAfirmacao(Suj-Tipo, [Obj], ter):-
-    write('Tem '),write(Suj), write(Tipo), write('\n'),
-	cidade(IDCidade, Obj, _IDPais),
-	hotel(_ID,Suj,_Estrelas, _Tlm, _Morada, IDCidade, IDRegiao),
+% TER
+
+% TER Estrelas
+verificacaoAfirmacao(Suj-Tipo, [Obj | _], ter):-
+	hotel(_ID,Suj,Obj, _Tlm, _Morada, _IDCidade, _IDRegiao),
+    write('Tem '),write(Suj), write(Tipo), write(Obj), write('\n'),
 	write('Os dados estao de acordo com as nossas base de dados').
 
-verificacaoAfirmacao([Suj-Tipo | Resto], [Obj], ter):-
-    write('Tem '),write(Suj), write(Tipo), write('\n'),
-	cidade(IDCidade, Obj, _IDPais),
-	hotel(_ID,Suj,_Estrelas, _Tlm, _Morada, IDCidade, IDRegiao),
-	verificacaoAfirmacao(Resto, [Obj], ficar).
+verificacaoAfirmacao([Suj-Tipo | Resto], [Obj | Cont], ter):-
+	hotel(_ID,Suj,Obj, _Tlm, _Morada, _IDCidade, _IDRegiao),
+    write('Tem '),write(Suj), write(Tipo), write(Obj),  write('\n'),
+	verificacaoAfirmacao(Resto, [Obj, Cont], ficar).
 
 verificacaoAfirmacao([_], _, _):-
-	write('Esta informação nao esta de acordo com a nossa base de dados.'),nl.
+	write('Esta informacao nao esta de acordo com a nossa base de dados.'),nl.

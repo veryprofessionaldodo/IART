@@ -237,7 +237,14 @@ preposicao(p-f) --> [das].
 /* ASSOCIAÇÃO VERBO-FUNÇÃO  */
 /*--------------------------*/
 
+possuir(hotel, servico).
+possuir(hotel, estrelas).
+possuir(hotel, maisestrelas).
+possuir(hotel, menosestrelas).
 ter(hotel, servico).
+ter(hotel, estrelas).
+ter(hotel, maisestrelas).
+ter(hotel, menosestrelas).
 ter(hotel, quarto).
 ficar(hotel, cidade).
 ficar(hotel, pais).

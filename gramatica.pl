@@ -19,6 +19,7 @@ frase_afirmativa(Acao,Suj,Obj) --> afirmativa_assis(Acao, LSuj, Obj).
 
 afirmativa_assis(Acao, LSuj, Obj) --> 
 	sintagma_nominal(Suj, N), 
+	{write('Faaack'), write(LSuj)},
 	sintagma_verbal(Acao, Obj, N, LSuj),
 	{verificacaoAfirmacao(LSuj, Obj, Acao)}.
 
