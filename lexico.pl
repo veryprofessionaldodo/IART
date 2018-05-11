@@ -99,6 +99,22 @@ nome(s-_, ['Moscovo']-cidade) --> ['Moscovo'].
 nome(s-_, ['Sao Petersburgo']-cidade) --> ['Sao Petersburgo'].
 nome(s-_, ['Kiev']-cidade) --> ['Kiev'].
 
+nome(_, ['1','estrela']-estrelas) --> ['1','estrela'].
+nome(_, ['2','estrelas']-estrelas) --> ['2','estrelas'].
+nome(_, ['3','estrelas']-estrelas) --> ['3','estrelas'].
+nome(_, ['4','estrelas']-estrelas) --> ['4','estrelas'].
+nome(_, ['5','estrelas']-estrelas) --> ['5','estrelas'].
+
+nome(_, ['mais','que','1','estrela']-maisestrelas) --> ['mais','que','1', 'estrela'].
+nome(_, ['mais','que','2','estrelas']-maisestrelas) --> ['mais','que','2', 'estrelas'].
+nome(_, ['mais','que','3','estrelas']-maisestrelas) --> ['mais','que','3', 'estrelas'].
+nome(_, ['mais','que','4','estrelas']-maisestrelas) --> ['mais','que','4', 'estrelas'].
+
+nome(_, ['menos','que','1','estrela']-menosestrelas) --> ['menos','que','1', 'estrela'].
+nome(_, ['menos','que','2','estrelas']-menosestrelas) --> ['menos','que','2', 'estrelas'].
+nome(_, ['menos','que','3','estrelas']-menosestrelas) --> ['menos','que','3', 'estrelas'].
+nome(_, ['menos','que','4','estrelas']-menosestrelas) --> ['menos','que','4', 'estrelas'].
+
 /*----------------------*/
 /*     DETERMINANTES    */
 /*----------------------*/
@@ -124,6 +140,7 @@ verbo(haver).
 verbo(existir).
 verbo(ficar).
 verbo(conter).
+verbo(possuir).
 
 /*----------------------*/
 /*     FORMA VERBAL     */
@@ -145,6 +162,18 @@ forma_verbal(p, custar-s) --> [custam].
 
 forma_verbal(s, custar-n) --> [nao,custa].
 forma_verbal(p, custar-n) --> [nao,custam].
+
+forma_verbal(s, possuir-s) --> [possui].
+forma_verbal(p, possuir-s) --> [possuem].
+
+forma_verbal(s, possuir-n) --> [nao,possui].
+forma_verbal(p, possuir-n) --> [nao,possuem].
+
+forma_verbal(s, possuir-s) --> [que,possui].
+forma_verbal(p, possuir-s) --> [que,possuem].
+
+forma_verbal(s, possuir-n) --> [que,nao,possui].
+forma_verbal(p, possuir-n) --> [que,nao,possuem].
 
 forma_verbal(_, haver-s) --> [ha].
 forma_verbal(_, haver-n) --> [nao,ha].
@@ -209,3 +238,5 @@ existir(hotel, cidade).
 existir(hotel, pais).
 conter(hotel, servico).
 conter(hotel, quarto).
+possuir(hotel, servico).
+possuir(hotel, quarto).

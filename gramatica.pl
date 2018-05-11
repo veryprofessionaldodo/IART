@@ -11,15 +11,14 @@ frase(_,_):- write("erro sintaxe").*/
 
 %frase(Acao,Suj,Obj) --> frase_interrogativa(Acao, Suj, Obj), [?].
 
-
 frase(Acao,Suj,Obj) --> frase_afirmativa(Acao, Suj, Obj), [.].
 frase(Acao,Suj,Obj) --> frase_interrogativa(Acao, Suj, Obj), ['?'].
 
 frase_afirmativa(Acao,Suj,Obj) --> afirmativa_assis(Acao, LSuj, Obj).
 
-afirmativa_assis(Acao, LSuj, Obj) --> sintagma_nominal(LSuj, N, NVerbo), 
-	sintagma_verbal(Acao, Obj, NVerbo, LSuj)
-	, {verificacaoAfirmacao(LSuj, Obj, Acao)}.
+afirmativa_assis(Acao, LSuj, Obj) --> sintagma_nominal(Suj, N, NVerbo), 
+	sintagma_verbal(Acao, Obj, NVerbo, LSuj),
+	{verificacaoAfirmacao(LSuj, Obj, Acao)}.
 
 frase_interrogativa(Acao, Suj, Obj) -->
 	interrogativa_assis(Acao, Suj, Obj).
@@ -32,11 +31,9 @@ interrogativa_assis(Acao, Suj, Obj) -->
 	sintagma_verbal(Acao, Suj, N2, TipoS),
 	sintagma_nominal(_N, N2).
 
-
 sintagma_nominal(Suj-Tipo, N) --> determinante(N-G), nome(N-G, Suj-Tipo).
 sintagma_nominal(Suj-Tipo, N) --> preposicao(N-G), nome(N-G, Suj-Tipo).
 sintagma_nominal(Suj-Tipo, N) --> nome(N-G, Suj-Tipo).
-
 
 /* 
 Quantos (são) os hotéis do Porto?
@@ -81,7 +78,6 @@ verificacaoAfirmacao([Suj-Tipo | Resto], [Obj], ficar):-
 
 verificacaoAfirmacao([_], _, _):-
 	write('Esta informação nao esta de acordo com a nossa base de dados.'),nl.
-
 
 
 %frase_interrogativa(Acao, Suj, Obj) --> .
