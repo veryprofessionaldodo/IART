@@ -40,12 +40,12 @@ prop_hotel(6, 'centro da cidade').
 /*------------------------*/
 
 % continente(IDContinente, Nome).
-continente(1, Europa).
-continente(2, Africa).
-continente(3, America_Norte).
-continente(4, America_Sul).
-continente(5, Oceania).
-continente(6, Asia).
+continente(1, 'Europa').
+continente(2, 'Africa').
+continente(3, 'America do Norte').
+continente(4, 'America do Sul').
+continente(5, 'Oceania').
+continente(6, 'Asia').
 
 /*------------------------*/
 /*         PAÍSES         */

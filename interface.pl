@@ -2,7 +2,7 @@
 /* INTERFACE DO PROGRAMA */
 /*-----------------------*/
 
-:-consult('gramatica.pl').
+:-reconsult('gramatica.pl').
 
 inicio:- 
     write('Escreve a tua pergunta! Termina com \'.\' ou \'?\' para a questao ser valida.\nPergunta: '),
@@ -47,4 +47,4 @@ parse_input([],CurrWord, Words, List) :-
 
 
 teste:-
-    frase(Acao, Suj, Obj, ['o', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Tipton', 'ficam', 'em', 'Tirana', '.'],_).
+    frase(Acao, Suj, Obj, ['o', 'Hotel', 'Tipton', 'fica', 'na', 'Europa', '.'],_).

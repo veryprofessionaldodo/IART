@@ -24,80 +24,86 @@ nome(s-f, [garagem,privativa]-servico) --> [garagem,privativa].
 nome(s-m, [pequeno,almoco]-servico) --> [pequeno,almoco].
 
 nome(s-m, [pais]-pais) --> [pais].
-nome(s-f, ['Albania']-pais) --> ['Albania'].
-nome(s-f, ['Alemanha']-pais) --> ['Alemanha'].
-nome(s-f, ['Belgica']-pais) --> ['Belgica'].
-nome(s-f, ['Croacia']-pais) --> ['Croacia'].
-nome(s-f, ['Dinamarca']-pais) --> ['Dinamarca'].
-nome(s-f, ['Estonia']-pais) --> ['Estonia'].
-nome(s-f, ['Finlandia']-pais) --> ['Finlandia'].
-nome(s-_, ['Franca']-pais) --> ['Franca'].
-nome(s-f, ['Grecia']-pais) --> ['Grecia'].
-nome(s-f, ['Islandia']-pais) --> ['Islandia'].
-nome(s-f, ['Lituania']-pais) --> ['Lituania'].
-nome(s-f, ['Macedonia']-pais) --> ['Macedonia'].
-nome(s-f, ['Holanda']-pais) --> ['Holanda'].
-nome(s-_, ['Portugal']-pais) --> ['Portugal'].
-nome(s-f, ['Russia']-pais) --> ['Russia'].
-nome(s-f, ['Ucrania']-pais) --> ['Ucrania'].
-nome(s-f, ['Espanha']-pais) --> ['Espanha'].
-nome(s-f, ['Estados', 'Unidos', 'da', 'America']-pais) --> ['Estados', 'Unidos', 'da', 'America'].
+nome(s-f, ['Albania']-pais) --> ['na','Albania'].
+nome(s-f, ['Alemanha']-pais) --> ['na','Alemanha'].
+/*nome(s-f, ['Belgica']-pais) --> ['na','Belgica'].
+nome(s-f, ['Croacia']-pais) --> ['na','Croacia'].
+nome(s-f, ['Dinamarca']-pais) --> ['na','Dinamarca'].
+nome(s-f, ['Estonia']-pais) --> ['na','Estonia'].
+nome(s-f, ['Finlandia']-pais) --> ['na','Finlandia'].
+nome(s-_, ['Franca']-pais) --> ['na','Franca'].
+nome(s-f, ['Grecia']-pais) --> ['na','Grecia'].
+nome(s-f, ['Islandia']-pais) --> ['na','Islandia'].
+nome(s-f, ['Lituania']-pais) --> ['na','Lituania'].
+nome(s-f, ['Macedonia']-pais) --> ['na','Macedonia'].
+nome(s-f, ['Holanda']-pais) --> ['na','Holanda'].
+nome(s-_, ['Portugal']-pais) --> ['em','Portugal'].
+nome(s-f, ['Russia']-pais) --> ['na','Russia'].
+nome(s-f, ['Ucrania']-pais) --> ['na','Ucrania'].
+nome(s-f, ['Espanha']-pais) --> ['na','Espanha'].
+nome(p-f, ['Estados', 'Unidos', 'da', 'America']-pais) --> ['nos','Estados', 'Unidos', 'da', 'America'].
+*/
+nome(s-m, [continente]-continente) --> [continente].
+nome(s-f, ['Europa']-continente) --> ['na', 'Europa'].
+nome(s-f, ['Africa']-continente) --> ['na', 'Africa'].
+nome(s-f, ['America do Norte']-continente) --> ['na', 'America', 'do', 'Norte'].
+nome(s-f, ['America do Sul']-continente) --> ['na', 'America', 'do', 'Sul'].
+nome(s-f, ['Oceania']-continente) --> ['na', 'Oceania'].
+nome(s-f, ['Asia']-cidade) --> ['na', 'Asia'].
 
-nome(s-f, [cidade]-cidade) --> [cidade].
-nome(_-_, ['Tirana']-cidade) --> ['Tirana'].
-nome(s-_, ['Durres']-cidade) --> ['Durres'].
-nome(s-_, ['Vlore']-cidade) --> ['Vlore'].
-nome(s-_, ['Berlim']-cidade) --> ['Berlim'].
-nome(s-_, ['Hamburgo']-cidade) --> ['Hamburgo'].
-nome(s-_, ['Munique']-cidade) --> ['Munique'].
-nome(s-_, ['Antuerpia']-cidade) --> ['Antuerpia'].
-nome(s-_, ['Bruges']-cidade) --> ['Bruges'].
-nome(s-_, ['Bruxelas']-cidade) --> ['Bruxelas'].
-nome(s-_, ['Zagreb']-cidade) --> ['Zagreb'].
-nome(s-_, ['Rijeka']-cidade) --> ['Rijeka'].
-nome(s-_, ['Split']-cidade) --> ['Split'].
-nome(s-_, ['Copenhaga']-cidade) --> ['Copenhaga'].
-nome(s-_, ['Aarhus']-cidade) --> ['Aarhus'].
-nome(s-_, ['Odense']-cidade) --> ['Odense'].
-nome(s-_, ['Tallinn']-cidade) --> ['Tallinn'].
-nome(s-_, ['Tartu']-cidade) --> ['Tartu'].
-nome(s-_, ['Narva']-cidade) --> ['Narva'].
-nome(s-_, ['Helsinquia']-cidade) --> ['Helsinquia'].
-nome(s-_, ['Tampere']-cidade) --> ['Tampere'].
-nome(s-_, ['Turku']-cidade) --> ['Turku'].
-nome(s-_, ['Paris']-cidade) --> ['Paris'].
-nome(s-_, ['Bordeus']-cidade) --> ['Bordeus'].
-nome(s-_, ['Lyon']-cidade) --> ['Lyon'].
-nome(s-_, ['Nicece']-cidade) --> ['Nice'].
-nome(s-_, ['Cannes']-cidade) --> ['Cannes'].
-nome(s-_, ['Atenas']-cidade) --> ['Atenas'].
-nome(s-_, ['Fira']-cidade) --> ['Fira'].
-nome(s-_, ['Rodes']-cidade) --> ['Rodes'].
-nome(s-_, ['Reikiavik']-cidade) --> ['Reikiavik'].
-nome(s-_, ['Keflavik']-cidade) --> ['Keflavik'].
-nome(s-_, ['Seyoisfjorour']-cidade) --> ['Seyoisfjorour'].
-nome(s-_, ['Vilnius']-cidade) --> ['Vilnius'].
-nome(s-_, ['Kaunas']-cidade) --> ['Kaunas'].
-nome(s-_, ['Klaipeda']-cidade) --> ['Klaipeda'].
-nome(s-_, ['Skopje']-cidade) --> ['Skopje'].
-nome(s-_, ['Ohrid']-cidade) --> ['Ohrid'].
-nome(s-_, ['Amesterdao']-cidade) --> ['Amesterdao'].
-nome(s-_, ['Roterdao']-cidade) --> ['Roterdao'].
-nome(s-_, ['Kinderdijk']-cidade) --> ['Kinderdijk'].
-nome(s-_, ['Haia']-cidade) --> ['Haia'].
-nome(s-_, ['Delft']-cidade) --> ['Delft'].
-nome(s-_, ['Lisboa']-cidade) --> ['Lisboa'].
-nome(s-_, ['Porto']-cidade) --> ['Porto'].
-nome(s-_, ['Guimaraes']-cidade) --> ['Guimaraes'].
-nome(s-_, ['Evora']-cidade) --> ['Evora'].
-nome(s-_, ['Fatima']-cidade) --> ['Fatima'].
-nome(s-_, ['Coimbra']-cidade) --> ['Coimbra'].
-nome(s-_, ['Albufeira']-cidade) --> ['Albufeira'].
-nome(s-_, ['Portimao']-cidade) --> ['Portimao'].
-nome(s-_, ['Murmansk']-cidade) --> ['Murmansk'].
-nome(s-_, ['Moscovo']-cidade) --> ['Moscovo'].
-nome(s-_, ['Sao Petersburgo']-cidade) --> ['Sao Petersburgo'].
-nome(s-_, ['Kiev']-cidade) --> ['Kiev'].
+nome(s-_, ['Tirana']-cidade) --> ['em','Tirana'].
+
+/*nome(s-_, ['Durres']-cidade) --> ['em','Durres'].
+nome(s-_, ['Vlore']-cidade) --> ['em','Vlore'].
+nome(s-_, ['Berlim']-cidade) --> ['em','Berlim'].
+nome(s-_, ['Hamburgo']-cidade) --> ['em','Hamburgo'].
+nome(s-_, ['Munique']-cidade) --> ['em','Munique'].
+nome(s-_, ['Antuerpia']-cidade) --> ['na', Antuerpia'].
+nome(s-_, ['Bruges']-cidade) --> ['em','Bruges'].
+nome(s-_, ['Bruxelas']-cidade) --> ['em','Bruxelas'].
+nome(s-_, ['Zagreb']-cidade) --> ['em','Zagreb'].
+nome(s-_, ['Rijeka']-cidade) --> ['em','Rijeka'].
+nome(s-_, ['Split']-cidade) --> ['em','Split'].
+nome(s-_, ['Copenhaga']-cidade) --> ['em','Copenhaga'].
+nome(s-_, ['Aarhus']-cidade) --> ['em','Aarhus'].
+nome(s-_, ['Odense']-cidade) --> ['em','Odense'].
+nome(s-_, ['Tallinn']-cidade) --> ['em','Tallinn'].
+nome(s-_, ['Tartu']-cidade) --> ['em','Tartu'].
+nome(s-_, ['Narva']-cidade) --> ['em','Narva'].
+nome(s-_, ['Helsinquia']-cidade) --> ['em','Helsinquia'].
+nome(s-_, ['Tampere']-cidade) --> ['em','Tampere'].
+nome(s-_, ['Turku']-cidade) --> ['em','Turku'].
+nome(s-_, ['Paris']-cidade) --> ['em','Paris'].
+nome(s-_, ['Bordeus']-cidade) --> ['em','Bordeus'].
+nome(s-_, ['Lyon']-cidade) --> ['em','Lyon'].
+nome(s-_, ['Atenas']-cidade) --> ['em','Atenas'].
+nome(s-_, ['Fira']-cidade) --> ['em','Fira'].
+nome(s-_, ['Rodes']-cidade) --> ['em','Rodes'].
+nome(s-_, ['Reikiavik']-cidade) --> ['em','Reikiavik'].
+nome(s-_, ['Keflavik']-cidade) --> ['em','Keflavik'].
+nome(s-_, ['Seyoisfjorour']-cidade) --> ['em','Seyoisfjorour'].
+nome(s-_, ['Vilnius']-cidade) --> ['em','Vilnius'].
+nome(s-_, ['Kaunas']-cidade) --> ['em','Kaunas'].
+nome(s-_, ['Klaipeda']-cidade) --> ['em','Klaipeda'].
+nome(s-_, ['Skopje']-cidade) --> ['em','Skopje'].
+nome(s-_, ['Ohrid']-cidade) --> ['em','Ohrid'].
+nome(s-_, ['Amesterdao']-cidade) --> ['em','Amesterdao'].
+nome(s-_, ['Roterdao']-cidade) --> ['em','Roterdao'].
+nome(s-_, ['Kinderdijk']-cidade) --> ['em','Kinderdijk'].
+nome(s-_, ['Haia']-cidade) --> ['em','Haia'].
+nome(s-_, ['Delft']-cidade) --> ['em','Delft'].
+nome(s-_, ['Lisboa']-cidade) --> ['em','Lisboa'].
+nome(s-_, ['Porto']-cidade) --> ['no','Porto'].
+nome(s-_, ['Guimaraes']-cidade) --> ['em','Guimaraes'].
+nome(s-_, ['Evora']-cidade) --> ['em','Evora'].
+nome(s-_, ['Fatima']-cidade) --> ['em','Fatima'].
+nome(s-_, ['Coimbra']-cidade) --> ['em','Coimbra'].
+nome(s-_, ['Albufeira']-cidade) --> ['na','Albufeira'].
+nome(s-_, ['Portimao']-cidade) --> ['em','Portimao'].
+nome(s-_, ['Murmansk']-cidade) --> ['em','Murmansk'].
+nome(s-_, ['Moscovo']-cidade) --> ['em','Moscovo'].
+nome(s-_, ['Sao Petersburgo']-cidade) --> ['em','Sao Petersburgo'].
+nome(s-_, ['Kiev']-cidade) --> ['em','Kiev']. */
 
 nome(_, ['1','estrela']-estrelas) --> ['1','estrela'].
 nome(_, ['2','estrelas']-estrelas) --> ['2','estrelas'].
@@ -114,6 +120,7 @@ nome(_, ['menos','que','1','estrela']-menosestrelas) --> ['menos','que','1', 'es
 nome(_, ['menos','que','2','estrelas']-menosestrelas) --> ['menos','que','2', 'estrelas'].
 nome(_, ['menos','que','3','estrelas']-menosestrelas) --> ['menos','que','3', 'estrelas'].
 nome(_, ['menos','que','4','estrelas']-menosestrelas) --> ['menos','que','4', 'estrelas'].
+
 
 /*----------------------*/
 /*     DETERMINANTES    */
@@ -234,6 +241,7 @@ ter(hotel, servico).
 ter(hotel, quarto).
 ficar(hotel, cidade).
 ficar(hotel, pais).
+ficar(hotel, continente).
 existir(hotel, cidade).
 existir(hotel, pais).
 conter(hotel, servico).
