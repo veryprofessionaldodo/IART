@@ -26,6 +26,7 @@ nome(s-m, [pequeno,almoco]-servico) --> [pequeno,almoco].
 nome(s-m, [pais]-pais) --> [pais].
 nome(s-f, ['Albania']-pais) --> ['na','Albania'].
 nome(s-f, ['Alemanha']-pais) --> ['na','Alemanha'].
+nome(s-_, ['Portugal']-pais) --> ['em','Portugal'].
 /*nome(s-f, ['Belgica']-pais) --> ['na','Belgica'].
 nome(s-f, ['Croacia']-pais) --> ['na','Croacia'].
 nome(s-f, ['Dinamarca']-pais) --> ['na','Dinamarca'].
@@ -37,7 +38,6 @@ nome(s-f, ['Islandia']-pais) --> ['na','Islandia'].
 nome(s-f, ['Lituania']-pais) --> ['na','Lituania'].
 nome(s-f, ['Macedonia']-pais) --> ['na','Macedonia'].
 nome(s-f, ['Holanda']-pais) --> ['na','Holanda'].
-nome(s-_, ['Portugal']-pais) --> ['em','Portugal'].
 nome(s-f, ['Russia']-pais) --> ['na','Russia'].
 nome(s-f, ['Ucrania']-pais) --> ['na','Ucrania'].
 nome(s-f, ['Espanha']-pais) --> ['na','Espanha'].

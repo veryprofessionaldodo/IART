@@ -18,8 +18,7 @@ frase(Acao,Suj,Obj) --> frase_interrogativa(Acao, Suj, Obj), ['?'].
 frase_afirmativa(Acao,Suj,Obj) --> afirmativa_assis(Acao, LSuj, Obj).
 
 afirmativa_assis(Acao, LSuj, Obj) --> 
-	sintagma_nominal(Suj, N), 
-	{write('Faaack'), write(LSuj)},
+	sintagma_nominal(LSuj, N), 
 	sintagma_verbal(Acao, Obj, N, LSuj),
 	{verificacaoAfirmacao(LSuj, Obj, Acao)}.
 
@@ -48,7 +47,7 @@ Quais os hotéis de Faro que possuem categoria inferior a 4 e quartos com vista 
 O Hotel X fica em Faro e possui 4 estrelas.
 */
 
-sintagma_verbal(Acao, Obj, N, [_-Tipo | O]) -->  %missing some stuff here
+sintagma_verbal(Acao, Obj, N, _-Tipo) -->  %missing some stuff here
 	verbal_assis(Acao, Obj, N, Tipo).
 
 verbal_assis(Acao, Obj, N-G, Tipo) -->
@@ -56,8 +55,8 @@ verbal_assis(Acao, Obj, N-G, Tipo) -->
 	nome(_, Obj-Tipo2),
 	{teste_semantico(Acao, Tipo,Tipo2)}. 
 
-verbal_assis(Acao, Obj, N, Tipo) --> 
-	forma_verbal(N, Acao-P), 
+verbal_assis(Acao, Obj, N-G, Tipo) --> 
+	forma_verbal(N-G, Acao-P), 
 	preposicao(N-G),
 	nome(N-G, Obj-Tipo2),
 	{teste_semantico(Acao, Tipo,Tipo2)}. 

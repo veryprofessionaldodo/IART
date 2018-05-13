@@ -53,13 +53,13 @@ verificacaoAfirmacao([Suj-Tipo | Resto], [Obj], ficar):-
 % TER Estrelas
 verificacaoAfirmacao(Suj-Tipo, [Obj | _], ter):-
 	hotel(_ID,Suj,Obj, _Tlm, _Morada, _IDCidade, _IDRegiao),
-    write('Tem '),write(Suj), write(Tipo), write(Obj), write('\n'),
+    write('Tem1 '),write(Suj), write(Tipo), write(Obj), write('\n'),
 	write('Os dados estao de acordo com as nossas base de dados').
 
 verificacaoAfirmacao([Suj-Tipo | Resto], [Obj | Cont], ter):-
 	hotel(_ID,Suj,Obj, _Tlm, _Morada, _IDCidade, _IDRegiao),
-    write('Tem '),write(Suj), write(Tipo), write(Obj),  write('\n'),
-	verificacaoAfirmacao(Resto, [Obj, Cont], ficar).
+    write('Tem2 '),write(Suj), write(Tipo), write(Obj),  write('\n'),
+	verificacaoAfirmacao(Resto, [Obj, Cont], ter).
 
-verificacaoAfirmacao([_], _, _):-
+verificacaoAfirmacao(_, _, _):-
 	write('Esta informacao nao esta de acordo com a nossa base de dados.'),nl.
