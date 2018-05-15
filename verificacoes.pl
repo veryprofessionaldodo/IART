@@ -2,7 +2,7 @@
 
 % TODO FALTA FICAR RUA
 
-% FICAR Cidade
+% FICAR Cidade - 1 ou mais sujeitos
 verificacaoAfirmacao(Suj-Tipo, [Obj], ficar):-
     write('Ficar '),write(Suj), write(Tipo), write('\n'),
 	hotel(_ID,Suj,_Estrelas, _Tlm, _Morada, IDCidade, IDRegiao),

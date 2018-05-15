@@ -46,4 +46,6 @@ parse_input([],CurrWord, Words, List) :-
     append(Words, [TmpWord], List).
 
 teste:-
-    frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'tem', '3', 'estrelas', '.'],_).
+    %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'tem', '3', 'estrelas', '.'],_).
+    %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Tipton', 'tem', '3', 'estrelas', '.'],_).
+    frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Tipton', 'ficam', 'em', 'Tirana', '.'],_).
