@@ -33,9 +33,13 @@ interrogativa_assis(Acao, Suj, Obj) -->
 	sintagma_verbal(Acao, Suj, N2, TipoS),
 	sintagma_nominal(_N, N2).
 
-sintagma_nominal(Suj-Tipo, N-G) --> determinante(N-G), nome(N-G, Suj-Tipo).
-sintagma_nominal(Suj-Tipo, N-G) --> preposicao(N-G), nome(N-G, Suj-Tipo).
-sintagma_nominal(Suj-Tipo, N-G) --> nome(N-G, Suj-Tipo).
+
+sintagma_nominal([Suj-Tipo | O], N) --> sintagma_nominal_aux(Suj-Tipo, N-G), [e], sintagma_nominal(O, N, _). % Nverbo é 'p' pois são dois ou mais sujeitos, daí ser plural
+sintagma_nominal(Suj-Tipo, N) --> sintagma_nominal_aux(Suj-Tipo, N-G).
+
+sintagma_nominal_aux(Suj-Tipo, N-G) --> determinante(N-G), nome(N-G, Suj-Tipo).
+sintagma_nominal_aux(Suj-Tipo, N-G) --> preposicao(N-G), nome(N-G, Suj-Tipo).
+sintagma_nominal_aux(Suj-Tipo, N-G) --> nome(N-G, Suj-Tipo).
 
 /* 
 Quantos (são) os hotéis do Porto?
@@ -47,8 +51,11 @@ Quais os hotéis de Faro que possuem categoria inferior a 4 e quartos com vista 
 O Hotel X fica em Faro e possui 4 estrelas.
 */
 
-sintagma_verbal(Acao, Obj, N, _-Tipo) -->  %missing some stuff here
-	verbal_assis(Acao, Obj, N, Tipo).
+sintagma_verbal(Acao, Obj, N, [_-Tipo | O]) -->  %missing some stuff here
+	verbal_assis(Acao, Obj, p-G, Tipo). % TODO: verificação semantica que todos os tipos correspondem ao verbo
+
+sintagma_verbal(Acao, Obj, N, _-Tipo) -->  %se existem varios sujeitos, as formas verbais têm de estar no plural
+	verbal_assis(Acao, Obj, N-G, Tipo).
 
 verbal_assis(Acao, Obj, N-G, Tipo) -->
 	forma_verbal(N, Acao-P), 
@@ -65,22 +72,3 @@ verbal_assis(Acao, Obj, N-G, Tipo) -->
 teste_semantico(Acao, Tipo1, Tipo2):-
 	P=..[Acao, Tipo1, Tipo2],
 	P.
-
-%frase_interrogativa(Acao, Suj, Obj) --> .
-
-/*
-frase(LWords, Response) --> sintagma_nominal(LSuj, N), 
-			sintagma_verbal(Acao, Obj, N, LSuj), 
-			{resposta(Suj, Acao, Obj)}.
-
-sintagma_nominal(LSuj, N) --> sn1(LSuj, N).
-sintagma_nominal([Suj | O], P) --> sn1(Suj, _), [e], sn(O,_). % dois sujeitos
-
-sn1([Suj], N) --> determinante(N-G), nome(N-G, Suj).
-	
-sintagma_verbal(Acao, Obj, N, LSuj) --> verbo(Acao, N), nome(_, Obj).
-sintagma_verbal(gostar, Obj, N, LSuj) --> verbo(gostar, N), preposicao(G1-N1), nome(G1-N1, Obj).
-
-resposta(Suj, Acao, Obj):-
-	P = ..[Acao, Suj, Obj],
-	(P, write('Sim') ; write('Nao')).*/
