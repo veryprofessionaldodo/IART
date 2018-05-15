@@ -19,8 +19,8 @@ frase_afirmativa(Acao,Suj,Obj) --> afirmativa_assis(Acao, LSuj, Obj).
 
 afirmativa_assis(Acao, LSuj, Obj) --> 
 	sintagma_nominal(LSuj, N), 
-	sintagma_verbal(Acao, Obj, N, LSuj),
-	{verificacaoAfirmacao(LSuj, Obj, Acao)}.
+	sintagma_verbal(LAcao, LObj, N, LSuj),{ write('AHHH '), write(LObj),nl, write('BHHHHH '), write(LAcao),nl},
+	{write('Verificacao'), nl, verificacaoAfirmacaoTotal(LSuj, LObj, LAcao)}.
 
 frase_interrogativa(Acao, Suj, Obj) -->
 	interrogativa_assis(Acao, Suj, Obj).
@@ -51,11 +51,25 @@ Quais os hotéis de Faro que possuem categoria inferior a 4 e quartos com vista 
 O Hotel X fica em Faro e possui 4 estrelas.
 */
 
-sintagma_verbal(Acao, Obj, N, [_-Tipo | O]) -->  %missing some stuff here
-	verbal_assis(Acao, Obj, p-G, Tipo). % TODO: verificação semantica que todos os tipos correspondem ao verbo
 
-sintagma_verbal(Acao, Obj, N, _-Tipo) -->  %se existem varios sujeitos, as formas verbais têm de estar no plural
-	verbal_assis(Acao, Obj, N-G, Tipo).
+% TODO: verificação semantica que todos os tipos correspondem ao verbo
+
+%varios sujeitos e varios sintagmas verbais
+sintagma_verbal([Acao | OAcao], [Obj | OObj], N, [_-Tipo | O]) -->
+	verbal_assis(Acao, Obj, p-G, Tipo), {write('-1L-'), write(Obj),nl},  [e], sintagma_verbal(OAcao, OObj, N, [_-Tipo | O]).
+
+%varios sujeitos e um sintagma verbal
+sintagma_verbal(Acao, [Obj], N, [_-Tipo | O]) -->  %missing some stuff here
+	verbal_assis(Acao,  Obj, p-G, Tipo), {write('L-'), write(Obj),nl}.
+
+%um sujeito e varios sintagmas verbais
+sintagma_verbal([Acao | OAcao], [Obj | OObj], N, _-Tipo) -->
+	verbal_assis(Acao, Obj, p-G, Tipo), {write('-2L-'), write(Obj),nl}, [e], sintagma_verbal(OAcao, OObj, N, _-Tipo).
+
+%um sujeitos e um sintagma verbal
+sintagma_verbal(Acao, [Obj], N, _-Tipo) -->  %se existem varios sujeitos, as formas verbais têm de estar no plural
+	verbal_assis(Acao, Obj, N-G, Tipo), {write('L-'), write(Obj),nl}.
+
 
 verbal_assis(Acao, Obj, N-G, Tipo) -->
 	forma_verbal(N, Acao-P), 

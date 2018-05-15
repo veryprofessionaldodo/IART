@@ -5,7 +5,7 @@
 % hotel(IDHotel, Nome, 	Estrelas, Tel, IDMorada, IDCidade, IDRegião). Regiao é do tipo Montanha, Praia...
 hotel(1, ['Hotel', 'Tipton'], '3', '278421134', 124, 1, 2).
 hotel(2, ['Hotel', 'Vila', 'Gale'], '4', '278421189', 124, 7, 2).
-hotel(3, ['Hotel', 'Axis'], '4', '278421189', 124, 32, 2).
+hotel(3, ['Hotel', 'Axis'], '4', '278421189', 124, 7, 2). %32
 hotel(4, ['Hotel', 'Continental'], '4', '278421189', 124, 28, 2).
 hotel(5, ['Hotel', 'Ibis'], '4', '278421189', 124, 8, 2).
 hotel(6, ['Hotel', 'Village'], '4', '278421189', 124, 17, 2).

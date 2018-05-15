@@ -52,13 +52,14 @@ nome(s-f, ['Oceania']-continente) --> ['na', 'Oceania'].
 nome(s-f, ['Asia']-cidade) --> ['na', 'Asia'].
 
 nome(s-_, ['Tirana']-cidade) --> ['em','Tirana'].
+nome(s-f, ['Antuerpia']-cidade) --> ['na', 'Antuerpia'].
 
 /*nome(s-_, ['Durres']-cidade) --> ['em','Durres'].
 nome(s-_, ['Vlore']-cidade) --> ['em','Vlore'].
 nome(s-_, ['Berlim']-cidade) --> ['em','Berlim'].
 nome(s-_, ['Hamburgo']-cidade) --> ['em','Hamburgo'].
 nome(s-_, ['Munique']-cidade) --> ['em','Munique'].
-nome(s-_, ['Antuerpia']-cidade) --> ['na', Antuerpia'].
+nome(s-f, ['Antuerpia']-cidade) --> ['na', 'Antuerpia'].
 nome(s-_, ['Bruges']-cidade) --> ['em','Bruges'].
 nome(s-_, ['Bruxelas']-cidade) --> ['em','Bruxelas'].
 nome(s-_, ['Zagreb']-cidade) --> ['em','Zagreb'].
