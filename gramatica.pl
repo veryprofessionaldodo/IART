@@ -27,6 +27,15 @@ interrogativa_assis(Acao, Suj, Obj) -->
 	{write('Final result is '), write(Acao), write(' '), write(Suj), write(' '), write(LSuj)},
 	{verificacaoInterrogacaoTotal(TipoP, LSuj, Suj, Acao)}.
 
+% Ex : Quantos são os hoteis que ficam em X?
+interrogativa_assis(Acao, Suj, Obj) -->
+	% quantificador indica que tipo de pergunta está a ser feita
+	quantificador(TipoP, N-G), 
+	sintagma_verbal(Acao, Suj, N-G, LSuj),
+	sintagma_nominal(LSuj, N2),
+	{write('Final result is '), write(Acao), write(' '), write(Suj), write(' '), write(LSuj)},
+	{verificacaoInterrogacaoTotal(TipoP, LSuj, Suj, Acao)}.
+
 frase_afirmativa(Acao,Suj,Obj) --> afirmativa_assis(Acao, LSuj, Obj).
 
 afirmativa_assis(Acao, LSuj, Obj) --> 
@@ -35,8 +44,8 @@ afirmativa_assis(Acao, LSuj, Obj) -->
 	{write('Verificacao'), nl, verificacaoAfirmacaoTotal(LSuj, LObj, LAcao)}.
 
 % Nverbo é 'p' pois são dois ou mais sujeitos, daí ser plural
-sintagma_nominal([Suj-Tipo | O], N) --> sintagma_nominal_aux(Suj-Tipo, N-G), [e], sintagma_nominal(O, N, _). 
-sintagma_nominal(Suj-Tipo, N) --> sintagma_nominal_aux(Suj-Tipo, N-G).
+sintagma_nominal([Suj-Tipo | O], N) --> sintagma_nominal_aux(Suj-Tipo, N), [e], sintagma_nominal(O, N, _). 
+sintagma_nominal(Suj-Tipo, N) --> sintagma_nominal_aux(Suj-Tipo, N).
 
 sintagma_nominal_aux(Suj-Tipo, N-G) --> determinante(N-G), nome(N-G, Suj-Tipo).
 sintagma_nominal_aux(Suj-Tipo, N-G) --> preposicao(N-G), nome(N-G, Suj-Tipo).
@@ -46,7 +55,7 @@ sintagma_nominal_aux(Suj-Tipo, N-G) --> nome(N-G, Suj-Tipo).
 Quantos (são) os hotéis do Porto?
 Quais (são) os hotéis de categoria superior a 3 estrelas em Lisboa?
 E em Coimbra?
-Que/Quais serviços disponibiliza o Hotel X?
+Que/Quais serviços disponibiliza o Hotel X? (feito)
 Quais os hotéis parisienses que possuem serviço de babysitting? (fazer um novo predicado de lexico deLocal, que liga palavra a IDCidade)
 Quais os hotéis de Faro que possuem categoria inferior a 4 e quartos com vista de mar? 
 O Hotel X fica em Faro e possui 4 estrelas. (feito)

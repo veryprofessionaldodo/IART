@@ -93,11 +93,23 @@ verificacaoInterrogacao(que, Suj-hoteis, Obj, ficar) :-
 
 % Que serviços tem X?
 verificacaoInterrogacao(que, Suj-servico, Obj, ter) :-
-	nl, write('O hotel '), write(Suj), write(' '), write(Obj),
 	findall(Servico, 
 		(
 			hotel(IDHotel, Obj, _Estrelas, _Tlm, _IdMorada, IDCidade, _IDRegiao), 
 			tem_servico(IDHotel, IDServico), 
 			servico(IDServico, Servico)
 		), Servicos),
-	nl, write('A resposta a essa pergunta e : '), writeList(Servicos).
+	nl, write('Os servicos sao : '), writeList(Servicos).
+
+% Quantos são os hoteis de X?
+verificacaoInterrogacao(quanto, Suj-hoteis, Obj, ter) :-
+	nl,write('Yoooo'),
+	findall(IDHotel, 
+	(
+		cidade(IDCidade, Obj, _IDPais),
+		hotel(IDHotel, _Nome, _Estrelas, _Tlm, _IdMorada, IDCidade, _IDRegiao)
+	), Hoteis),
+	length(Hoteis, Contagem),
+	nl, write('Existe(m) '), write(Contagem), write(' hotel(is) em '), write(Obj).
+
+

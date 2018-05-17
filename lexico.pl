@@ -55,7 +55,9 @@ nome(s-f, ['Oceania']-continente) --> ['na', 'Oceania'].
 nome(s-f, ['Asia']-cidade) --> ['na', 'Asia'].
 
 nome(s-_, ['Tirana']-cidade) --> ['em','Tirana'].
+nome(s-_, ['Tirana']-cidade) --> ['de','Tirana'].
 nome(s-f, ['Antuerpia']-cidade) --> ['na', 'Antuerpia'].
+nome(s-f, ['Antuerpia']-cidade) --> ['da', 'Antuerpia'].
 
 /*nome(s-_, ['Durres']-cidade) --> ['em','Durres'].
 nome(s-_, ['Vlore']-cidade) --> ['em','Vlore'].
@@ -152,6 +154,8 @@ verbo(existir).
 verbo(ficar).
 verbo(conter).
 verbo(possuir).
+verbo(disponibilizar).
+verbo(ser).
 
 /*----------------------*/
 /*     FORMA VERBAL     */
@@ -174,17 +178,42 @@ forma_verbal(p, custar-s) --> [custam].
 forma_verbal(s, custar-n) --> [nao,custa].
 forma_verbal(p, custar-n) --> [nao,custam].
 
-forma_verbal(s, possuir-s) --> [possui].
-forma_verbal(p, possuir-s) --> [possuem].
+% Como são sinonimos a ter, facilita numero de predicados
+forma_verbal(s, ter-s) --> [possui].
+forma_verbal(p, ter-s) --> [possuem].
 
-forma_verbal(s, possuir-n) --> [nao,possui].
-forma_verbal(p, possuir-n) --> [nao,possuem].
+forma_verbal(s, ter-n) --> [nao,possui].
+forma_verbal(p, ter-n) --> [nao,possuem].
 
-forma_verbal(s, possuir-s) --> [que,possui].
-forma_verbal(p, possuir-s) --> [que,possuem].
+forma_verbal(s, ter-s) --> [que,possui].
+forma_verbal(p, ter-s) --> [que,possuem].
 
-forma_verbal(s, possuir-n) --> [que,nao,possui].
-forma_verbal(p, possuir-n) --> [que,nao,possuem].
+forma_verbal(s, ter-n) --> [que,nao,possui].
+forma_verbal(p, ter-n) --> [que,nao,possuem].
+
+forma_verbal(s, ter-s) --> [disponibiliza].
+forma_verbal(p, ter-s) --> [disponibilizam].
+
+forma_verbal(s, ter-n) --> [nao,disponibiliza].
+forma_verbal(p, ter-n) --> [nao,disponibilizam].
+
+forma_verbal(s, ter-s) --> [que,disponibiliza].
+forma_verbal(p, ter-s) --> [que,disponibilizam].
+
+forma_verbal(s, ter-n) --> [que,nao,disponibiliza].
+forma_verbal(p, ter-n) --> [que,nao,disponibilizam].
+
+forma_verbal(_, ter-s) --> [e].
+forma_verbal(_, ter-s) --> [sao].
+
+forma_verbal(_, ter-n) --> [nao,e].
+forma_verbal(_, ter-n) --> [nao,sao].
+
+forma_verbal(_, ter-s) --> [que,e].
+forma_verbal(_, ter-s) --> [que,sao].
+
+forma_verbal(_, ter-n) --> [que,nao,e].
+forma_verbal(_, ter-n) --> [que,nao,sao].
 
 forma_verbal(_, haver-s) --> [ha].
 forma_verbal(_, haver-n) --> [nao,ha].
@@ -203,17 +232,21 @@ forma_verbal(p, existir-n) --> [nao,existem].
 %quantificador(num-gen, tipo) --> [quantificador]
 quantificador(qual,s-_) --> [qual].
 quantificador(qual, p-_) --> [quais].
+quantificador(quanto, s-f) --> [quanta].
+quantificador(quanto, s-m) --> [quanto].
 quantificador(quanto, p-f) --> [quantas].
 quantificador(quanto, p-m) --> [quantos].
-quantificador(onde,_) --> [onde].
-quantificador(que,_) --> [que].
+quantificador(onde,_-_) --> [onde].
+quantificador(que,_-_) --> [que].
 
 quantificador(qual, s-_) --> ['Qual'].
 quantificador(qual, p-_) --> ['Quais'].
+quantificador(quanto, s-f) --> ['Quanta'].
+quantificador(quanto, s-m) --> ['Quanto'].
 quantificador(quanto, p-f) --> ['Quantas'].
 quantificador(quanto, p-m) --> ['Quantos'].
-quantificador(onde, _) --> ['Onde'].
-quantificador(que, _) --> ['Que'].
+quantificador(onde, _-_) --> ['Onde'].
+quantificador(que, _-_) --> ['Que'].
 
 /*----------------------*/
 /*      PREPOSIÇÕES     */
