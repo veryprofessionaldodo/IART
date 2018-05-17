@@ -15,6 +15,8 @@ nome(s-m, ['Hotel','Ibis']-hotel) --> ['Hotel','Ibis'].
 nome(s-m, ['Hotel','Village']-hotel) --> ['Hotel','Village'].   
 nome(s-m, ['Hotel','Lusitano']-hotel) --> ['Hotel','Lusitano'].   
 
+nome(s-m, [servico]-servico) --> [servico].
+nome(p-m, [servicos]-servico) --> [servicos].
 nome(s-m, [spa]-servico) --> [spa].
 nome(s-m, [ginasio]-servico) --> [ginasio].
 nome(s-m, [casino]-servico) --> [casino].

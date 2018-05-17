@@ -1,4 +1,4 @@
-:-reconsult(utils.pl).
+:-reconsult(utils).
 
 % verifica frases afirmativas
 
@@ -73,11 +73,12 @@ verificacaoAfirmacao([Suj-Tipo | Resto], [Obj | Cont], ter):-
 verificacaoAfirmacao(_, _, _):-
 	write('Esta informacao nao esta de acordo com a nossa base de dados.'),nl.
 
-verificacaoInterrogacaoTotal(Quant, LSuj, [Obj | []], Acao):-
-	verificacaoInterrogacao(LSuj, Obj, Acao).
+verificacaoInterrogacaoTotal(Quant, LSuj, [List|_], Acao):-
+	%listToString(List, '', Obj),
+	verificacaoInterrogacao(Quant, LSuj, List, Acao).
 
 verificacaoInterrogacaoTotal(Quant, LSuj, [Obj | RestoObj], [Acao | RestoAcao]):-
-	verificacaoInterrogacao(LSuj, Obj, Acao),
+	verificacaoInterrogacao(Quant, LSuj, Obj, Acao),
 	verificacaoInterrogacaoTotal(LSuj, RestoObj, RestoAcao).
 
 % QUE 
@@ -85,7 +86,18 @@ verificacaoInterrogacaoTotal(Quant, LSuj, [Obj | RestoObj], [Acao | RestoAcao]):
 % hotel(IDHotel, Nome, 	Estrelas, Tel, IDMorada, IDCidade, IDRegião). Regiao é do tipo Montanha, Praia...
 
 % Que hoteis ficam X(cidade)?
-verificacaoInterrogacao(que, Suj-hoteis, [Obj | _ ], ficar) :-
-	cidade(Obj, IDCidade),
+verificacaoInterrogacao(que, Suj-hoteis, Obj, ficar) :-
+	cidade(IDCidade, Obj, _IDPais), nl,
 	findall(Nome, hotel(_IDHotel, Nome, _Estrelas, _Tlm, _IdMorada, IDCidade, _IDRegiao), Hoteis),
-	write('A resposta a essa pergunta é : '), writeList(Hoteis).
+	write('A resposta a essa pergunta e : '), writeList(Hoteis).
+
+% Que serviços tem X?
+verificacaoInterrogacao(que, Suj-servico, Obj, ter) :-
+	nl, write('O hotel '), write(Suj), write(' '), write(Obj),
+	findall(Servico, 
+		(
+			hotel(IDHotel, Obj, _Estrelas, _Tlm, _IdMorada, IDCidade, _IDRegiao), 
+			tem_servico(IDHotel, IDServico), 
+			servico(IDServico, Servico)
+		), Servicos),
+	nl, write('A resposta a essa pergunta e : '), writeList(Servicos).

@@ -25,7 +25,7 @@ interrogativa_assis(Acao, Suj, Obj) -->
 	sintagma_nominal(LSuj, N),
 	sintagma_verbal(Acao, Suj, N2, LSuj),
 	{write('Final result is '), write(Acao), write(' '), write(Suj), write(' '), write(LSuj)},
-	verificacaoInterrogacaoTotal(TipoP, Lsuj, Suj, Acao).
+	{verificacaoInterrogacaoTotal(TipoP, LSuj, Suj, Acao)}.
 
 frase_afirmativa(Acao,Suj,Obj) --> afirmativa_assis(Acao, LSuj, Obj).
 
@@ -70,6 +70,11 @@ sintagma_verbal([Acao | OAcao], [Obj | OObj], N, _-Tipo) -->
 sintagma_verbal(Acao, [Obj], N, _-Tipo) -->  %se existem varios sujeitos, as formas verbais têm de estar no plural
 	verbal_assis(Acao, Obj, N-G, Tipo), {write('L-'), write(Obj),nl}.
 
+verbal_assis(Acao, Obj, N-G, Tipo) --> 
+	forma_verbal(N-G, Acao-P), 
+	determinante(N2-G2),
+	nome(N2-G2, Obj-Tipo2),
+	{teste_semantico(Acao, Tipo,Tipo2)}. 
 
 verbal_assis(Acao, Obj, N-G, Tipo) -->
 	forma_verbal(N, Acao-P), 
@@ -78,11 +83,16 @@ verbal_assis(Acao, Obj, N-G, Tipo) -->
 
 verbal_assis(Acao, Obj, N-G, Tipo) --> 
 	forma_verbal(N-G, Acao-P), 
-	preposicao(N-G),
-	nome(N-G, Obj-Tipo2),
+	preposicao(N2-G2),
+	nome(N2-G2, Obj-Tipo2),
 	{teste_semantico(Acao, Tipo,Tipo2)}. 
 
-%P pode ser afirmativo ou negativo 
+% Ex: o hotel FICA EM TIRANA
 teste_semantico(Acao, Tipo1, Tipo2):-
 	P=..[Acao, Tipo1, Tipo2],
+	P.
+
+% Ex: que SERVICOS TEM
+teste_semantico(Acao, Tipo1, Tipo2):-
+	P=..[Acao, Tipo2, Tipo1],
 	P.

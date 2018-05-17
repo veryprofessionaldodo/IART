@@ -5,7 +5,7 @@
 % hotel(IDHotel, Nome, 	Estrelas, Tel, IDMorada, IDCidade, IDRegião). Regiao é do tipo Montanha, Praia...
 hotel(1, ['Hotel', 'Tipton'], '3', '278421134', 124, 1, 2).
 hotel(2, ['Hotel', 'Vila', 'Gale'], '4', '278421189', 124, 7, 2).
-hotel(3, ['Hotel', 'Axis'], '4', '278421189', 124, 7, 2). %32
+hotel(3, ['Hotel', 'Axis'], '4', '278421189', 124, 7, 2). 
 hotel(4, ['Hotel', 'Continental'], '4', '278421189', 124, 28, 2).
 hotel(5, ['Hotel', 'Ibis'], '4', '278421189', 124, 8, 2).
 hotel(6, ['Hotel', 'Village'], '4', '278421189', 124, 17, 2).
@@ -187,15 +187,15 @@ cidade(54, 'Kiev', 16).
 /*        SERVIÇOS        */
 /*------------------------*/
 
-% servico(Nome).
-servico('babysitting').
-servico('limpeza de quartos').
-servico('garagem privativa').
-servico('wifi').
-servico('pequeno almoco').
-servico('ginasio').
-servico('spa').
-servico('casino').
+% servico(ID,Nome).
+servico(1,'babysitting').
+servico(2,'limpeza de quartos').
+servico(3,'garagem privativa').
+servico(4,'wifi').
+servico(5,'pequeno almoco').
+servico(6,'ginasio').
+servico(7,'spa').
+servico(8,'casino').
 
 /*------------------------*/
 /*       TEM QUARTO       */
@@ -207,3 +207,7 @@ servico('casino').
 /*       TEM SERVIÇO      */
 /*------------------------*/
 
+% tem_servico(IDHotel, IDServico).
+tem_servico(1,1).
+tem_servico(1,2).
+tem_servico(1,5).
