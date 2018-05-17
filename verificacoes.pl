@@ -1,3 +1,5 @@
+:-reconsult(utils.pl).
+
 % verifica frases afirmativas
 
 % TODO FALTA FICAR RUA
@@ -70,3 +72,20 @@ verificacaoAfirmacao([Suj-Tipo | Resto], [Obj | Cont], ter):-
 
 verificacaoAfirmacao(_, _, _):-
 	write('Esta informacao nao esta de acordo com a nossa base de dados.'),nl.
+
+verificacaoInterrogacaoTotal(Quant, LSuj, [Obj | []], Acao):-
+	verificacaoInterrogacao(LSuj, Obj, Acao).
+
+verificacaoInterrogacaoTotal(Quant, LSuj, [Obj | RestoObj], [Acao | RestoAcao]):-
+	verificacaoInterrogacao(LSuj, Obj, Acao),
+	verificacaoInterrogacaoTotal(LSuj, RestoObj, RestoAcao).
+
+% QUE 
+
+% hotel(IDHotel, Nome, 	Estrelas, Tel, IDMorada, IDCidade, IDRegião). Regiao é do tipo Montanha, Praia...
+
+% Que hoteis ficam X(cidade)?
+verificacaoInterrogacao(que, Suj-hoteis, [Obj | _ ], ficar) :-
+	cidade(Obj, IDCidade),
+	findall(Nome, hotel(_IDHotel, Nome, _Estrelas, _Tlm, _IdMorada, IDCidade, _IDRegiao), Hoteis),
+	write('A resposta a essa pergunta é : '), writeList(Hoteis).

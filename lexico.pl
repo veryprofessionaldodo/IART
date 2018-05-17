@@ -5,7 +5,8 @@
 % NOTA IMPORTANTE -> Para fins de consistencia usa se sempre Numero-Genero
 
 % Para maiúsculas é necessário '' porque senão reconhece uma variável.
-nome(s-m, [hotel]-hotel) --> [hotel].   
+nome(s-m, ['hotel']-hotel) --> ['hotel'].   
+nome(p-_, ['hoteis']-hotel) --> ['hoteis'].
 nome(s-m, ['Hotel','Tipton']-hotel) --> ['Hotel','Tipton'].   
 nome(s-m, ['Hotel','Vila', 'Gale']-hotel) --> ['Hotel','Vila','Gale'].   
 nome(s-m, ['Hotel','Axis']-hotel) --> ['Hotel','Axis'].   
