@@ -92,6 +92,23 @@ verificacaoInterrogacao(que, Suj-hotel, [Obj], ficar) :-
 	findall(Nome, hotel(_IDHotel, Nome, _Estrelas, _Tlm, _IdMorada, IDCidade, _IDRegiao), Hoteis),
 	write('A resposta a essa pergunta e : '), writeList(Hoteis).
 
+% Que hoteis ficam X(pais)?
+verificacaoInterrogacao(que, Suj-hotel, [Obj], ficar) :-	
+	pais(IDPais, Obj, _IDContinente),
+	findall(Nome, 
+			(cidade(IDCidade, _, IDPais), hotel(_IDHotel, Nome, _Estrelas, _Tlm, _IdMorada, IDCidade, _IDRegiao)), 
+			Hoteis),
+	write('A resposta a essa pergunta e : '), writeList(Hoteis).
+
+% Que hoteis ficam X(continente)?
+verificacaoInterrogacao(que, Suj-hotel, [Obj], ficar) :-	
+	continente(IDContinete, Obj),
+	findall(Nome, 
+			(pais(IDPais, _, IDContinente), cidade(IDCidade, _, IDPais), 
+				hotel(_IDHotel, Nome, _Estrelas, _Tlm, _IdMorada, IDCidade, _IDRegiao)), 
+			Hoteis),
+	write('A resposta a essa pergunta e : '), writeList(Hoteis).
+
 % Que serviços tem X?
 verificacaoInterrogacao(que, Suj-servico, Obj, ter) :-
 	findall(Servico, 
