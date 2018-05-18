@@ -2,7 +2,7 @@
 :-reconsult('lexico.pl').
 :-reconsult('verificacoes.pl').
 
-:-dynamic lastData/5.
+:-dynamic lastData/4.
 
 /*----------------------*/
 /* ESTRUTURA DAS FRASES */
@@ -20,12 +20,19 @@ frase(Acao,Suj,Obj) --> frase_afirmativa(Acao, Suj, Obj), [.].
 frase_interrogativa(Acao, Suj, Obj) -->
 	interrogativa_assis(Acao, Suj, Obj).
 
-%Começa por E
+%Começa por E - lugar
 interrogativa_assis(Acao, NovoSuj, Obj) -->
 	conjuncao(_),
-	{retract((lastData(TipoP, N-G, LSuj, Suj, Acao)))},
-	novo_sujeito(NovoSuj),
+	novo_sujeito_l(NovoSuj),
+	{retract((lastData(TipoP, LSuj, Suj, Acao)))},
 	{verificacaoInterrogacaoTotal(TipoP, LSuj, [NovoSuj], Acao)}.
+
+%Começa por E - hotel
+interrogativa_assis(Acao, NovosSujs, Obj) -->
+	conjuncao(_),
+	novo_sujeito_s(NovosSujs),
+	{retract((lastData(TipoP, LSuj, Suj, Acao))), write('retract: '), write(TipoP), write(' '), write(LSuj), write(' '), write(Suj), write(' '), write(Acao),nl},
+	{verificacaoInterrogacaoTotal(TipoP, LSuj, [NovosSujs], Acao)}.
 
 % Ex : Que/Quais serviços disponibiliza o Hotel X?
 interrogativa_assis(Acao, Suj, Obj) -->
@@ -34,7 +41,7 @@ interrogativa_assis(Acao, Suj, Obj) -->
 	sintagma_nominal(LSuj, N),
 	sintagma_verbal(Acao, Suj, N2, LSuj),
 	{write('Final result is '), write(Acao), write(' '), write(Suj), write(' '), write(LSuj)},
-	{verificacaoInterrogacaoTotal(TipoP, LSuj, Suj, Acao), assert((lastData(TipoP, N-_, LSuj, Suj, Acao)))}.
+	{verificacaoInterrogacaoTotal(TipoP, LSuj, Suj, Acao), nl,write('Assert:'),nl,assert((lastData(TipoP, LSuj, Suj, Acao)))}.
 
 % Ex : Quantos são os hoteis que ficam em X?
 interrogativa_assis(Acao, Suj, Obj) -->
@@ -43,7 +50,7 @@ interrogativa_assis(Acao, Suj, Obj) -->
 	sintagma_verbal(Acao, Suj, N-G, LSuj),
 	sintagma_nominal(LSuj, N2),
 	{write('Final result is '), write(Acao), write(' '),write(N-G), write(' '), write(Suj), write(' '), write(LSuj)},
-	{verificacaoInterrogacaoTotal(TipoP, LSuj, Suj, Acao), assert(TipoP, N-G, LSuj, Suj, Acao)}.
+	{verificacaoInterrogacaoTotal(TipoP, LSuj, Suj, Acao), assert(TipoP, LSuj, Suj, Acao)}.
 
 frase_afirmativa(Acao,Suj,Obj) --> afirmativa_assis(Acao, LSuj, Obj).
 
@@ -115,10 +122,16 @@ teste_semantico(Acao, Tipo1, Tipo2):-
 	P=..[Acao, Tipo2, Tipo1],
 	P.
 
-
-novo_sujeito(NovoSuj) --> %incluir teste semantico!
+%lugar
+novo_sujeito_l(NovoSuj) --> %incluir teste semantico!
 	nome(N-G, NovoSuj-Tipo),
 	{write('novo_sujeito: '), write(NovoSuj-Tipo)}.
 
-clean_lastData :-
-      retractall(lastData(_,_,_,_)).
+novo_sujeito_s(Suj) -->
+	determinante(N-G), nome(N-G, Suj-_Tipo).
+
+/*novo_sujeito_s([Suj | O]) --> %incluir teste semantico!
+	novo_sujeito_aux(Suj), [e], novo_sujeito_s(O, N). 
+
+novo_sujeito_aux(Suj) -->
+	determinante(N-G), nome(N-G, Suj-_Tipo).*/

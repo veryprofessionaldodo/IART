@@ -213,3 +213,4 @@ servico(8,'casino').
 tem_servico(1,1).
 tem_servico(1,2).
 tem_servico(1,5).
+tem_servico(3,5).
