@@ -54,7 +54,7 @@ teste:-
     %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Tipton', 'tem', '3', 'estrelas', '.'],_).
     %frase(Acao, Suj, Obj, ['Que', 'hoteis','ficam','em','Tirana','?'],_).
     %frase(Acao, Suj, Obj, ['Que', 'servicos','tem','o','Hotel','Tipton','?'],_).
-    frase(Acao, Suj, Obj, ['Quantos', 'sao','os','hoteis','de','Tirana','?'],_).
+    frase(Acao, Suj, Obj, ['Quantos','sao','os','hoteis','de','Tirana','?'],_).
     %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Tipton', 'ficam', 'em', 'Tirana', '.'],_).
     %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Tipton', 'ficam', 'em', 'Tirana', 'e', 'tem', '3', 'estrelas', '.'],_).
     %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Tipton', 'tem', '3', 'estrelas', 'e', 'ficam', 'em', 'Tirana', '.'],_).

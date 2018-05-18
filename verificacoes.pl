@@ -74,6 +74,7 @@ verificacaoAfirmacao(_, _, _):-
 	write('Esta informacao nao esta de acordo com a nossa base de dados.'),nl.
 
 verificacaoInterrogacaoTotal(Quant, LSuj, [List|_], Acao):-
+	nl,write('Verificacao'),nl, write(LSuj) , write(' '), write(List), write(' '), write(Acao),nl,
 	%listToString(List, '', Obj),
 	verificacaoInterrogacao(Quant, LSuj, List, Acao).
 
@@ -86,8 +87,8 @@ verificacaoInterrogacaoTotal(Quant, LSuj, [Obj | RestoObj], [Acao | RestoAcao]):
 % hotel(IDHotel, Nome, 	Estrelas, Tel, IDMorada, IDCidade, IDRegião). Regiao é do tipo Montanha, Praia...
 
 % Que hoteis ficam X(cidade)?
-verificacaoInterrogacao(que, Suj-hoteis, Obj, ficar) :-
-	cidade(IDCidade, Obj, _IDPais), nl,
+verificacaoInterrogacao(que, Suj-hotel, [Obj], ficar) :-	
+	cidade(IDCidade, Obj, _IDPais),
 	findall(Nome, hotel(_IDHotel, Nome, _Estrelas, _Tlm, _IdMorada, IDCidade, _IDRegiao), Hoteis),
 	write('A resposta a essa pergunta e : '), writeList(Hoteis).
 
@@ -102,7 +103,7 @@ verificacaoInterrogacao(que, Suj-servico, Obj, ter) :-
 	nl, write('Os servicos sao : '), writeList(Servicos).
 
 % Quantos são os hoteis de X?
-verificacaoInterrogacao(quanto, Suj-hoteis, Obj, ter) :-
+verificacaoInterrogacao(quanto, Suj-hotel, [Obj], ter) :-
 	nl,write('Yoooo'),
 	findall(IDHotel, 
 	(
