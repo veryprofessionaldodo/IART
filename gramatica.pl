@@ -2,6 +2,8 @@
 :-reconsult('lexico.pl').
 :-reconsult('verificacoes.pl').
 
+:-dynamic lastData/5.
+
 /*----------------------*/
 /* ESTRUTURA DAS FRASES */
 /*----------------------*/
@@ -18,6 +20,13 @@ frase(Acao,Suj,Obj) --> frase_afirmativa(Acao, Suj, Obj), [.].
 frase_interrogativa(Acao, Suj, Obj) -->
 	interrogativa_assis(Acao, Suj, Obj).
 
+%Começa por E
+interrogativa_assis(Acao, NovoSuj, Obj) -->
+	conjuncao(_),
+	{retract((lastData(TipoP, N-G, LSuj, Suj, Acao)))},
+	novo_sujeito(NovoSuj),
+	{verificacaoInterrogacaoTotal(TipoP, LSuj, [NovoSuj], Acao)}.
+
 % Ex : Que/Quais serviços disponibiliza o Hotel X?
 interrogativa_assis(Acao, Suj, Obj) -->
 	% quantificador indica que tipo de pergunta está a ser feita
@@ -25,7 +34,7 @@ interrogativa_assis(Acao, Suj, Obj) -->
 	sintagma_nominal(LSuj, N),
 	sintagma_verbal(Acao, Suj, N2, LSuj),
 	{write('Final result is '), write(Acao), write(' '), write(Suj), write(' '), write(LSuj)},
-	{verificacaoInterrogacaoTotal(TipoP, LSuj, Suj, Acao)}.
+	{verificacaoInterrogacaoTotal(TipoP, LSuj, Suj, Acao), assert((lastData(TipoP, N-_, LSuj, Suj, Acao)))}.
 
 % Ex : Quantos são os hoteis que ficam em X?
 interrogativa_assis(Acao, Suj, Obj) -->
@@ -33,8 +42,8 @@ interrogativa_assis(Acao, Suj, Obj) -->
 	quantificador(TipoP, N-G), 
 	sintagma_verbal(Acao, Suj, N-G, LSuj),
 	sintagma_nominal(LSuj, N2),
-	{write('Final result is '), write(Acao), write(' '), write(Suj), write(' '), write(LSuj)},
-	{verificacaoInterrogacaoTotal(TipoP, LSuj, Suj, Acao)}.
+	{write('Final result is '), write(Acao), write(' '),write(N-G), write(' '), write(Suj), write(' '), write(LSuj)},
+	{verificacaoInterrogacaoTotal(TipoP, LSuj, Suj, Acao), assert(TipoP, N-G, LSuj, Suj, Acao)}.
 
 frase_afirmativa(Acao,Suj,Obj) --> afirmativa_assis(Acao, LSuj, Obj).
 
@@ -76,7 +85,7 @@ sintagma_verbal([Acao | OAcao], [Obj | OObj], N, _-Tipo) -->
 	verbal_assis(Acao, Obj, p-G, Tipo), {write(Acao),write('-2L-'), write(Obj),nl}, [e], sintagma_verbal(OAcao, OObj, N, _-Tipo).
 
 %um sujeitos e um sintagma verbal
-sintagma_verbal(Acao, [Obj], N, _-Tipo) -->  %se existem varios sujeitos, as formas verbais têm de estar no plural
+sintagma_verbal(Acao, [Obj], N, _-Tipo) -->
 	verbal_assis(Acao, Obj, N-G, Tipo), {write(Acao),write('L-'), write(Obj),nl}.
 
 verbal_assis(Acao, Obj, N-G, Tipo) --> 
@@ -105,3 +114,11 @@ teste_semantico(Acao, Tipo1, Tipo2):-
 teste_semantico(Acao, Tipo1, Tipo2):-
 	P=..[Acao, Tipo2, Tipo1],
 	P.
+
+
+novo_sujeito(NovoSuj) --> %incluir teste semantico!
+	nome(N-G, NovoSuj-Tipo),
+	{write('novo_sujeito: '), write(NovoSuj-Tipo)}.
+
+clean_lastData :-
+      retractall(lastData(_,_,_,_)).

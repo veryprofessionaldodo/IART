@@ -62,3 +62,7 @@ teste:-
     %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Tipton', 'tem', '3', 'estrelas', 'e', 'ficam', 'em', 'Tirana', '.'],_).
     %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Vila', 'Gale', 'e', 'o', 'Hotel', 'Axis', 'tem', '4', 'estrelas', 'e', 'ficam', 'na', 'Antuerpia', '.'],_).
     %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Vila', 'Gale', 'e', 'o', 'Hotel', 'Axis', 'ficam', 'na', 'Antuerpia', 'e', 'tem', '4', 'estrelas', '.'],_).
+
+teste2:-
+    %frase(Acao, Suj, Obj, ['E', 'em','Africa','?'],_).
+    frase(Acao, Suj, Obj, ['E', 'na','Antuerpia','?'],_).

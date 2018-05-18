@@ -48,7 +48,7 @@ nome(p-f, ['Estados', 'Unidos', 'da', 'America']-pais) --> ['nos','Estados', 'Un
 */
 nome(s-m, [continente]-continente) --> [continente].
 nome(s-f, ['Europa']-continente) --> ['na', 'Europa'].
-nome(s-f, ['Africa']-continente) --> ['na', 'Africa'].
+nome(s-f, ['Africa']-continente) --> ['em', 'Africa'].
 nome(s-f, ['America do Norte']-continente) --> ['na', 'America', 'do', 'Norte'].
 nome(s-f, ['America do Sul']-continente) --> ['na', 'America', 'do', 'Sul'].
 nome(s-f, ['Oceania']-continente) --> ['na', 'Oceania'].
@@ -268,6 +268,13 @@ preposicao(s-m) --> [do].
 preposicao(s-f) --> [da].
 preposicao(p-m) --> [dos].
 preposicao(p-f) --> [das].
+
+/*----------------------*/
+/*      CONJUNÇÃO       */
+/*----------------------*/
+
+conjuncao(_) --> [e].
+conjuncao(_) --> ['E'].
 
 
 /*--------------------------*/

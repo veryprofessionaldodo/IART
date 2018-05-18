@@ -73,6 +73,7 @@ verificacaoAfirmacao([Suj-Tipo | Resto], [Obj | Cont], ter):-
 verificacaoAfirmacao(_, _, _):-
 	write('Esta informacao nao esta de acordo com a nossa base de dados.'),nl.
 
+
 verificacaoInterrogacaoTotal(Quant, LSuj, [List|_], Acao):-
 	nl,write('Verificacao'),nl, write(LSuj) , write(' '), write(List), write(' '), write(Acao),nl,
 	%listToString(List, '', Obj),
@@ -102,7 +103,7 @@ verificacaoInterrogacao(que, Suj-hotel, [Obj], ficar) :-
 
 % Que hoteis ficam X(continente)?
 verificacaoInterrogacao(que, Suj-hotel, [Obj], ficar) :-	
-	continente(IDContinete, Obj),
+	continente(IDContinente, Obj),
 	findall(Nome, 
 			(pais(IDPais, _, IDContinente), cidade(IDCidade, _, IDPais), 
 				hotel(_IDHotel, Nome, _Estrelas, _Tlm, _IdMorada, IDCidade, _IDRegiao)), 

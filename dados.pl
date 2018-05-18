@@ -10,6 +10,7 @@ hotel(4, ['Hotel', 'Continental'], '4', '278421189', 124, 28, 2).
 hotel(5, ['Hotel', 'Ibis'], '4', '278421189', 124, 8, 2).
 hotel(6, ['Hotel', 'Village'], '4', '278421189', 124, 17, 2).
 hotel(7, ['Hotel', 'Lusitano'], '4','278421189', 124, 43, 2).
+hotel(8, ['Hotel', 'Angolano'], '4','278421189', 124, 55, 2).
 
 /*------------------------*/
 /*        QUARTOS         */
@@ -70,9 +71,9 @@ pais(15, 'Russia', 1).
 pais(16, 'Ucrania', 1).
 pais(17, 'Espanha', 1).
 pais(18, 'Estados Unidos da America', 3).
-/*
+
 pais(18, 'Angola', 2).
-pais(19, 'Cabo Verde', 2).
+/*pais(19, 'Cabo Verde', 2).
 pais(20, 'Egito', 2).
 pais(21, 'Guine', 2).
 pais(22, 'Quenia', 2).
@@ -174,6 +175,7 @@ cidade(51, 'Murmansk', 15).
 cidade(52, 'Moscovo', 15).
 cidade(53, 'Sao Petersburgo', 15).
 cidade(54, 'Kiev', 16).
+cidade(55, 'Luanda', 18).
 
 
 /*------------------------*/
