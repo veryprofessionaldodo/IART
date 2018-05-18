@@ -15,8 +15,9 @@ frase(_,_):- write("erro sintaxe").*/
 %frase(Acao,Suj,Obj) --> frase_interrogativa(Acao, Suj, Obj), [?].
 
 frase(Acao,Suj,Obj) --> frase_interrogativa(TipoP, Acao, Suj, Obj), ['?'], 
-						{verificacaoInterrogacaoTotal(TipoP, Suj, Obj, Acao, [])}.
-						
+						{	write('FRASE: '),nl,write(TipoP),write(' '),write(Acao),write(' '),write(Suj),write(' '),write(Obj),nl,
+							verificacaoInterrogacaoTotal(TipoP, Suj, Obj, Acao, [])}.
+
 frase(Acao,Suj,Obj) --> frase_afirmativa(Acao, Suj, Obj), [.].
 
 frase_interrogativa(TipoP, Acao, Suj, Obj) -->
@@ -30,16 +31,14 @@ frase_interrogativa(TipoP, Acao, Suj, Obj) -->
 interrogativa_assis(TipoP, Acao, LSuj, [NovoSuj]) -->
 	conjuncao(_),
 	novo_sujeito_l(NovoSuj),
-	{retract((lastData(TipoP, LSuj, Suj, Acao)))}
-	/*{verificacaoInterrogacaoTotal(TipoP, LSuj, [NovoSuj], Acao)}*/.
+	{retract((lastData(TipoP, LSuj, Suj, Acao)))}.
 
 %Começa por E - hotel
-interrogativa_assis(TipoP, Acao, LSuj, [NovoSujs]) -->
+interrogativa_assis(TipoP, Acao, LSuj, [NovosSujs]) -->
 	conjuncao(_),
 	novo_sujeito_s(NovosSujs),
 	{retract((lastData(TipoP, LSuj, Suj, Acao))), 
-		write('retract: '), write(TipoP), write(' '), write(LSuj), write(' '), write(Suj), write(' '), write(Acao),nl}
-	/*{verificacaoInterrogacaoTotal(TipoP, LSuj, [NovosSujs], Acao)}*/.
+		write('retract: '), write(TipoP), write(' '), write(LSuj), write(' '), write(Suj), write(' '), write(Acao),nl}.
 
 
 /*
@@ -52,8 +51,8 @@ interrogativa_assis(TipoP, Acao, LSuj, Obj) -->
 	quantificador(TipoP, N), 
 	sintagma_nominal(LSuj, N),
 	sintagma_verbal(Acao, Obj, N2, LSuj),
-	{write('2Final result is '), write(Acao), write(' '), write(Obj), write(' '), write(LSuj)}
-	/*{verificacaoInterrogacaoTotal(TipoP, LSuj, Obj, Acao), assert((lastData(TipoP, LSuj, Obj, Acao)))}*/.
+	{write('2Final result is '), write(Acao), write(' '), write(Obj), write(' '), write(LSuj)},
+	{assert((lastData(TipoP, LSuj, Obj, Acao)))}.
 
 %Ex : Quais os hotéis parisienses que possuem ...
 interrogativa_assis(TipoP, [Acao1 | Acao], LSuj, [Obj1 | Suj]) -->
@@ -62,8 +61,7 @@ interrogativa_assis(TipoP, [Acao1 | Acao], LSuj, [Obj1 | Suj]) -->
 	sintagma_nominal(LSuj, N),
 	adjetivo(N,Obj1-Tipo, Acao1),
 	sintagma_verbal(Acao, Suj, N2, LSuj),
-	{write('Final result is '), write([Acao1 | Acao]), write(' '), write([Obj1 | Suj]), write(' '), write(LSuj)}
-	/*{verificacaoInterrogacaoTotal(TipoP, LSuj, [Obj1 | Suj], [Acao1 | Acao],[])}*/. % adicionar lista ao assert
+	{write('Final result is '), write([Acao1 | Acao]), write(' '), write([Obj1 | Suj]), write(' '), write(LSuj)}. % adicionar lista ao assert
 
 %Ex: Quais os hoteis parisienses?
 interrogativa_assis(TipoP, Acao, LSuj, [Obj]) -->
@@ -71,8 +69,8 @@ interrogativa_assis(TipoP, Acao, LSuj, [Obj]) -->
 	quantificador(TipoP, N), 
 	sintagma_nominal(LSuj, N),
 	adjetivo(N,Obj-Tipo, Acao),
-	{write('Final result is '), write(Acao), write(' '), write(Obj), write(' '), write(LSuj)}
-	/*{verificacaoInterrogacaoTotal(TipoP, LSuj, [Obj], Acao), assert((lastData(TipoP, LSuj, Obj, Acao)))}*/. % adicionar lista ao assert
+	{write('Final result is '), write(Acao), write(' '), write(Obj), write(' '), write(LSuj)},
+	{assert((lastData(TipoP, LSuj, Obj, Acao)))}.
 
 % Ex : Quantos são os hoteis que ficam em X?
 interrogativa_assis(TipoP, Acao, LSuj, Obj) -->
@@ -80,8 +78,8 @@ interrogativa_assis(TipoP, Acao, LSuj, Obj) -->
 	quantificador(TipoP, N-G), 
 	sintagma_verbal(Acao, Obj, N-G, LSuj),
 	sintagma_nominal(LSuj, N2),
-	{write('Final result is '), write(Acao), write(' '),write(N-G), write(' '), write(Obj), write(' '), write(LSuj)}
-	/*{verificacaoInterrogacaoTotal(TipoP, LSuj, Obj, Acao), assert(TipoP, LSuj, Obj, Acao)}*/.
+	{write('Final result is '), write(Acao), write(' '),write(N-G), write(' '), write(Obj), write(' '), write(LSuj)},
+	{assert(TipoP, LSuj, Obj, Acao)}.
 
 
 
