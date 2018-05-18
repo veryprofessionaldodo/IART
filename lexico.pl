@@ -30,13 +30,13 @@ nome(s-m, [pais]-pais) --> [pais].
 nome(s-f, ['Albania']-pais) --> ['na','Albania'].
 nome(s-f, ['Alemanha']-pais) --> ['na','Alemanha'].
 nome(s-_, ['Portugal']-pais) --> ['em','Portugal'].
-/*nome(s-f, ['Belgica']-pais) --> ['na','Belgica'].
+nome(s-f, ['Belgica']-pais) --> ['na','Belgica'].
 nome(s-f, ['Croacia']-pais) --> ['na','Croacia'].
 nome(s-f, ['Dinamarca']-pais) --> ['na','Dinamarca'].
 nome(s-f, ['Estonia']-pais) --> ['na','Estonia'].
 nome(s-f, ['Finlandia']-pais) --> ['na','Finlandia'].
 nome(s-_, ['Franca']-pais) --> ['na','Franca'].
-nome(s-f, ['Grecia']-pais) --> ['na','Grecia'].
+/*nome(s-f, ['Grecia']-pais) --> ['na','Grecia'].
 nome(s-f, ['Islandia']-pais) --> ['na','Islandia'].
 nome(s-f, ['Lituania']-pais) --> ['na','Lituania'].
 nome(s-f, ['Macedonia']-pais) --> ['na','Macedonia'].
@@ -46,6 +46,7 @@ nome(s-f, ['Ucrania']-pais) --> ['na','Ucrania'].
 nome(s-f, ['Espanha']-pais) --> ['na','Espanha'].
 nome(p-f, ['Estados', 'Unidos', 'da', 'America']-pais) --> ['nos','Estados', 'Unidos', 'da', 'America'].
 */
+
 nome(s-m, [continente]-continente) --> [continente].
 nome(s-f, ['Europa']-continente) --> ['na', 'Europa'].
 nome(s-f, ['Africa']-continente) --> ['em', 'Africa'].
@@ -58,6 +59,7 @@ nome(s-_, ['Tirana']-cidade) --> ['em','Tirana'].
 nome(s-_, ['Tirana']-cidade) --> ['de','Tirana'].
 nome(s-f, ['Antuerpia']-cidade) --> ['na', 'Antuerpia'].
 nome(s-f, ['Antuerpia']-cidade) --> ['da', 'Antuerpia'].
+nome(s-_, ['Paris']-cidade) --> ['em','Paris'].
 
 /*nome(s-_, ['Durres']-cidade) --> ['em','Durres'].
 nome(s-_, ['Vlore']-cidade) --> ['em','Vlore'].
@@ -142,6 +144,18 @@ determinante(s-f) --> ['A'].
 determinante(s-m) --> ['O'].
 determinante(p-f) --> ['As'].
 determinante(p-m) --> ['Os'].
+
+
+/*----------------------*/
+/*     ADJETIVOS	    */
+/*----------------------*/
+
+adjetivo(s-_, ['Paris']-cidade, ficar) --> [parisiense].
+adjetivo(p-_, ['Paris']-cidade, ficar) --> [parisienses].
+adjetivo(s-_, ['Porto']-cidade, ficar) --> [portuense].
+adjetivo(p-_, ['Porto']-cidade, ficar) --> [portuenses].
+adjetivo(p-_, ['Porto']-cidade, ficar) --> [portuenses].
+
 
 /*----------------------*/
 /*        VERBOS        */

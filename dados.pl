@@ -11,6 +11,8 @@ hotel(5, ['Hotel', 'Ibis'], '4', '278421189', 124, 8, 2).
 hotel(6, ['Hotel', 'Village'], '4', '278421189', 124, 17, 2).
 hotel(7, ['Hotel', 'Lusitano'], '4','278421189', 124, 43, 2).
 hotel(8, ['Hotel', 'Angolano'], '4','278421189', 124, 55, 2).
+hotel(9, ['Hotel', 'Merci'], '4','278421189', 124, 22, 2).
+hotel(10, ['Hotel', 'Louvre'], '4','278421189', 124, 22, 2).
 
 /*------------------------*/
 /*        QUARTOS         */
@@ -214,3 +216,4 @@ tem_servico(1,1).
 tem_servico(1,2).
 tem_servico(1,5).
 tem_servico(3,5).
+tem_servico(9,1).

@@ -17,5 +17,12 @@ listToString([Head|Tail], TmpString, String) :-
     listToString(Tail, TmpFinal, String).
 
 
+interLists([], _, []).
 
+interLists([H1|T1], L2, [H1|Res]) :-
+    member(H1, L2),
+    interLists(T1, L2, Res).
+
+interLists([_|T1], L2, Res) :-
+    interLists(T1, L2, Res).
 
