@@ -4,7 +4,7 @@
 
 % hotel(IDHotel, Nome, 	Estrelas, Tel, IDMorada, IDCidade, IDRegião). Regiao é do tipo Montanha, Praia...
 hotel(1, ['Hotel', 'Tipton'], '3', '278421134', 124, 1, 2).
-hotel(2, ['Hotel', 'Vila', 'Gale'], '4', '278421189', 124, 7, 2).
+hotel(2, ['Hotel', 'Vila', 'Gale'], '4', '278421189', 124, 1, 2).
 hotel(3, ['Hotel', 'Axis'], '4', '278421189', 124, 7, 2). 
 hotel(4, ['Hotel', 'Continental'], '4', '278421189', 124, 28, 2).
 hotel(5, ['Hotel', 'Ibis'], '4', '278421189', 124, 8, 2).
@@ -18,7 +18,12 @@ hotel(10, ['Hotel', 'Louvre'], '4','278421189', 124, 22, 2).
 /*        QUARTOS         */
 /*------------------------*/
 
-%quarto(IDQuarto, Nome, NumPessoas).           
+%quarto(IDQuarto, Nome, NumPessoas).   
+quarto(1, 'casal', 2).
+quarto(2, 'solteiro', 1).
+quarto(3, 'familia', 3).
+quarto(4, 'familia', 4).
+quarto(5, 'suite', 5).
 
 /*------------------------*/
 /*   PROPRIEDADES HOTEL   */
@@ -37,6 +42,8 @@ prop_hotel(6, 'centro da cidade').
 /*------------------------*/
 
 % prop_quarto(IDProp, NomePropriedade).
+prop_quarto(1,'vista para o mar').
+prop_quarto(2,'ar condicionado').
 
 /*------------------------*/
 /*      CONTINENTES       */
@@ -185,7 +192,7 @@ cidade(55, 'Luanda', 18).
 /*------------------------*/
 
 % morada(IDMorada, NomeMorada, IDCidade).
-
+morada(1, 'Rua Bouca da Cavadinha', 1).
 
 /*------------------------*/
 /*        SERVIÇOS        */
@@ -206,6 +213,10 @@ servico(8,'casino').
 /*------------------------*/
 
 % tem_quarto(IDHotel, IDQuarto, Preço).
+tem_quarto(1, 1, 100).
+tem_quarto(1, 2, 150).
+tem_quarto(1, 3, 170).
+tem_quarto(1, 4, 300).
 
 /*------------------------*/
 /*       TEM SERVIÇO      */

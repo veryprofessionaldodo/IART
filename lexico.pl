@@ -48,18 +48,15 @@ nome(p-f, ['Estados', 'Unidos', 'da', 'America']-pais) --> ['nos','Estados', 'Un
 */
 
 nome(s-m, [continente]-continente) --> [continente].
-nome(s-f, ['Europa']-continente) --> ['na', 'Europa'].
-nome(s-f, ['Africa']-continente) --> ['em', 'Africa'].
-nome(s-f, ['America do Norte']-continente) --> ['na', 'America', 'do', 'Norte'].
-nome(s-f, ['America do Sul']-continente) --> ['na', 'America', 'do', 'Sul'].
-nome(s-f, ['Oceania']-continente) --> ['na', 'Oceania'].
-nome(s-f, ['Asia']-cidade) --> ['na', 'Asia'].
-
-nome(s-_, ['Tirana']-cidade) --> ['em','Tirana'].
-nome(s-_, ['Tirana']-cidade) --> ['de','Tirana'].
-nome(s-f, ['Antuerpia']-cidade) --> ['na', 'Antuerpia'].
-nome(s-f, ['Antuerpia']-cidade) --> ['da', 'Antuerpia'].
-nome(s-_, ['Paris']-cidade) --> ['em','Paris'].
+nome(s-f, ['Europa']-continente) --> ['Europa'].
+nome(s-_, ['Africa']-continente) --> ['Africa']
+nome(s-f, ['America do Norte']-continente) --> ['America', 'do', 'Norte'].
+nome(s-f, ['America do Sul']-continente) --> ['America', 'do', 'Sul'].
+nome(s-f, ['Oceania']-continente) --> ['Oceania'].
+nome(s-f, ['Asia']-cidade) --> ['Asia'].
+nome(s-_, ['Tirana']-cidade) --> ['Tirana'].
+nome(s-f, ['Antuerpia']-cidade) --> ['Antuerpia'].
+nome(s-_, ['Paris']-cidade) --> ['Paris'].
 
 /*nome(s-_, ['Durres']-cidade) --> ['em','Durres'].
 nome(s-_, ['Vlore']-cidade) --> ['em','Vlore'].
@@ -156,7 +153,6 @@ adjetivo(s-_, ['Porto']-cidade, ficar) --> [portuense].
 adjetivo(p-_, ['Porto']-cidade, ficar) --> [portuenses].
 adjetivo(p-_, ['Porto']-cidade, ficar) --> [portuenses].
 
-
 /*----------------------*/
 /*        VERBOS        */
 /*----------------------*/
@@ -199,35 +195,18 @@ forma_verbal(p, ter-s) --> [possuem].
 forma_verbal(s, ter-n) --> [nao,possui].
 forma_verbal(p, ter-n) --> [nao,possuem].
 
-forma_verbal(s, ter-s) --> [que,possui].
-forma_verbal(p, ter-s) --> [que,possuem].
-
-forma_verbal(s, ter-n) --> [que,nao,possui].
-forma_verbal(p, ter-n) --> [que,nao,possuem].
-
 forma_verbal(s, ter-s) --> [disponibiliza].
 forma_verbal(p, ter-s) --> [disponibilizam].
 
 forma_verbal(s, ter-n) --> [nao,disponibiliza].
 forma_verbal(p, ter-n) --> [nao,disponibilizam].
 
-forma_verbal(s, ter-s) --> [que,disponibiliza].
-forma_verbal(p, ter-s) --> [que,disponibilizam].
-
-forma_verbal(s, ter-n) --> [que,nao,disponibiliza].
-forma_verbal(p, ter-n) --> [que,nao,disponibilizam].
 
 forma_verbal(_, ter-s) --> [e].
 forma_verbal(_, ter-s) --> [sao].
 
 forma_verbal(_, ter-n) --> [nao,e].
 forma_verbal(_, ter-n) --> [nao,sao].
-
-forma_verbal(_, ter-s) --> [que,e].
-forma_verbal(_, ter-s) --> [que,sao].
-
-forma_verbal(_, ter-n) --> [que,nao,e].
-forma_verbal(_, ter-n) --> [que,nao,sao].
 
 forma_verbal(_, haver-s) --> [ha].
 forma_verbal(_, haver-n) --> [nao,ha].
@@ -282,6 +261,7 @@ preposicao(s-m) --> [do].
 preposicao(s-f) --> [da].
 preposicao(p-m) --> [dos].
 preposicao(p-f) --> [das].
+preposicao(_) --> [que].
 
 /*----------------------*/
 /*      CONJUNÇÃO       */

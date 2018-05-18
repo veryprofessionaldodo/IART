@@ -26,7 +26,7 @@ frase_interrogativa(TipoP, Acao, Suj, Obj) -->
 /* 
 	PERGUNTAS COM O CONTEXTO DA PERGUNTA ANTERIOR
 */
-
+/*
 %Começa por E - lugar
 interrogativa_assis(TipoP, Acao, LSuj, [NovoSuj]) -->
 	conjuncao(_),
@@ -39,13 +39,13 @@ interrogativa_assis(TipoP, Acao, LSuj, [NovosSujs]) -->
 	novo_sujeito_s(NovosSujs),
 	{retract((lastData(TipoP, LSuj, Suj, Acao))), 
 		write('retract: '), write(TipoP), write(' '), write(LSuj), write(' '), write(Suj), write(' '), write(Acao),nl}.
-
-
+*/
 /*
 	PERGUNTAS SEM CONTEXTO DA PERGUNTA ANTERIOR
 */
 
 % Ex : Que/Quais serviços disponibiliza o Hotel X?
+/*
 interrogativa_assis(TipoP, Acao, LSuj, Obj) -->
 	% quantificador indica que tipo de pergunta está a ser feita
 	quantificador(TipoP, N), 
@@ -71,33 +71,32 @@ interrogativa_assis(TipoP, Acao, LSuj, [Obj]) -->
 	adjetivo(N,Obj-Tipo, Acao),
 	{write('Final result is '), write(Acao), write(' '), write(Obj), write(' '), write(LSuj)},
 	{assert((lastData(TipoP, LSuj, Obj, Acao)))}.
-
+*/
 % Ex : Quantos são os hoteis que ficam em X?
 interrogativa_assis(TipoP, Acao, LSuj, Obj) -->
 	% quantificador indica que tipo de pergunta está a ser feita
-	quantificador(TipoP, N-G), 
-	sintagma_verbal(Acao, Obj, N-G, LSuj),
+	quantificador(TipoP, N), 
+	sintagma_verbal(Acao, Obj, N, LSuj),
 	sintagma_nominal(LSuj, N2),
-	{write('Final result is '), write(Acao), write(' '),write(N-G), write(' '), write(Obj), write(' '), write(LSuj)},
-	{assert(TipoP, LSuj, Obj, Acao)}.
+	%{write('Final result is '), write(Acao), write(' '),write(N), write(' '), write(Obj), write(' '), write(LSuj)},
+	{assert((lastData(TipoP, LSuj, Obj, Acao)))}.
 
 
+%Quantos (são) os hotéis do Porto?
 
 /* 
 Quantos (são) os hotéis do Porto?
 Quais (são) os hotéis de categoria superior a 3 estrelas em Lisboa?
 E em Coimbra?
 Que/Quais serviços disponibiliza o Hotel X? (feito)
-Quais os hotéis parisienses que possuem serviço de babysitting? (fazer um novo predicado de lexico deLocal, que liga palavra a IDCidade)
+Quais os hotéis parisienses que possuem serviço de babysitting? (feito)
 Quais os hotéis de Faro que possuem categoria inferior a 4 e quartos com vista de mar? 
 O Hotel X fica em Faro e possui 4 estrelas. (feito)
 */
 
-
 /* ------------------------ */
 /*		FRASE AFIRMATIVA 	*/
 /* -------------------------*/
-
 
 frase_afirmativa(Acao,Suj,Obj) --> afirmativa_assis(Acao, LSuj, Obj).
 
@@ -105,7 +104,6 @@ afirmativa_assis(Acao, LSuj, Obj) -->
 	sintagma_nominal(LSuj, N-G),
 	sintagma_verbal(LAcao, LObj, N, LSuj),
 	{verificacaoAfirmacaoTotal(LSuj, LObj, LAcao)}.
-
 
 /* ------------------------ */
 /*		   SINTAGMAS 		*/
@@ -119,56 +117,100 @@ sintagma_nominal_aux(Suj-Tipo, N-G) --> determinante(N-G), nome(N-G, Suj-Tipo).
 sintagma_nominal_aux(Suj-Tipo, N-G) --> preposicao(N-G), nome(N-G, Suj-Tipo).
 sintagma_nominal_aux(Suj-Tipo, N-G) --> nome(N-G, Suj-Tipo).
 
-
 % TODO: verificação semantica que todos os tipos correspondem ao verbo
+
 %varios sujeitos e varios sintagmas verbais
+/*
+sintagma_verbal([Acao | OAcao], [Obj | OObj], N, [_-Tipo | O]) -->
+	[que], verbal_assis(Acao, Obj, N, Tipo), [e], sintagma_verbal(OAcao, OObj, N, [_-Tipo | O]).
+
 sintagma_verbal([Acao | OAcao], [Obj | OObj], N, [_-Tipo | O]) -->
 	verbal_assis(Acao, Obj, N, Tipo), [e], sintagma_verbal(OAcao, OObj, N, [_-Tipo | O]).
 
 %varios sujeitos e um sintagma verbal
 sintagma_verbal(Acao, [Obj], N, [_-Tipo | O]) -->  
+	[que], verbal_assis(Acao,  Obj, N, Tipo).
+
+sintagma_verbal(Acao, [Obj], N, [_-Tipo | O]) -->  
 	verbal_assis(Acao,  Obj, N, Tipo).
 
 %um sujeito e varios sintagmas verbais
 sintagma_verbal([Acao | OAcao], [Obj | OObj], N, _-Tipo) -->
-	verbal_assis(Acao, Obj, N, Tipo), [e], sintagma_verbal(OAcao, OObj, N, _-Tipo).
+	[que], verbal_assis(Acao, Obj, N, Tipo), [e], sintagma_verbal(OAcao, OObj, N, _-Tipo).
 
-%um sujeitos e um sintagma verbal
+sintagma_verbal([Acao | OAcao], [Obj | OObj], N, _-Tipo) -->
+	verbal_assis(Acao, Obj, N, Tipo), [e], sintagma_verbal(OAcao, OObj, N, _-Tipo).
+*/
+%um sujeito e um sintagma verbal
+sintagma_verbal(Acao, [Obj], N, _-Tipo) -->
+	[que], verbal_assis(Acao, Obj, N, Tipo).
+
 sintagma_verbal(Acao, [Obj], N, _-Tipo) -->
 	verbal_assis(Acao, Obj, N, Tipo).
 
+
 verbal_assis(Acao, Obj, N, Tipo) --> 
-	forma_verbal(N-G, Acao-P), 
-	determinante(N2-G2),
-	nome(N2-G2, Obj-Tipo2),
+	{nonvar(Tipo)}, % Tipo já está instanciado
+	forma_verbal(N, Acao-P), 
+	determinante(N2),
+	nome(N2, Obj-Tipo2),
 	{teste_semantico(Acao, Tipo,Tipo2)}. 
 
+% Tipo não está instanciado, por isso não é efetuado um teste semântico aqui. 
+% Só feito depois (caso especial do quanto sao os hoteis, hoteis esta depois da forma verbal)
+
+verbal_assis(Acao, Obj, N, Tipo) --> 
+	forma_verbal(N, Acao-P), 
+	determinante(N2),
+	nome(N2, Obj-Tipo2). 
+
 verbal_assis(Acao, Obj, N, Tipo) -->
+	{nonvar(Tipo)}, % Tipo já está instanciado
 	forma_verbal(N, Acao-P), 
 	nome(_, Obj-Tipo2),
 	{teste_semantico(Acao, Tipo,Tipo2)}. 
 
+verbal_assis(Acao, Obj, N, Tipo) -->
+	forma_verbal(N, Acao-P), 
+	nome(_, Obj-Tipo2). 
+
 verbal_assis(Acao, Obj, N, Tipo) --> 
-	forma_verbal(N-G, Acao-P), 
-	preposicao(N2-G2),
-	nome(N2-G2, Obj-Tipo2),
+	{nonvar(Tipo)}, % Tipo já está instanciado
+	forma_verbal(N, Acao-P), 
+	preposicao(N2),
+	nome(N2, Obj-Tipo2),
 	{teste_semantico(Acao, Tipo,Tipo2)}. 
+	
+verbal_assis(Acao, Obj, N, Tipo) --> 
+	forma_verbal(N, Acao-P), 
+	preposicao(N2),
+	nome(N2, Obj-Tipo2). 
+	
+verbal_assis(Acao, Obj, N, Tipo) --> 
+	{nonvar(Tipo)},
+	forma_verbal(N, Acao-P), 
+	preposicao(N2),
+	nome(_N2, Obj-Tipo2),
+	{teste_semantico(Acao, Tipo,Tipo2)}. 	
+
+verbal_assis(Acao, Obj, N, Tipo) --> 
+	forma_verbal(N, Acao-P), 
+	preposicao(N2),
+	nome(_N2, Obj-Tipo2). 	
 
 %lugar
 novo_sujeito_l(NovoSuj) --> %incluir teste semantico!
-	nome(N-G, NovoSuj-Tipo),
+	nome(_, NovoSuj-Tipo),
 	{write('novo_sujeito: '), write(NovoSuj-Tipo)}.
 
 novo_sujeito_s(Suj) -->
-	determinante(N-G), nome(N-G, Suj-_Tipo).
+	determinante(N), nome(N, Suj-_Tipo).
 
 /*novo_sujeito_s([Suj | O]) --> %incluir teste semantico!
 	novo_sujeito_aux(Suj), [e], novo_sujeito_s(O, N). 
 
 novo_sujeito_aux(Suj) -->
 	determinante(N-G), nome(N-G, Suj-_Tipo).*/
-
-
 
 /* ------------------------ */
 /*		TESTES SEMANTICOS 	*/

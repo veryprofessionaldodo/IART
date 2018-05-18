@@ -153,8 +153,17 @@ verificacaoInterrogacao(TipoQ, Suj-servico, Obj, ter, Resposta) :-
 		), Resposta).
 
 % Quantos são os hoteis de X?
-verificacaoInterrogacao(quanto, Suj-hotel, [Obj], ter, Resposta) :-
-	nl,write('Yoooo'),
+verificacaoInterrogacao(quanto, [Cidade]-cidade, [Tipo], ter, Resposta) :-
+	(Tipo == hotel ; Tipo == hoteis), % Estrutura varia porque nome está depois do verbo	
+	findall(IDHotel, 
+	(
+		cidade(IDCidade, Cidade, _IDPais),
+		hotel(IDHotel, _Nome, _Estrelas, _Tlm, _IdMorada, IDCidade, _IDRegiao)
+	), Hoteis),
+	length(Hoteis, Resposta).
+
+% Quantos hoteis ficam em X?
+verificacaoInterrogacao(quanto, Suj-hotel, [Obj], ficar, Resposta) :-
 	findall(IDHotel, 
 	(
 		cidade(IDCidade, Obj, _IDPais),
@@ -162,8 +171,8 @@ verificacaoInterrogacao(quanto, Suj-hotel, [Obj], ter, Resposta) :-
 	), Hoteis),
 	length(Hoteis, Resposta).
 
-
 escreverResposta(quanto, Resposta):-
 	nl,write('Resposta: '),nl,write(Resposta),nl.
+
 escreverResposta(_, Resposta):-
 	nl,write('Resposta: '),writeList(Resposta),nl.
