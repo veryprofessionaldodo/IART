@@ -11,7 +11,7 @@ hotel(5, ['Hotel', 'Ibis'], 4, '278421189', 124, 8).
 hotel(6, ['Hotel', 'Village'], 4, '278421189', 124, 17).
 hotel(7, ['Hotel', 'Lusitano'], 4,'278421189', 124, 43).
 hotel(8, ['Hotel', 'Angolano'], 4,'278421189', 124, 55).
-hotel(9, ['Hotel', 'Merci'], 4,'278421189', 124, 22).
+hotel(9, ['Hotel', 'Merci'], 3,'278421189', 124, 22).
 hotel(10, ['Hotel', 'Louvre'], 4,'278421189', 124, 22).
 
 /*------------------------*/
@@ -207,6 +207,7 @@ servico(5,'pequeno almoco').
 servico(6,'ginasio').
 servico(7,'spa').
 servico(8,'casino').
+servico(9, 'piscina').
 
 /*------------------------*/
 /*       TEM QUARTO       */

@@ -1,5 +1,7 @@
 :-reconsult(utils).
 
+:-dynamic hasErrors/0.
+
 % verifica frases afirmativas
 
 % TODO FALTA FICAR RUA
@@ -201,9 +203,27 @@ escreverResposta(_, Resposta):-
 	nl,write('Resposta: '),writeList(Resposta),nl.
 
 % Para análise recursiva
+verifica_filtro(HoteisAtuais, NovaLista) :-
+	length(HoteisAtuais, L1),
+	length(NovaLista, L2),
+	L1 == L2.
+
+% SE FOR AFIRMACAO, ESTA
+verifica_filtro(_,_) :- assert(hasErrors). 
+
+analise_lista(Lista) :-
+	retract(hasErrors),
+	% É uma afirmação, nas está errrada
+	write('A informacao nao esta de acordo com a nossa base de dados').
+	
+analise_lista(Lista) :-
+	write('A informacao esta de acordo com a nossa base de dados').
+
+
 analise_lista(quanto, Lista) :-
 	nl,write('A resposta certa e : '), length(Lista, Comprimento), write(Comprimento).
 
 analise_lista(Quant, Lista) :-
 	nonvar(Quant), 
 	nl,write('A resposta certa e : '), writeListHoteis(Lista).
+:-dynamic hasErrors/0.

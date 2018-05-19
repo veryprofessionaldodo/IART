@@ -5,6 +5,7 @@
 
 :-dynamic lastData/4.
 
+
 /*----------------------*/
 /* ESTRUTURA DAS FRASES */
 /*----------------------*/
@@ -31,7 +32,7 @@ frase_interrogativa(TipoP, Acao, Suj, Obj) -->
 /* 
 	PERGUNTAS COM O CONTEXTO DA PERGUNTA ANTERIOR
 */
-
+/*
 %Começa por E - lugar
 interrogativa_assis(TipoP, Acao, LSuj, [NovoSuj]) -->
 	conjuncao(_),
@@ -44,13 +45,13 @@ interrogativa_assis(TipoP, Acao, LSuj, [NovosSujs]) -->
 	novo_sujeito_s(NovosSujs),
 	{retract((lastData(TipoP, LSuj, Suj, Acao))), 
 		write('retract: '), write(TipoP), write(' '), write(LSuj), write(' '), write(Suj), write(' '), write(Acao),nl}.
-
+*/
 /*
 	PERGUNTAS SEM CONTEXTO DA PERGUNTA ANTERIOR
 */
 
 % Ex : Que/Quais serviços disponibiliza o Hotel X?
-
+/*
 interrogativa_assis(TipoP, Acao, LSuj, Obj) -->
 	% quantificador indica que tipo de pergunta está a ser feita
 	quantificador(TipoP, N), 
@@ -86,20 +87,58 @@ interrogativa_assis(TipoP, Acao, LSuj, Obj) -->
 	sintagma_nominal(LSuj, _N2),
 	%{write('Final result is '), write(Acao), write(' '),write(N), write(' '), write(Obj), write(' '), write(LSuj)},
 	{assert((lastData(TipoP, LSuj, Obj, Acao)))}.
+*/
+%frase(Acao, Suj, Obj, ['O', 'Hotel', 'Vila', 'Gale', 'e', 'o', 'Hotel', 'Axis', 'ficam', 'na', 'Antuerpia', 'e', 'tem', '4', 'estrelas', '.'],_).
 
-% Ex : Quais os hotéis de categoria superior a 3 estrelas em Lisboa? 
+% O Com Erros apenas é usado nas afirmações porque só aqui é que são feitas comparações diretas
 recursive_assis -->
 	{findall(IDHotel, hotel(IDHotel, _, _, _, _, _), Hoteis)},
-	recursive_assis1(Hoteis, ListaFinal), [.], {analise_lista(_TipoP, ListaFinal)}.
+	recursive_assis1(Hoteis, ListaFinal), [.], {analise_lista(ListaFinal)}.
 
+% Ex : Quais os hotéis de categoria superior a 3 estrelas em Lisboa? 
+/*
 recursive_assis -->
 	quantificador(TipoP, _N), 
 	{findall(IDHotel, hotel(IDHotel, _, _, _, _, _), Hoteis)},
 	recursive_assis1(Hoteis, ListaFinal), [?], {analise_lista(TipoP, ListaFinal)}.
+*/
+recursive_assis1(HoteisAtuais, ListaFinal) -->
+	[e], sintagma_nominal(Suj-Tipo, _N),
+	{filtrar_append(HoteisAtuais, Suj-Tipo, NovaLista), write(NovaLista)},
+	recursive_assis1(NovaLista, ListaFinal).
 
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	sintagma_nominal(Suj-Tipo, _N),
 	{filtrar(HoteisAtuais, Suj-Tipo, NovaLista), write(NovaLista)},
+	recursive_assis1(NovaLista, ListaFinal).
+
+recursive_assis1(HoteisAtuais, ListaFinal) -->
+	[e], [que], forma_verbal(N, TipoV-A), %Afirmativo ou negativo
+	sintagma_nominal(Suj-Tipo, N-G),
+	{filtrar(HoteisAtuais, TipoV-A, Suj-Tipo, NovaLista), write(NovaLista)},
+	% Se no caso de uma afiramação respostas tenham sido filtradas, implica que estava com erros
+	{verifica_filtro(HoteisAtuais, NovaLista)},
+	recursive_assis1(NovaLista, ListaFinal).
+
+recursive_assis1(HoteisAtuais, ListaFinal) -->
+	[que], forma_verbal(N, TipoV-A), %Afirmativo ou negativo
+	sintagma_nominal(Suj-Tipo, N2),
+	{filtrar(HoteisAtuais, TipoV-A, Suj-Tipo, NovaLista), write(NovaLista)},
+	{verifica_filtro(HoteisAtuais, NovaLista)},
+	recursive_assis1(NovaLista, ListaFinal).
+
+recursive_assis1(HoteisAtuais, ListaFinal) -->
+	[e], forma_verbal(N, TipoV-A), %Afirmativo ou negativo
+	sintagma_nominal(Suj-Tipo, N2),
+	{filtrar(HoteisAtuais, TipoV-A, Suj-Tipo, NovaLista), write(NovaLista)},
+	{verifica_filtro(HoteisAtuais, NovaLista)},
+	recursive_assis1(NovaLista, ListaFinal).
+
+recursive_assis1(HoteisAtuais, ListaFinal) -->
+	forma_verbal(N, TipoV-A), %Afirmativo ou negativo
+	sintagma_nominal(Suj-Tipo, N2),
+	{filtrar(HoteisAtuais, TipoV-A, Suj-Tipo, NovaLista), write(NovaLista)},
+	{verifica_filtro(HoteisAtuais, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
 
 	%{assert((lastData(TipoP, LSuj, Obj, Acao)))}.
@@ -140,7 +179,7 @@ sintagma_nominal_aux(Suj-Tipo, N-G) --> preposicao(N-G), nome(N-G, Suj-Tipo).
 sintagma_nominal_aux(Suj-Tipo, N-G) --> nome(N-G, Suj-Tipo).
 
 % TODO: verificação semantica que todos os tipos correspondem ao verbo
-
+/*
 %varios sujeitos e varios sintagmas verbais
 sintagma_verbal([Acao | OAcao], [Obj | OObj], N, [_-Tipo | O], Tipo2) -->
 	[que], verbal_assis(Acao, Obj, N, Tipo, Tipo2), [e], sintagma_verbal(OAcao, OObj, N, [_-Tipo | O], Tipo2).
@@ -161,7 +200,7 @@ sintagma_verbal([Acao | OAcao], [Obj | OObj], N, _-Tipo, Tipo2) -->
 
 sintagma_verbal([Acao | OAcao], [Obj | OObj], N, _-Tipo, Tipo2) -->
 	verbal_assis(Acao, Obj, N, Tipo, Tipo2), [e], sintagma_verbal(OAcao, OObj, N, _-Tipo, Tipo2).
-
+*/
 %um sujeito e um sintagma verbal
 sintagma_verbal(Acao, [Obj], N, _-Tipo, Tipo2) -->
 	[que], verbal_assis(Acao, Obj, N, Tipo, Tipo2).
