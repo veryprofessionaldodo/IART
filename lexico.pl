@@ -15,27 +15,32 @@ nome(s-m, ['Hotel','Ibis']-hotel) --> ['Hotel','Ibis'].
 nome(s-m, ['Hotel','Village']-hotel) --> ['Hotel','Village'].   
 nome(s-m, ['Hotel','Lusitano']-hotel) --> ['Hotel','Lusitano'].   
 
-nome(s-m, [servico]-servico) --> [servico].
-nome(p-m, [servicos]-servico) --> [servicos].
-nome(s-m, [spa]-servico) --> [spa].
-nome(s-m, [ginasio]-servico) --> [ginasio].
-nome(s-m, [casino]-servico) --> [casino].
-nome(s-m, [wifi]-servico) --> [wifi].
-nome(s-m, [babysitting]-servico) --> [babysitting].
-nome(s-f, [limpeza,de,quartos]-servico) --> [limpeza,de,quartos].
-nome(s-f, [garagem,privativa]-servico) --> [garagem,privativa].
-nome(s-m, [pequeno,almoco]-servico) --> [pequeno,almoco].
+nome(s-m, ['servico']-servico) --> ['servico'].
+nome(p-m, ['servicos']-servico) --> ['servicos'].
+nome(s-m, ['spa']-servico) --> ['spa'].
+nome(s-m, ['ginasio']-servico) --> ['ginasio'].
+nome(s-m, ['casino']-servico) --> ['casino'].
+nome(s-m, ['wifi']-servico) --> ['wifi'].
+nome(s-m, ['babysitting']-servico) --> ['babysitting'].
+nome(s-f, ['limpeza','de','quartos']-servico) --> ['limpeza','de','quartos'].
+nome(s-f, ['garagem','privativa']-servico) --> ['garagem','privativa'].
+nome(s-m, ['pequeno','almoco']-servico) --> ['pequeno','almoco'].
 
-nome(s-m, [pais]-pais) --> [pais].
-nome(s-f, ['Albania']-pais) --> ['na','Albania'].
-nome(s-f, ['Alemanha']-pais) --> ['na','Alemanha'].
-nome(s-_, ['Portugal']-pais) --> ['em','Portugal'].
-nome(s-f, ['Belgica']-pais) --> ['na','Belgica'].
-nome(s-f, ['Croacia']-pais) --> ['na','Croacia'].
-nome(s-f, ['Dinamarca']-pais) --> ['na','Dinamarca'].
-nome(s-f, ['Estonia']-pais) --> ['na','Estonia'].
-nome(s-f, ['Finlandia']-pais) --> ['na','Finlandia'].
-nome(s-_, ['Franca']-pais) --> ['na','Franca'].
+nome(_, ['casal']-quarto) --> ['casal'].
+nome(_, ['solteiro']-quarto) --> ['solteiro'].
+nome(_, ['familia']-quarto) --> ['familia'].
+nome(_, ['suite']-quarto) --> ['suite'].
+
+nome(s-m, ['pais']-pais) --> ['pais'].
+nome(s-f, ['Albania']-pais) --> ['Albania'].
+nome(s-f, ['Alemanha']-pais) --> ['Alemanha'].
+nome(s-_, ['Portugal']-pais) --> ['Portugal'].
+nome(s-f, ['Belgica']-pais) --> ['Belgica'].
+nome(s-f, ['Croacia']-pais) --> ['Croacia'].
+nome(s-f, ['Dinamarca']-pais) --> ['Dinamarca'].
+nome(s-f, ['Estonia']-pais) --> ['Estonia'].
+nome(s-f, ['Finlandia']-pais) --> ['Finlandia'].
+nome(s-_, ['Franca']-pais) --> ['Franca'].
 /*nome(s-f, ['Grecia']-pais) --> ['na','Grecia'].
 nome(s-f, ['Islandia']-pais) --> ['na','Islandia'].
 nome(s-f, ['Lituania']-pais) --> ['na','Lituania'].
@@ -47,11 +52,11 @@ nome(s-f, ['Espanha']-pais) --> ['na','Espanha'].
 nome(p-f, ['Estados', 'Unidos', 'da', 'America']-pais) --> ['nos','Estados', 'Unidos', 'da', 'America'].
 */
 
-nome(s-m, [continente]-continente) --> [continente].
+nome(s-m, ['continente']-continente) --> [continente].
 nome(s-f, ['Europa']-continente) --> ['Europa'].
 nome(s-_, ['Africa']-continente) --> ['Africa'].
-nome(s-f, ['America do Norte']-continente) --> ['America', 'do', 'Norte'].
-nome(s-f, ['America do Sul']-continente) --> ['America', 'do', 'Sul'].
+nome(s-f, ['America','do','Norte']-continente) --> ['America', 'do', 'Norte'].
+nome(s-f, ['America', 'do', 'Sul']-continente) --> ['America', 'do', 'Sul'].
 nome(s-f, ['Oceania']-continente) --> ['Oceania'].
 nome(s-f, ['Asia']-cidade) --> ['Asia'].
 nome(s-_, ['Tirana']-cidade) --> ['Tirana'].
@@ -175,7 +180,7 @@ determinante(p-m) --> ['Os'].
 
 
 /*----------------------*/
-/*     ADJETIVOS	    */
+/*      ADJETIVOS       */
 /*----------------------*/
 
 adjetivo(s-_, ['Paris']-cidade, ficar) --> [parisiense].

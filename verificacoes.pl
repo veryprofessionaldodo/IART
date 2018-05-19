@@ -106,7 +106,7 @@ verificacaoAfirmacao(_, _, _):-
 /* ------------------ */
 /* 	  INTERROGAÇÕES   */
 /* ------------------ */
-
+/*
 %Questão com um unico elemento de verificação
 verificacaoInterrogacaoTotal(Quant, LSuj, [List|_], Acao, []):-
 	nl,write('Verificacao'),nl, write(LSuj) , write(' '), write(List), write(' '), write(Acao),nl,
@@ -131,52 +131,32 @@ verificacaoInterrogacaoTotal(Quant, LSuj, [List|_], Acao, Resposta):-
 	verificacaoInterrogacao(Quant, LSuj, List, Acao, Resposta2),
 	interLists(Resposta, Resposta2, RespostaFinal),
 	escreverResposta(Quant, RespostaFinal).
+*/
 
-
-% QUE / QUAL
-% Que hoteis ficam X(cidade)?
-verificacaoInterrogacao(TipoQ, _Suj-hotel, [Obj], ficar, Resposta) :-
-	(TipoQ == que ; TipoQ == qual),
-	cidade(IDCidade, Obj, _IDPais),
-	findall(Nome, hotel(_IDHotel, Nome, _Estrelas, _Tlm, _IdMorada, IDCidade), Resposta).
-
-% Que hoteis ficam X(pais)?
-verificacaoInterrogacao(TipoQ, _Suj-hotel, [Obj], ficar, Resposta) :-	
-	(TipoQ == que ; TipoQ == qual),
-	pais(IDPais, Obj, _IDContinente),
-	findall(Nome, 
-			(cidade(IDCidade, _, IDPais), hotel(_IDHotel, Nome, _Estrelas, _Tlm, _IdMorada, IDCidade)), 
-			Resposta).
-
-% Que hoteis ficam X(continente)?
-verificacaoInterrogacao(TipoQ, _Suj-hotel, [Obj], ficar, Resposta) :-	
-	(TipoQ == que ; TipoQ == qual),
-	continente(IDContinente, Obj),
-	findall(Nome, 
-			(pais(IDPais, _, IDContinente), cidade(IDCidade, _, IDPais), 
-				hotel(_IDHotel, Nome, _Estrelas, _Tlm, _IdMorada, IDCidade)), 
-			Resposta).
-
-% Hoteis que tem servico X?
-verificacaoInterrogacao(TipoQ, _Suj-hotel, [Obj], ter, Resposta) :-
-	(TipoQ == que ; TipoQ == qual),
-	findall(Hotel, 
-		(
-			servico(IDServico, Obj),
-			tem_servico(IDHotel, IDServico),
-			hotel(IDHotel, Hotel, _Estrelas, _Tlm, _IdMorada, _IDCidade)
-		), Resposta).
-
-% Que serviços tem X?
-verificacaoInterrogacao(TipoQ, _Suj-servico, Obj, ter, Resposta) :-
+% Servicos tem X e Y?
+verificacaoInterrogacao(TipoQ, Hoteis, _Suj-servico, ter) :-
 	(TipoQ == que ; TipoQ == qual),
 	findall(Servico, 
 		(
-			hotel(IDHotel, Obj, _Estrelas, _Tlm, _IdMorada, _IDCidade), 
-			tem_servico(IDHotel, IDServico), 
-			servico(IDServico, Servico)
-		), Resposta).
+			hotel(IDHotel, Hotel, _Estrelas, _Tlm, _IdMorada, _IDCidade),
+			member(IDHotel, Hoteis),
+			servico(IDServico, Servico),
+			tem_servico(IDHotel, IDServico)
+		), Resposta),
+		escreverResposta(TipoQ,Resposta).
 
+% Que quartos tem X e Y?
+verificacaoInterrogacao(TipoQ, Hoteis, _Suj-quarto, ter) :-
+		findall(Quarto,
+		(
+			hotel(IDHotel, Hotel, _Estrelas, _Tlm, _IdMorada, _IDCidade),
+			member(IDHotel, Hoteis),
+			quarto(IDQuarto, Quarto),
+			tem_quarto(IDHotel, IDQuarto)
+		), Resposta),
+		escreverResposta(TipoQ,Resposta).
+
+/*
 % Quantos são os hoteis de X?
 verificacaoInterrogacao(quanto, [Cidade]-cidade, [Tipo], ter, Resposta) :-
 	(Tipo == hotel ; Tipo == hoteis), % Estrutura varia porque nome está depois do verbo	
@@ -195,9 +175,10 @@ verificacaoInterrogacao(quanto, _Suj-hotel, [Obj], ficar, Resposta) :-
 		hotel(IDHotel, _Nome, _Estrelas, _Tlm, _IdMorada, IDCidade)
 	), Hoteis),
 	length(Hoteis, Resposta).
+*/ 
 
 escreverResposta(quanto, Resposta):-
-	nl,write('Resposta: '),nl,write(Resposta),nl.
+	nl,write('Resposta: '),nl,length(Resposta, Comp), write(Comp),nl.
 
 escreverResposta(_, Resposta):-
 	nl,write('Resposta: '),writeList(Resposta),nl.
@@ -218,7 +199,6 @@ analise_lista(Lista) :-
 	
 analise_lista(Lista) :-
 	write('A informacao esta de acordo com a nossa base de dados').
-
 
 analise_lista(quanto, Lista) :-
 	nl,write('A resposta certa e : '), length(Lista, Comprimento), write(Comprimento).

@@ -6,6 +6,7 @@
 :-dynamic lastData/4.
 
 
+
 /*----------------------*/
 /* ESTRUTURA DAS FRASES */
 /*----------------------*/
@@ -14,24 +15,38 @@
 frase(_,_):- retract(erroSem), write("Erro Semantico").
 frase(_,_):- write("erro sintaxe").*/
 
-%frase(Acao,Suj,Obj) --> frase_interrogativa(Acao, Suj, Obj), [?].
+frase(Acao,Suj,Obj) --> frase_interrogativa, [?].
 
 /*
 frase(Acao,Suj,Obj) --> frase_interrogativa(TipoP, Acao, Suj, Obj), ['?'], 
 						%{write('FRASE: '),nl,write(TipoP),write(' '),write(Acao),write(' '),write(Suj),write(' '),write(Obj),nl,
 						verificacaoInterrogacaoTotal(TipoP, Suj, Obj, Acao, [])}.
 */
+
+%frase(Acao,Suj,Obj) --> frase_afirmativa(Acao, Suj, Obj), [.].
+
+frase_interrogativa -->
+	interrogativa_assis.
+
+% Criado para casos especiais
 frase(_Acao, _Suj, _Obj) --> 
 	recursive_assis.
-
-frase(Acao,Suj,Obj) --> frase_afirmativa(Acao, Suj, Obj), [.].
-
-frase_interrogativa(TipoP, Acao, Suj, Obj) -->
-	interrogativa_assis(TipoP, Acao, Suj, Obj).
 
 /* 
 	PERGUNTAS COM O CONTEXTO DA PERGUNTA ANTERIOR
 */
+%Estruturas simples e específicas para o contexto do trabalho, com menos foco na recursividade
+interrogativa_assis -->
+	% quantificador indica que tipo de pergunta está a ser feita
+	quantificador(TipoP, N), 
+	sintagma_nominal(Suj-Tipo, N),
+	forma_verbal(N, Acao-Afirmativo),
+	{findall(IDHotel, hotel(IDHotel,_,_,_,_,_), HoteisAtuais)},
+	recursive_assis1(HoteisAtuais, ListaFinal),
+	{write(ListaFinal)},
+	{verificacaoInterrogacao(TipoP, ListaFinal, Suj-Tipo, Acao)},
+	{assert((lastData(TipoP, LSuj, Obj, Acao)))}.
+
 /*
 %Começa por E - lugar
 interrogativa_assis(TipoP, Acao, LSuj, [NovoSuj]) -->
@@ -51,15 +66,8 @@ interrogativa_assis(TipoP, Acao, LSuj, [NovosSujs]) -->
 */
 
 % Ex : Que/Quais serviços disponibiliza o Hotel X?
-/*
-interrogativa_assis(TipoP, Acao, LSuj, Obj) -->
-	% quantificador indica que tipo de pergunta está a ser feita
-	quantificador(TipoP, N), 
-	sintagma_nominal(LSuj, N),
-	sintagma_verbal(Acao, Obj, _N2, LSuj),
-	{write('2Final result is '), write(Acao), write(' '), write(Obj), write(' '), write(LSuj)},
-	{assert((lastData(TipoP, LSuj, Obj, Acao)))}.
 
+/*
 %Ex : Quais os hotéis parisienses que possuem ...
 interrogativa_assis(TipoP, [Acao1 | Acao], LSuj, [Obj1 | Suj]) -->
 	% quantificador indica que tipo de pergunta está a ser feita
@@ -96,12 +104,12 @@ recursive_assis -->
 	recursive_assis1(Hoteis, ListaFinal), [.], {analise_lista(ListaFinal)}.
 
 % Ex : Quais os hotéis de categoria superior a 3 estrelas em Lisboa? 
-/*
+
 recursive_assis -->
 	quantificador(TipoP, _N), 
 	{findall(IDHotel, hotel(IDHotel, _, _, _, _, _), Hoteis)},
 	recursive_assis1(Hoteis, ListaFinal), [?], {analise_lista(TipoP, ListaFinal)}.
-*/
+
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	[e], sintagma_nominal(Suj-Tipo, _N),
 	{filtrar_append(HoteisAtuais, Suj-Tipo, NovaLista), write(NovaLista)},
@@ -110,6 +118,22 @@ recursive_assis1(HoteisAtuais, ListaFinal) -->
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	sintagma_nominal(Suj-Tipo, _N),
 	{filtrar(HoteisAtuais, Suj-Tipo, NovaLista), write(NovaLista)},
+	recursive_assis1(NovaLista, ListaFinal).
+
+
+% Frases contem adjetivos que podem servir de verbos (ex: parisiense)
+recursive_assis1(HoteisAtuais, ListaFinal) -->
+	[e], sintagma_nominal(_Suj-_Tipo, N),
+	adjetivo(N,Obj-TipoV, Acao),
+	{filtrar(HoteisAtuais, Acao-A, Obj-Tipo, NovaLista), write(NovaLista)},
+	{verifica_filtro(HoteisAtuais, NovaLista)},
+	recursive_assis1(NovaLista, ListaFinal).
+
+recursive_assis1(HoteisAtuais, ListaFinal) -->
+	sintagma_nominal(Suj-Tipo, _N),
+	adjetivo(N,Obj-TipoV, Acao),
+	{filtrar(HoteisAtuais, Acao-A, Obj-TipoV, NovaLista), write(NovaLista)},
+	{verifica_filtro(HoteisAtuais, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
 
 recursive_assis1(HoteisAtuais, ListaFinal) -->
@@ -124,8 +148,8 @@ recursive_assis1(HoteisAtuais, ListaFinal) -->
 	[que], forma_verbal(N, TipoV-A), %Afirmativo ou negativo
 	sintagma_nominal(Suj-Tipo, N2),
 	{filtrar(HoteisAtuais, TipoV-A, Suj-Tipo, NovaLista), write(NovaLista)},
-	{verifica_filtro(HoteisAtuais, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
+	
 
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	[e], forma_verbal(N, TipoV-A), %Afirmativo ou negativo
@@ -141,23 +165,13 @@ recursive_assis1(HoteisAtuais, ListaFinal) -->
 	{verifica_filtro(HoteisAtuais, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
 
-	%{assert((lastData(TipoP, LSuj, Obj, Acao)))}.
-	
 recursive_assis1(ListaFinal, ListaFinal) --> {true}.
-/* 
-Quantos (são) os hotéis do Porto? (feito)
-Quais os hotéis de categoria superior a 3 estrelas em Lisboa? (feito)
-E em Coimbra? (feito)
-Que/Quais serviços disponibiliza o Hotel X? (feito)
-Quais os hotéis parisienses que possuem serviço de babysitting? (feito)
-Quais os hotéis de Faro que possuem categoria inferior a 4 e quartos com vista de mar? 
-O Hotel X fica em Faro e possui 4 estrelas. (feito)
-*/
+
 
 /* ------------------------ */
 /*		FRASE AFIRMATIVA 	*/
 /* -------------------------*/
-
+/*
 frase_afirmativa(Acao,LSuj,Obj) --> afirmativa_assis(Acao, LSuj, Obj).
 
 afirmativa_assis(LAcao, LSuj, LObj) --> 
@@ -165,7 +179,7 @@ afirmativa_assis(LAcao, LSuj, LObj) -->
 	sintagma_verbal(LAcao, LObj, N, LSuj, Tipo2),
 	{write('AfiAssis: '),write(LAcao),write(' '),write(LSuj),write(' '),write(LObj),write(' '),write(Tipo2),nl},
 	{verificacaoAfirmacaoTotal(LSuj, LObj, LAcao, Tipo2)}.
-
+*/
 /* ------------------------ */
 /*		   SINTAGMAS 		*/
 /* -------------------------*/

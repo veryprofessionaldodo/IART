@@ -1,20 +1,25 @@
 %filtrar(HoteisAtuais, Suj-Tipo, NovaLista)
 % hotel(IDHotel, Nome, 	Estrelas, Tel, IDMorada, IDCidade)
 
-filtrar(HoteisAtuais, [Obj]-cidade, NovaLista) :-
+:-dynamic pergunta/1.
+:-dynamic 
+
+filtrar(HoteisAtuais, Obj-cidade, NovaLista) :-
     findall(IDHotel,
     (
         cidade(IDCidade, Obj, _IDPais),
         hotel(IDHotel, _Nome, _Estrelas, _Tel, _IDMorada, IDCidade),
         member(IDHotel, HoteisAtuais)
-    ) , NovaLista).
+    ) , NovaLista),
+    remover_pergunta.
 
 filtrar(HoteisAtuais, Obj-estrelas, NovaLista) :-
     findall(IDHotel,
     (
         hotel(IDHotel, _Nome, Obj, _Tel, _IDMorada, _IDCidade),
         member(IDHotel, HoteisAtuais)
-    ) , NovaLista).
+    ) , NovaLista),
+    remover_pergunta.
 
 filtrar(HoteisAtuais, Obj-maisestrelas, NovaLista) :-
     findall(IDHotel,
@@ -22,7 +27,8 @@ filtrar(HoteisAtuais, Obj-maisestrelas, NovaLista) :-
         hotel(IDHotel, _Nome, Estrelas, _Tel, _IDMorada, _IDCidade),
         Estrelas > Obj,
         member(IDHotel, HoteisAtuais)
-    ) , NovaLista).
+    ) , NovaLista),
+    remover_pergunta.
 
 filtrar(HoteisAtuais, Obj-menosestrelas, NovaLista) :-
     findall(IDHotel,
@@ -30,7 +36,8 @@ filtrar(HoteisAtuais, Obj-menosestrelas, NovaLista) :-
         hotel(IDHotel, _Nome, Estrelas, _Tel, _IDMorada, _IDCidade),
         Estrelas < Obj,
         member(IDHotel, HoteisAtuais)
-    ) , NovaLista).
+    ) , NovaLista), 
+    remover_pergunta.
 
 filtrar(HoteisAtuais, Obj-hotel, NovaLista) :- 
     findall(IDHotel,
@@ -38,11 +45,18 @@ filtrar(HoteisAtuais, Obj-hotel, NovaLista) :-
         hotel(IDHotel, Obj, _Estrelas, _Tel, _IDMorada, _IDCidade),
         member(IDHotel, HoteisAtuais)
     ) , NovaLista),
-    length(NovaLista, Comprimento), Comprimento > 0.
+    length(NovaLista, Comprimento), Comprimento > 0,
+    remover_pergunta.
 
-filtrar(HoteisAtuais, _Obj-hotel, HoteisAtuais).
+filtrar(HoteisAtuais, _Obj-hotel, HoteisAtuais) :- remover_pergunta.
 
 % PARA A POSSIBILIDADE DE MULTIPLOS SUJEITOS
+% Em caso de haver uma pergunta anterior
+filtrar_append(HoteisAtuais, Obj-Tipo, NovaLista) :- 
+    pergunta(Verbo-Afirmativo),
+    filtrar(HoteisAtuais,Verbo-Afirmativo, Obj-Tipo, NovaLista).
+
+% Caso não haja
 filtrar_append(HoteisAtuais, Obj-hotel, NovaLista) :- 
     findall(IDHotel,
     (
@@ -51,62 +65,83 @@ filtrar_append(HoteisAtuais, Obj-hotel, NovaLista) :-
     ) , TmpList), append(HoteisAtuais, TmpList, NovaLista).
 
 % FILTROS QUE INCLUEM VERBOS
-
-filtrar(HoteisAtuais, ter-_Afirmativo, [Obj]-servico, NovaLista) :-
+filtrar(HoteisAtuais, ter-Afirmativo, Obj-servico, NovaLista) :-
     findall(IDHotel,
     (
         hotel(IDHotel, _Nome, _Estrelas, _Tel, _IDMorada, _IDCidade),
         tem_servico(IDHotel, IDServico),
         servico(IDServico, Obj),
         member(IDHotel, HoteisAtuais)
-    ) , NovaLista).
+    ) , NovaLista),
+    pergunta_atual(ter-Afirmativo).
     
-filtrar(HoteisAtuais, ter-_Afirmativo, Obj-estrelas, NovaLista) :-
+filtrar(HoteisAtuais, ter-Afirmativo, Obj-estrelas, NovaLista) :-
     findall(IDHotel,
     (
         hotel(IDHotel, _Nome, Obj, _Tel, _IDMorada, _IDCidade),
         member(IDHotel, HoteisAtuais)
-    ) , NovaLista).
+    ) , NovaLista),
+    pergunta_atual(ter-Afirmativo).
 
-filtrar(HoteisAtuais, ter-_Afirmativo, Obj-maisestrelas, NovaLista) :-
+filtrar(HoteisAtuais, ter-Afirmativo, Obj-maisestrelas, NovaLista) :-
     findall(IDHotel,
     (
         hotel(IDHotel, _Nome, Estrelas, _Tel, _IDMorada, _IDCidade),
         Estrelas > Obj,
         member(IDHotel, HoteisAtuais)
-    ) , NovaLista).
+    ) , NovaLista),
+    pergunta_atual(ter-Afirmativo).
 
-filtrar(HoteisAtuais, ter-_Afirmativo, Obj-menosestrelas, NovaLista) :-
+filtrar(HoteisAtuais, ter-Afirmativo, Obj-menosestrelas, NovaLista) :-
     findall(IDHotel,
     (
         hotel(IDHotel, _Nome, Estrelas, _Tel, _IDMorada, _IDCidade),
         Estrelas < Obj,
         member(IDHotel, HoteisAtuais)
-    ) , NovaLista).
+    ) , NovaLista),
+    pergunta_atual(ter-Afirmativo).
 
-filtrar(HoteisAtuais, ficar-_Afirmativo, Obj-cidade, NovaLista) :-
+filtrar(HoteisAtuais, ficar-Afirmativo, Obj-cidade, NovaLista) :-
     findall(IDHotel,
     (
         cidade(IDCidade, Obj, _IDPais),
         hotel(IDHotel, _Nome, Estrelas, _Tel, _IDMorada, IDCidade),
         member(IDHotel, HoteisAtuais)
-    ) , NovaLista).
+    ) , NovaLista),
+    pergunta_atual(ficar-Afirmativo).
 
-filtrar(HoteisAtuais, ficar-_Afirmativo, Obj-pais, NovaLista) :-
+filtrar(HoteisAtuais, ficar-Afirmativo, Obj-pais, NovaLista) :-
     findall(IDHotel,
     (
-        cidade(IDCidade, _Nome, IDPais),
+        cidade(IDCidade, _NomeCidade, IDPais),
         pais(IDPais, Obj, _IDContinente),
-        hotel(IDHotel, _Nome, Estrelas, _Tel, _IDMorada, IDCidade),
+        hotel(IDHotel, _NomeHotel, Estrelas, _Tel, _IDMorada, IDCidade),
         member(IDHotel, HoteisAtuais)
-    ) , NovaLista).
+    ) , NovaLista),
+    pergunta_atual(ficar-Afirmativo).
 
-filtrar(HoteisAtuais, ficar-_Afirmativo, Obj-continente, NovaLista) :-
+filtrar(HoteisAtuais, ficar-Afirmativo, Obj-continente, NovaLista) :-
     findall(IDHotel,
     (
-        cidade(IDCidade, _Nome, IDPais),
-        pais(IDPais, _Nome, IDContinente),
+        cidade(IDCidade, _NomeCidade, IDPais),
+        pais(IDPais, _NomePais, IDContinente),
         continente(IDContinente, Obj),
-        hotel(IDHotel, _Nome, Estrelas, _Tel, _IDMorada, IDCidade),
+        hotel(IDHotel, _NomeHotel, Estrelas, _Tel, _IDMorada, IDCidade),
         member(IDHotel, HoteisAtuais)
-    ) , NovaLista).
+    ) , NovaLista),
+    pergunta_atual(ter-Afirmativo).
+
+% Importante para multiplos sujeitos após forma verbal (ex: tem 3 estrelas e babysitting).
+pergunta_atual(NovoVerbo-Afirmativo) :- 
+    retract(pergunta(_-_)),
+    assert(pergunta(NovoVerbo-Afirmativo)).
+
+% Não havia pergunta anterior
+pergunta_atual(NovoVerbo-Afirmativo) :- 
+    assert(pergunta(NovoVerbo-Afirmativo)).
+
+remover_pergunta :-
+    retract(pergunta(_-_)).
+
+% Caso não haja perguntas ainda
+remover_pergunta.

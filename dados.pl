@@ -19,67 +19,55 @@ hotel(10, ['Hotel', 'Louvre'], 4,'278421189', 124, 22).
 /*------------------------*/
 
 %quarto(IDQuarto, Nome, NumPessoas).   
-quarto(1, 'casal', 2).
-quarto(2, 'solteiro', 1).
-quarto(3, 'familia', 3).
-quarto(4, 'familia', 4).
-quarto(5, 'suite', 5).
-
-/*------------------------*/
-/*   PROPRIEDADES HOTEL   */
-/*------------------------*/
-
-% prop_hotel(IDProp, NomePropriedade).
-prop_hotel(1, 'piscina').
-prop_hotel(2, 'praia').
-prop_hotel(3, 'parque').
-prop_hotel(4, 'natureza').
-prop_hotel(5, 'montanha').
-prop_hotel(6, 'centro da cidade').
+quarto(1, ['casal'], 2).
+quarto(2, ['solteiro'], 1).
+quarto(3, ['familia'], 3).
+quarto(4, ['familia'], 4).
+quarto(5, ['suite'], 5).
 
 /*------------------------*/
 /*   PROPRIEDADES QUARTO  */
 /*------------------------*/
 
 % prop_quarto(IDProp, NomePropriedade).
-prop_quarto(1,'vista para o mar').
-prop_quarto(2,'ar condicionado').
+prop_quarto(1,['vista','para','o','mar']).
+prop_quarto(2,['ar', 'condicionado']).
 
 /*------------------------*/
 /*      CONTINENTES       */
 /*------------------------*/
 
 % continente(IDContinente, Nome).
-continente(1, 'Europa').
-continente(2, 'Africa').
-continente(3, 'America do Norte').
-continente(4, 'America do Sul').
-continente(5, 'Oceania').
-continente(6, 'Asia').
+continente(1, ['Europa']).
+continente(2, ['Africa']).
+continente(3, ['America', 'do', 'Norte']).
+continente(4, ['America','do','Sul']).
+continente(5, ['Oceania']).
+continente(6, ['Asia']).
 
 /*------------------------*/
 /*         PAÍSES         */
 /*------------------------*/
 
 % pais(IDPais, NomePais, IDContinente).
-pais(1, 'Albania', 1).
-pais(2, 'Alemanha', 1).
-pais(3, 'Belgica', 1).
-pais(4, 'Croacia', 1).
-pais(5, 'Dinamarca', 1).
-pais(6, 'Estonia', 1).
-pais(7, 'Finlandia', 1).
-pais(8, 'Franca', 1).
-pais(9, 'Grecia', 1).
-pais(10, 'Islandia', 1).
-pais(11, 'Lituania', 1).
-pais(12, 'Macedonia', 1).
-pais(13, 'Holanda', 1).
-pais(14, 'Portugal', 1).
-pais(15, 'Russia', 1).
-pais(16, 'Ucrania', 1).
-pais(17, 'Espanha', 1).
-pais(18, 'Estados Unidos da America', 3).
+pais(1, ['Albania'], 1).
+pais(2, ['Alemanha'], 1).
+pais(3, ['Belgica'], 1).
+pais(4, ['Croacia'], 1).
+pais(5, ['Dinamarca'], 1).
+pais(6, ['Estonia'], 1).
+pais(7, ['Finlandia'], 1).
+pais(8, ['Franca'], 1).
+pais(9, ['Grecia'], 1).
+pais(10, ['Islandia'], 1).
+pais(11, ['Lituania'], 1).
+pais(12, ['Macedonia'], 1).
+pais(13, ['Holanda'], 1).
+pais(14, ['Portugal'], 1).
+pais(15, ['Russia'], 1).
+pais(16, ['Ucrania'], 1).
+pais(17, ['Espanha'], 1).
+pais(18, ['Estados','Unidos','da','America'], 3).
 
 pais(18, 'Angola', 2).
 /*pais(19, 'Cabo Verde', 2).
@@ -130,15 +118,15 @@ pais(56, 'Tailandia', 6).*/
 /*------------------------*/
 
 %cidade(IDCidade, NomeCidade, IDPais).
-cidade(1, 'Tirana', 1).
-cidade(2, 'Durres', 1).
-cidade(3, 'Vlore', 1).
-cidade(4, 'Berlim,', 2).
-cidade(5, 'Hamburgo', 2).
-cidade(6, 'Munique', 2).
-cidade(7, 'Antuerpia', 3).
-cidade(8, 'Bruges', 3).
-cidade(9, 'Bruxelas', 3).
+cidade(1, ['Tirana'], 1).
+cidade(2, ['Durres'], 1).
+cidade(3, ['Vlore'], 1).
+cidade(4, ['Berlim'], 2).
+cidade(5, ['Hamburgo'], 2).
+cidade(6, ['Munique'], 2).
+cidade(7, ['Antuerpia'], 3).
+cidade(8, ['Bruges'], 3).
+cidade(9, ['Bruxelas'], 3).
 cidade(10, 'Zagreb', 4).
 cidade(11, 'Rijeka', 4).
 cidade(12, 'Split', 4).
@@ -151,7 +139,7 @@ cidade(18, 'Narva', 6).
 cidade(19, 'Helsinquia', 7).
 cidade(20, 'Tampere', 7).
 cidade(21, 'Turku', 7).
-cidade(22, 'Paris', 8).
+cidade(22, ['Paris'], 8).
 cidade(23, 'Bordeus', 8).
 cidade(24, 'Lyon', 8).
 cidade(25, 'Nice', 8).
@@ -172,19 +160,19 @@ cidade(39, 'Roterdao', 13).
 cidade(40, 'Kinderdijk', 13).
 cidade(41, 'Haia', 13).
 cidade(42, 'Delft', 13).
-cidade(43, 'Lisboa', 14).
-cidade(44, 'Porto', 14).
-cidade(45, 'Guimaraes', 14).
-cidade(46, 'Evora', 14).
-cidade(47, 'Fatima', 14).
-cidade(48, 'Coimbra', 14).
-cidade(49, 'Albufeira', 14).
-cidade(50, 'Portimao', 14).
-cidade(51, 'Murmansk', 15).
-cidade(52, 'Moscovo', 15).
-cidade(53, 'Sao Petersburgo', 15).
-cidade(54, 'Kiev', 16).
-cidade(55, 'Luanda', 18).
+cidade(43, ['Lisboa'], 14).
+cidade(44, ['Porto'], 14).
+cidade(45, ['Guimaraes'], 14).
+cidade(46, ['Evora'], 14).
+cidade(47, ['Fatima'], 14).
+cidade(48, ['Coimbra'], 14).
+cidade(49, ['Albufeira'], 14).
+cidade(50, ['Portimao'], 14).
+cidade(51, ['Murmansk'], 15).
+cidade(52, ['Moscovo'], 15).
+cidade(53, ['Sao','Petersburgo'], 15).
+cidade(54, ['Kiev'], 16).
+cidade(55, ['Luanda'], 18).
 
 
 /*------------------------*/
@@ -192,22 +180,22 @@ cidade(55, 'Luanda', 18).
 /*------------------------*/
 
 % morada(IDMorada, NomeMorada, IDCidade).
-morada(1, 'Rua Bouca da Cavadinha', 1).
+morada(1, ['Rua','Bouca','da','Cavadinha'], 1).
 
 /*------------------------*/
 /*        SERVIÇOS        */
 /*------------------------*/
 
 % servico(ID,Nome).
-servico(1,'babysitting').
-servico(2,'limpeza de quartos').
-servico(3,'garagem privativa').
-servico(4,'wifi').
-servico(5,'pequeno almoco').
-servico(6,'ginasio').
-servico(7,'spa').
-servico(8,'casino').
-servico(9, 'piscina').
+servico(1,['babysitting']).
+servico(2,['limpeza','de','quartos']).
+servico(3,['garagem','privativa']).
+servico(4,['wifi']).
+servico(5,['pequeno','almoco']).
+servico(6,['ginasio']).
+servico(7,['spa']).
+servico(8,['casino']).
+servico(9,['piscina']).
 
 /*------------------------*/
 /*       TEM QUARTO       */
@@ -229,3 +217,6 @@ tem_servico(1,2).
 tem_servico(1,5).
 tem_servico(3,5).
 tem_servico(9,1).
+tem_servico(9,5).
+tem_servico(1,4).
+tem_servico(5,8).
