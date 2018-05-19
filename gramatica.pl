@@ -45,7 +45,7 @@ interrogativa_assis(TipoP, Acao, LSuj, [NovosSujs]) -->
 */
 
 % Ex : Que/Quais serviços disponibiliza o Hotel X?
-/*
+
 interrogativa_assis(TipoP, Acao, LSuj, Obj) -->
 	% quantificador indica que tipo de pergunta está a ser feita
 	quantificador(TipoP, N), 
@@ -71,7 +71,7 @@ interrogativa_assis(TipoP, Acao, LSuj, [Obj]) -->
 	adjetivo(N,Obj-Tipo, Acao),
 	{write('Final result is '), write(Acao), write(' '), write(Obj), write(' '), write(LSuj)},
 	{assert((lastData(TipoP, LSuj, Obj, Acao)))}.
-*/
+
 % Ex : Quantos são os hoteis que ficam em X?
 interrogativa_assis(TipoP, Acao, LSuj, Obj) -->
 	% quantificador indica que tipo de pergunta está a ser feita
@@ -85,9 +85,9 @@ interrogativa_assis(TipoP, Acao, LSuj, Obj) -->
 %Quantos (são) os hotéis do Porto?
 
 /* 
-Quantos (são) os hotéis do Porto?
-Quais (são) os hotéis de categoria superior a 3 estrelas em Lisboa?
-E em Coimbra?
+Quantos (são) os hotéis do Porto? (feito)
+Quais (são) os hotéis de categoria superior a 3 estrelas em Lisboa? 
+E em Coimbra? (feito)
 Que/Quais serviços disponibiliza o Hotel X? (feito)
 Quais os hotéis parisienses que possuem serviço de babysitting? (feito)
 Quais os hotéis de Faro que possuem categoria inferior a 4 e quartos com vista de mar? 
@@ -102,8 +102,9 @@ frase_afirmativa(Acao,Suj,Obj) --> afirmativa_assis(Acao, LSuj, Obj).
 
 afirmativa_assis(Acao, LSuj, Obj) --> 
 	sintagma_nominal(LSuj, N-G),
-	sintagma_verbal(LAcao, LObj, N, LSuj),
-	{verificacaoAfirmacaoTotal(LSuj, LObj, LAcao)}.
+	sintagma_verbal(LAcao, LObj, N, LSuj, Tipo2),
+	{write('Faack '),write(LAcao), write(LObj), write(Obj), write(Tipo2),nl},
+	{verificacaoAfirmacaoTotal(LSuj, LObj, LAcao, Tipo2)}.
 
 /* ------------------------ */
 /*		   SINTAGMAS 		*/
@@ -121,35 +122,34 @@ sintagma_nominal_aux(Suj-Tipo, N-G) --> nome(N-G, Suj-Tipo).
 
 %varios sujeitos e varios sintagmas verbais
 /*
-sintagma_verbal([Acao | OAcao], [Obj | OObj], N, [_-Tipo | O]) -->
-	[que], verbal_assis(Acao, Obj, N, Tipo), [e], sintagma_verbal(OAcao, OObj, N, [_-Tipo | O]).
+sintagma_verbal([Acao | OAcao], [Obj | OObj], N, [_-Tipo | O], Tipo2) -->
+	[que], verbal_assis(Acao, Obj, N, Tipo, Tipo2), [e], sintagma_verbal(OAcao, OObj, N, [_-Tipo | O], Tipo2).
 
-sintagma_verbal([Acao | OAcao], [Obj | OObj], N, [_-Tipo | O]) -->
-	verbal_assis(Acao, Obj, N, Tipo), [e], sintagma_verbal(OAcao, OObj, N, [_-Tipo | O]).
+sintagma_verbal([Acao | OAcao], [Obj | OObj], N, [_-Tipo | O], Tipo2) -->
+	verbal_assis(Acao, Obj, N, Tipo, Tipo2), [e], sintagma_verbal(OAcao, OObj, N, [_-Tipo | O], Tipo2).
 
 %varios sujeitos e um sintagma verbal
-sintagma_verbal(Acao, [Obj], N, [_-Tipo | O]) -->  
-	[que], verbal_assis(Acao,  Obj, N, Tipo).
+sintagma_verbal(Acao, [Obj], N, [_-Tipo | O], Tipo2) -->  
+	[que], verbal_assis(Acao,  Obj, N, Tipo, Tipo2).
 
-sintagma_verbal(Acao, [Obj], N, [_-Tipo | O]) -->  
-	verbal_assis(Acao,  Obj, N, Tipo).
+sintagma_verbal(Acao, [Obj], N, [_-Tipo | O], Tipo2) -->  
+	verbal_assis(Acao,  Obj, N, Tipo, Tipo2).
 
 %um sujeito e varios sintagmas verbais
-sintagma_verbal([Acao | OAcao], [Obj | OObj], N, _-Tipo) -->
-	[que], verbal_assis(Acao, Obj, N, Tipo), [e], sintagma_verbal(OAcao, OObj, N, _-Tipo).
+sintagma_verbal([Acao | OAcao], [Obj | OObj], N, _-Tipo, Tipo2) -->
+	[que], verbal_assis(Acao, Obj, N, Tipo, Tipo2), [e], sintagma_verbal(OAcao, OObj, N, _-Tipo, Tipo2).
 
-sintagma_verbal([Acao | OAcao], [Obj | OObj], N, _-Tipo) -->
-	verbal_assis(Acao, Obj, N, Tipo), [e], sintagma_verbal(OAcao, OObj, N, _-Tipo).
-*/
+sintagma_verbal([Acao | OAcao], [Obj | OObj], N, _-Tipo, Tipo2) -->
+	verbal_assis(Acao, Obj, N, Tipo, Tipo2), [e], sintagma_verbal(OAcao, OObj, N, _-Tipo, Tipo2).
+
 %um sujeito e um sintagma verbal
-sintagma_verbal(Acao, [Obj], N, _-Tipo) -->
-	[que], verbal_assis(Acao, Obj, N, Tipo).
+sintagma_verbal(Acao, [Obj], N, _-Tipo, Tipo2) -->
+	[que], verbal_assis(Acao, Obj, N, Tipo, Tipo2).
+*/
+sintagma_verbal(Acao, [Obj], N, _-Tipo, Tipo2) -->
+	verbal_assis(Acao, Obj, N, Tipo, Tipo2).
 
-sintagma_verbal(Acao, [Obj], N, _-Tipo) -->
-	verbal_assis(Acao, Obj, N, Tipo).
-
-
-verbal_assis(Acao, Obj, N, Tipo) --> 
+verbal_assis(Acao, Obj, N, Tipo, Tipo2) --> 
 	{nonvar(Tipo)}, % Tipo já está instanciado
 	forma_verbal(N, Acao-P), 
 	determinante(N2),
@@ -159,41 +159,41 @@ verbal_assis(Acao, Obj, N, Tipo) -->
 % Tipo não está instanciado, por isso não é efetuado um teste semântico aqui. 
 % Só feito depois (caso especial do quanto sao os hoteis, hoteis esta depois da forma verbal)
 
-verbal_assis(Acao, Obj, N, Tipo) --> 
+verbal_assis(Acao, Obj, N, Tipo, Tipo2) --> 
 	forma_verbal(N, Acao-P), 
 	determinante(N2),
 	nome(N2, Obj-Tipo2). 
 
-verbal_assis(Acao, Obj, N, Tipo) -->
+verbal_assis(Acao, Obj, N, Tipo, Tipo2) -->
 	{nonvar(Tipo)}, % Tipo já está instanciado
 	forma_verbal(N, Acao-P), 
 	nome(_, Obj-Tipo2),
 	{teste_semantico(Acao, Tipo,Tipo2)}. 
 
-verbal_assis(Acao, Obj, N, Tipo) -->
+verbal_assis(Acao, Obj, N, Tipo, Tipo2) -->
 	forma_verbal(N, Acao-P), 
 	nome(_, Obj-Tipo2). 
 
-verbal_assis(Acao, Obj, N, Tipo) --> 
+verbal_assis(Acao, Obj, N, Tipo, Tipo2) --> 
 	{nonvar(Tipo)}, % Tipo já está instanciado
 	forma_verbal(N, Acao-P), 
 	preposicao(N2),
 	nome(N2, Obj-Tipo2),
 	{teste_semantico(Acao, Tipo,Tipo2)}. 
 	
-verbal_assis(Acao, Obj, N, Tipo) --> 
+verbal_assis(Acao, Obj, N, Tipo, Tipo2) --> 
 	forma_verbal(N, Acao-P), 
 	preposicao(N2),
 	nome(N2, Obj-Tipo2). 
 	
-verbal_assis(Acao, Obj, N, Tipo) --> 
+verbal_assis(Acao, Obj, N, Tipo, Tipo2) --> 
 	{nonvar(Tipo)},
 	forma_verbal(N, Acao-P), 
 	preposicao(N2),
 	nome(_N2, Obj-Tipo2),
 	{teste_semantico(Acao, Tipo,Tipo2)}. 	
 
-verbal_assis(Acao, Obj, N, Tipo) --> 
+verbal_assis(Acao, Obj, N, Tipo, Tipo2) --> 
 	forma_verbal(N, Acao-P), 
 	preposicao(N2),
 	nome(_N2, Obj-Tipo2). 	

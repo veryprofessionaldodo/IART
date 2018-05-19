@@ -8,53 +8,53 @@
 /* 	    AFIRMAÇÕES    */
 /* ------------------ */
 
-verificacaoAfirmacaoTotal(LSuj, [Obj | []], Acao):-
-	verificacaoAfirmacao(LSuj, Obj, Acao).
+verificacaoAfirmacaoTotal(LSuj, [Obj | []], Acao, Tipo2):-
+	verificacaoAfirmacao(LSuj, Obj, Acao, Tipo2).
 
-verificacaoAfirmacaoTotal(LSuj, [Obj | RestoObj], [Acao | RestoAcao]):-
-	verificacaoAfirmacao(LSuj, Obj, Acao),
-	verificacaoAfirmacaoTotal(LSuj, RestoObj, RestoAcao).
+verificacaoAfirmacaoTotal(LSuj, [Obj | RestoObj], [Acao | RestoAcao], Tipo2):-
+	verificacaoAfirmacao(LSuj, Obj, Acao, Tipo2),
+	verificacaoAfirmacaoTotal(LSuj, RestoObj, RestoAcao, Tipo2).
 
 % FICAR Cidade - 1 ou mais sujeitos
-verificacaoAfirmacao(Suj-Tipo, [Obj], ficar):-
+verificacaoAfirmacao(Suj-Tipo, [Obj], ficar, _Tipo2):-
     write('Ficar1 '),write(Suj), write(Tipo), write(' '), write(Obj),nl,
-	hotel(_ID,Suj,_Estrelas, _Tlm, _Morada, IDCidade, IDRegiao),
+	hotel(_ID,Suj,_Estrelas, _Tlm, _Morada, IDCidade),
 	cidade(IDCidade, Obj, _IDPais),
 	write('Os dados estao de acordo com as nossas base de dados'),nl.
 
-verificacaoAfirmacao([Suj-Tipo | Resto], [Obj], ficar):-
+verificacaoAfirmacao([Suj-Tipo | Resto], [Obj], ficar, _Tipo2):-
     write('Ficar2 '),write(Suj), write(Tipo), write(' '), write(Obj),nl,
-	hotel(_ID,Suj,_Estrelas, _Tlm, _Morada, IDCidade, IDRegiao),
+	hotel(_ID,Suj,_Estrelas, _Tlm, _Morada, IDCidade),
 	cidade(IDCidade, Obj, _IDPais),
 	verificacaoAfirmacao(Resto, [Obj], ficar).
 
 % FICAR País
-verificacaoAfirmacao(Suj-Tipo, Obj, ficar):-
+verificacaoAfirmacao(Suj-Tipo, Obj, ficar, _Tipo2):-
     write('Ficar3 '),write(Suj), write(Tipo), write(' '), write(Obj),nl,
-	hotel(_ID,Suj,_Estrelas, _Tlm, _Morada, IDCidade, IDRegiao),
+	hotel(_ID,Suj,_Estrelas, _Tlm, _Morada, IDCidade),
 	cidade(IDCidade, _Cidade, IDPais),
     pais(IDPais, Obj, _IDContinente),
 	write('Os dados estao de acordo com as nossas base de dados'),nl.
 
-verificacaoAfirmacao([Suj-Tipo | Resto], Obj, ficar):-
+verificacaoAfirmacao([Suj-Tipo | Resto], Obj, ficar, _Tipo2):-
     write('Ficar4 '),write(Suj), write(Tipo), write(' '), write(Obj),nl,
-	hotel(_ID,Suj,_Estrelas, _Tlm, _Morada, IDCidade, IDRegiao),
+	hotel(_ID,Suj,_Estrelas, _Tlm, _Morada, IDCidade),
 	cidade(IDCidade, _Cidade, IDPais),
     pais(IDPais, Obj, _IDContinente),
 	verificacaoAfirmacao(Resto, Obj, ficar).
 
 % FICAR Continente
-verificacaoAfirmacao(Suj-Tipo, Obj, ficar):-
+verificacaoAfirmacao(Suj-Tipo, Obj, ficar, _Tipo2):-
     write('Ficar5 '),write(Suj), write(Tipo), write(' '), write(Obj),nl,
-	hotel(_ID,Suj,_Estrelas, _Tlm, _Morada, IDCidade, IDRegiao),
+	hotel(_ID,Suj,_Estrelas, _Tlm, _Morada, IDCidade),
 	cidade(IDCidade, _Cidade, IDPais),
     pais(IDPais, _Pais, IDContinente),
     continente(IDContinente, Obj),
 	write('Os dados estao de acordo com as nossas base de dados'),nl.
 
-verificacaoAfirmacao([Suj-Tipo | Resto], Obj, ficar):-
+verificacaoAfirmacao([Suj-Tipo | Resto], Obj, ficar, _Tipo2):-
     write('Ficar6 '),write(Suj), write(Tipo), write(' '), write(Obj),nl,
-	hotel(_ID,Suj,_Estrelas, _Tlm, _Morada, IDCidade, IDRegiao),
+	hotel(_ID,Suj,_Estrelas, _Tlm, _Morada, IDCidade),
 	cidade(IDCidade, _Cidade, IDPais),
     pais(IDPais, _Pais, IDContinente),
     continente(IDContinente, Obj),
@@ -64,19 +64,38 @@ verificacaoAfirmacao([Suj-Tipo | Resto], Obj, ficar):-
 % TER
 
 % TER Estrelas
-verificacaoAfirmacao(Suj-Tipo, [Obj | _], ter):-
-	hotel(_ID,Suj,Obj, _Tlm, _Morada, _IDCidade, _IDRegiao),
-    write('Tem1 '),write(Suj), write(Tipo), write(Obj),nl,
-	write('Os dados estao de acordo com as nossas base de dados'),nl.
+verificacaoAfirmacao(Suj-Tipo, Obj, ter, 'estrelas'):-
+	hotel(_ID,Suj,Obj, _Tlm, _Morada, _IDCidade),
+    write('Os dados estao de acordo com as nossas base de dados'),nl.
 
-verificacaoAfirmacao([Suj-Tipo | Resto], [Obj | Cont], ter):-
-	hotel(_ID,Suj,Obj, _Tlm, _Morada, _IDCidade, _IDRegiao),
-    write('Tem2 '),write(Suj), write(Tipo), write(Obj),nl,
-	verificacaoAfirmacao(Resto, [Obj, Cont], ter).
+verificacaoAfirmacao([Suj-Tipo | Resto], Obj, ter, 'estrelas'):-
+	hotel(_ID,Suj,Obj, _Tlm, _Morada, _IDCidade),
+    verificacaoAfirmacao(Resto, Obj, ter).
+
+% TER MaisEstrelas
+verificacaoAfirmacao(Suj-Tipo, Obj, ter, 'maisestrelas'):-
+	hotel(_ID,Suj,Estrelas, _Tlm, _Morada, _IDCidade),
+	Estrelas > Obj,
+    write('Os dados estao de acordo com as nossas base de dados'),nl.
+
+verificacaoAfirmacao([Suj-Tipo | Resto], Obj, ter, 'maisestrelas'):-
+	hotel(_ID,Suj,Estrelas, _Tlm, _Morada, _IDCidade),
+	Estrelas > Obj,
+    verificacaoAfirmacao(Resto, Obj, ter).
+
+% TER MenosEstrelas
+verificacaoAfirmacao(Suj-Tipo, Obj, ter, 'menosestrelas'):-
+	hotel(_ID,Suj,Estrelas, _Tlm, _Morada, _IDCidade),
+	Estrelas < Obj,
+    write('Os dados estao de acordo com as nossas base de dados'),nl.
+
+verificacaoAfirmacao([Suj-Tipo | Resto], Obj, ter, 'menosestrelas'):-
+	hotel(_ID,Suj,Estrelas, _Tlm, _Morada, _IDCidade),
+	Estrelas < Obj,
+    verificacaoAfirmacao(Resto, Obj, ter).
 
 verificacaoAfirmacao(_, _, _):-
 	write('Esta informacao nao esta de acordo com a nossa base de dados.'),nl.
-
 
 /* ------------------ */
 /* 	  INTERROGAÇÕES   */
@@ -113,14 +132,14 @@ verificacaoInterrogacaoTotal(Quant, LSuj, [List|_], Acao, Resposta):-
 verificacaoInterrogacao(TipoQ, Suj-hotel, [Obj], ficar, Resposta) :-
 	(TipoQ == que ; TipoQ == qual),
 	cidade(IDCidade, Obj, _IDPais),
-	findall(Nome, hotel(_IDHotel, Nome, _Estrelas, _Tlm, _IdMorada, IDCidade, _IDRegiao), Resposta).
+	findall(Nome, hotel(_IDHotel, Nome, _Estrelas, _Tlm, _IdMorada, IDCidade), Resposta).
 
 % Que hoteis ficam X(pais)?
 verificacaoInterrogacao(TipoQ, Suj-hotel, [Obj], ficar, Resposta) :-	
 	(TipoQ == que ; TipoQ == qual),
 	pais(IDPais, Obj, _IDContinente),
 	findall(Nome, 
-			(cidade(IDCidade, _, IDPais), hotel(_IDHotel, Nome, _Estrelas, _Tlm, _IdMorada, IDCidade, _IDRegiao)), 
+			(cidade(IDCidade, _, IDPais), hotel(_IDHotel, Nome, _Estrelas, _Tlm, _IdMorada, IDCidade)), 
 			Resposta).
 
 % Que hoteis ficam X(continente)?
@@ -129,7 +148,7 @@ verificacaoInterrogacao(TipoQ, Suj-hotel, [Obj], ficar, Resposta) :-
 	continente(IDContinente, Obj),
 	findall(Nome, 
 			(pais(IDPais, _, IDContinente), cidade(IDCidade, _, IDPais), 
-				hotel(_IDHotel, Nome, _Estrelas, _Tlm, _IdMorada, IDCidade, _IDRegiao)), 
+				hotel(_IDHotel, Nome, _Estrelas, _Tlm, _IdMorada, IDCidade)), 
 			Resposta).
 
 % Hoteis que tem servico X?
@@ -139,7 +158,7 @@ verificacaoInterrogacao(TipoQ, Suj-hotel, [Obj], ter, Resposta) :-
 		(
 			servico(IDServico, Obj),
 			tem_servico(IDHotel, IDServico),
-			hotel(IDHotel, Hotel, _Estrelas, _Tlm, _IdMorada, IDCidade, _IDRegiao)
+			hotel(IDHotel, Hotel, _Estrelas, _Tlm, _IdMorada, IDCidade)
 		), Resposta).
 
 % Que serviços tem X?
@@ -147,7 +166,7 @@ verificacaoInterrogacao(TipoQ, Suj-servico, Obj, ter, Resposta) :-
 	(TipoQ == que ; TipoQ == qual),
 	findall(Servico, 
 		(
-			hotel(IDHotel, Obj, _Estrelas, _Tlm, _IdMorada, IDCidade, _IDRegiao), 
+			hotel(IDHotel, Obj, _Estrelas, _Tlm, _IdMorada, IDCidade), 
 			tem_servico(IDHotel, IDServico), 
 			servico(IDServico, Servico)
 		), Resposta).
@@ -158,7 +177,7 @@ verificacaoInterrogacao(quanto, [Cidade]-cidade, [Tipo], ter, Resposta) :-
 	findall(IDHotel, 
 	(
 		cidade(IDCidade, Cidade, _IDPais),
-		hotel(IDHotel, _Nome, _Estrelas, _Tlm, _IdMorada, IDCidade, _IDRegiao)
+		hotel(IDHotel, _Nome, _Estrelas, _Tlm, _IdMorada, IDCidade)
 	), Hoteis),
 	length(Hoteis, Resposta).
 
@@ -167,7 +186,7 @@ verificacaoInterrogacao(quanto, Suj-hotel, [Obj], ficar, Resposta) :-
 	findall(IDHotel, 
 	(
 		cidade(IDCidade, Obj, _IDPais),
-		hotel(IDHotel, _Nome, _Estrelas, _Tlm, _IdMorada, IDCidade, _IDRegiao)
+		hotel(IDHotel, _Nome, _Estrelas, _Tlm, _IdMorada, IDCidade)
 	), Hoteis),
 	length(Hoteis, Resposta).
 

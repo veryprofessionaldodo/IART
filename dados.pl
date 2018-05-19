@@ -3,16 +3,16 @@
 /*------------------------*/
 
 % hotel(IDHotel, Nome, 	Estrelas, Tel, IDMorada, IDCidade, IDRegião). Regiao é do tipo Montanha, Praia...
-hotel(1, ['Hotel', 'Tipton'], '3', '278421134', 124, 1, 2).
-hotel(2, ['Hotel', 'Vila', 'Gale'], '4', '278421189', 124, 1, 2).
-hotel(3, ['Hotel', 'Axis'], '4', '278421189', 124, 7, 2). 
-hotel(4, ['Hotel', 'Continental'], '4', '278421189', 124, 28, 2).
-hotel(5, ['Hotel', 'Ibis'], '4', '278421189', 124, 8, 2).
-hotel(6, ['Hotel', 'Village'], '4', '278421189', 124, 17, 2).
-hotel(7, ['Hotel', 'Lusitano'], '4','278421189', 124, 43, 2).
-hotel(8, ['Hotel', 'Angolano'], '4','278421189', 124, 55, 2).
-hotel(9, ['Hotel', 'Merci'], '4','278421189', 124, 22, 2).
-hotel(10, ['Hotel', 'Louvre'], '4','278421189', 124, 22, 2).
+hotel(1, ['Hotel', 'Tipton'], 3, '278421134', 124, 1).
+hotel(2, ['Hotel', 'Vila', 'Gale'], 4, '278421189', 124, 1).
+hotel(3, ['Hotel', 'Axis'], 3, '278421189', 124, 7). 
+hotel(4, ['Hotel', 'Continental'], 4, '278421189', 124, 28).
+hotel(5, ['Hotel', 'Ibis'], 4, '278421189', 124, 8).
+hotel(6, ['Hotel', 'Village'], 4, '278421189', 124, 17).
+hotel(7, ['Hotel', 'Lusitano'], 4,'278421189', 124, 43).
+hotel(8, ['Hotel', 'Angolano'], 4,'278421189', 124, 55).
+hotel(9, ['Hotel', 'Merci'], 4,'278421189', 124, 22).
+hotel(10, ['Hotel', 'Louvre'], 4,'278421189', 124, 22).
 
 /*------------------------*/
 /*        QUARTOS         */
