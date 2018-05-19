@@ -40,4 +40,4 @@ filtrar(HoteisAtuais, Obj-hotel, NovaLista) :-
     ) , NovaLista),
     length(NovaLista, Comprimento), Comprimento > 0.
 
-filtrar(HoteisAtuais, Obj-hotel, HoteisAtuais).
+filtrar(HoteisAtuais, _Obj-hotel, HoteisAtuais).

@@ -8,7 +8,7 @@ inicio:-
     read_line(user_input, X), 
     parse_input(X, [], [], ListWords), 
     write(ListWords),write('\n'),!,
-    frase(Acao, Suj, Obj, ListWords, _).    
+    frase(_Acao, _Suj, _Obj, ListWords, _).    
 
     %write(Response).
 
@@ -32,6 +32,10 @@ parse_input([Head|Body], CurrWord, TmpList, Words) :-
     ),
 
     parse_input(Body, NewWord, FinalList, Words).
+    
+parse_input([],CurrWord, Words, List) :- 
+    atom_chars(TmpWord, CurrWord),
+    append(Words, [TmpWord], List).
 
 is_ending_char(Head, NewList, FinalList) :-
     char_code(TmpWord2, Head),
@@ -40,9 +44,7 @@ is_ending_char(Head, NewList, FinalList) :-
 
 is_ending_char(_, FinalList, FinalList).
 
-parse_input([],CurrWord, Words, List) :- 
-    atom_chars(TmpWord, CurrWord),
-    append(Words, [TmpWord], List).
+
 
 %Quantos (são) os hotéis do Porto?
 
@@ -77,8 +79,9 @@ FRASES QUE NÃO FUNCIONAM
 */
 
 teste:-
-    frase(Acao, Suj, Obj, ['Quais', 'os', 'hoteis', 'de', 'categoria', 'superior',
-         'a', '2', 'estrelas', 'em', 'Tirana', '?'],_).
+    %frase(Acao, Suj, Obj, ['Quais', 'os', 'hoteis', 'de', 'categoria', 'superior','a', '2', 'estrelas', 'em', 'Tirana', '?'],_).
+    %frase(Acao, Suj, Obj, ['Quais', 'os', 'hoteis', 'parisienses', 'que', 'possuem', 'babysitting', '?'],_).
+    frase(Acao, Suj, Obj, ['O', 'Hotel', 'Vila', 'Gale', 'e', 'o', 'Hotel', 'Axis', 'ficam', 'na', 'Antuerpia', 'e', 'tem', '4', 'estrelas', '.'],_).
 
 teste2:-
     %frase(Acao, Suj, Obj, ['E', 'em','Africa','?'],_).

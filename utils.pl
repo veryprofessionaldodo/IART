@@ -10,7 +10,7 @@ writeArray([Head | Tail]) :-
 listToString([], String, String) :- write(String).
 listToString([Head|[]], TmpString, String) :-
     atom_concat(TmpString, Head, TmpFinal),
-    listToString(Tail, TmpFinal, String).
+    listToString(_Tail, TmpFinal, String).
 listToString([Head|Tail], TmpString, String) :-
     atom_concat(TmpString, Head, Tmp2),
     atom_concat(Tmp2, ' ', TmpFinal),
@@ -29,7 +29,7 @@ interLists([_|T1], L2, Res) :-
 % hotel(IDHotel, Nome, 	Estrelas, Tel, IDMorada, IDCidade)
 writeListHoteis([]).
 writeListHoteis([Head|Tail]) :-
-    nl, hotel(Head, Nome, _,_,_,_), listToString(Nome,'', String), 
+    nl, hotel(Head, Nome, _,_,_,_), listToString(Nome,'', _String), 
     writeListHoteis(Tail).
 
 

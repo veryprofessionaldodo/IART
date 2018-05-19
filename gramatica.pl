@@ -36,7 +36,7 @@ frase_interrogativa(TipoP, Acao, Suj, Obj) -->
 interrogativa_assis(TipoP, Acao, LSuj, [NovoSuj]) -->
 	conjuncao(_),
 	novo_sujeito_l(NovoSuj),
-	{retract((lastData(TipoP, LSuj, Suj, Acao)))}.
+	{retract((lastData(TipoP, LSuj, _Suj, Acao)))}.
 
 %Começa por E - hotel
 interrogativa_assis(TipoP, Acao, LSuj, [NovosSujs]) -->
@@ -55,7 +55,7 @@ interrogativa_assis(TipoP, Acao, LSuj, Obj) -->
 	% quantificador indica que tipo de pergunta está a ser feita
 	quantificador(TipoP, N), 
 	sintagma_nominal(LSuj, N),
-	sintagma_verbal(Acao, Obj, N2, LSuj),
+	sintagma_verbal(Acao, Obj, _N2, LSuj),
 	{write('2Final result is '), write(Acao), write(' '), write(Obj), write(' '), write(LSuj)},
 	{assert((lastData(TipoP, LSuj, Obj, Acao)))}.
 
@@ -64,8 +64,8 @@ interrogativa_assis(TipoP, [Acao1 | Acao], LSuj, [Obj1 | Suj]) -->
 	% quantificador indica que tipo de pergunta está a ser feita
 	quantificador(TipoP, N), 
 	sintagma_nominal(LSuj, N),
-	adjetivo(N,Obj1-Tipo, Acao1),
-	sintagma_verbal(Acao, Suj, N2, LSuj),
+	adjetivo(N,Obj1-_Tipo, Acao1),
+	sintagma_verbal(Acao, Suj, _N2, LSuj),
 	 % adicionar lista ao assert
 	{write('Final result is '), write([Acao1 | Acao]), write(' '), write([Obj1 | Suj]), write(' '), write(LSuj)}.
 
@@ -74,7 +74,7 @@ interrogativa_assis(TipoP, Acao, LSuj, [Obj]) -->
 	% quantificador indica que tipo de pergunta está a ser feita
 	quantificador(TipoP, N), 
 	sintagma_nominal(LSuj, N),
-	adjetivo(N,Obj-Tipo, Acao),
+	adjetivo(N,Obj-_Tipo, Acao),
 	{write('Final result is '), write(Acao), write(' '), write(Obj), write(' '), write(LSuj)},
 	{assert((lastData(TipoP, LSuj, Obj, Acao)))}.
 
@@ -83,22 +83,22 @@ interrogativa_assis(TipoP, Acao, LSuj, Obj) -->
 	% quantificador indica que tipo de pergunta está a ser feita
 	quantificador(TipoP, N), 
 	sintagma_verbal(Acao, Obj, N, LSuj),
-	sintagma_nominal(LSuj, N2),
+	sintagma_nominal(LSuj, _N2),
 	%{write('Final result is '), write(Acao), write(' '),write(N), write(' '), write(Obj), write(' '), write(LSuj)},
 	{assert((lastData(TipoP, LSuj, Obj, Acao)))}.
 
 % Ex : Quais os hotéis de categoria superior a 3 estrelas em Lisboa? 
 recursive_assis -->
 	{findall(IDHotel, hotel(IDHotel, _, _, _, _, _), Hoteis)},
-	recursive_assis1(Hoteis, ListaFinal), [.], {analise_lista(TipoP, ListaFinal)}.
+	recursive_assis1(Hoteis, ListaFinal), [.], {analise_lista(_TipoP, ListaFinal)}.
 
 recursive_assis -->
-	quantificador(TipoP, N), 
+	quantificador(TipoP, _N), 
 	{findall(IDHotel, hotel(IDHotel, _, _, _, _, _), Hoteis)},
 	recursive_assis1(Hoteis, ListaFinal), [?], {analise_lista(TipoP, ListaFinal)}.
 
 recursive_assis1(HoteisAtuais, ListaFinal) -->
-	sintagma_nominal(Suj-Tipo, N),
+	sintagma_nominal(Suj-Tipo, _N),
 	{filtrar(HoteisAtuais, Suj-Tipo, NovaLista), write(NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
 
@@ -119,12 +119,12 @@ O Hotel X fica em Faro e possui 4 estrelas. (feito)
 /*		FRASE AFIRMATIVA 	*/
 /* -------------------------*/
 
-frase_afirmativa(Acao,Suj,Obj) --> afirmativa_assis(Acao, LSuj, Obj).
+frase_afirmativa(Acao,LSuj,Obj) --> afirmativa_assis(Acao, LSuj, Obj).
 
-afirmativa_assis(Acao, LSuj, Obj) --> 
-	sintagma_nominal(LSuj, N-G),
+afirmativa_assis(LAcao, LSuj, LObj) --> 
+	sintagma_nominal(LSuj, N-_G),
 	sintagma_verbal(LAcao, LObj, N, LSuj, Tipo2),
-	{write('Faack '),write(LAcao), write(LObj), write(Obj), write(Tipo2),nl},
+	{write('AfiAssis: '),write(LAcao),write(' '),write(LSuj),write(' '),write(LObj),write(' '),write(Tipo2),nl},
 	{verificacaoAfirmacaoTotal(LSuj, LObj, LAcao, Tipo2)}.
 
 /* ------------------------ */
@@ -142,19 +142,18 @@ sintagma_nominal_aux(Suj-Tipo, N-G) --> nome(N-G, Suj-Tipo).
 % TODO: verificação semantica que todos os tipos correspondem ao verbo
 
 %varios sujeitos e varios sintagmas verbais
-
 sintagma_verbal([Acao | OAcao], [Obj | OObj], N, [_-Tipo | O], Tipo2) -->
 	[que], verbal_assis(Acao, Obj, N, Tipo, Tipo2), [e], sintagma_verbal(OAcao, OObj, N, [_-Tipo | O], Tipo2).
 
 sintagma_verbal([Acao | OAcao], [Obj | OObj], N, [_-Tipo | O], Tipo2) -->
-	verbal_assis(Acao, Obj, N, Tipo, Tipo2), [e], sintagma_verbal(OAcao, OObj, N, [_-Tipo | O], Tipo2).
+	verbal_assis(Acao, Obj, N, Tipo, Tipo2), {write('here '), write(Acao),nl}, [e], sintagma_verbal(OAcao, OObj, N, [_-Tipo | O], Tipo2).
 
 %varios sujeitos e um sintagma verbal
-sintagma_verbal(Acao, [Obj], N, [_-Tipo | O], Tipo2) -->  
+sintagma_verbal(Acao, [Obj], N, [_-Tipo | _O], Tipo2) -->  
 	[que], verbal_assis(Acao,  Obj, N, Tipo, Tipo2).
 
-sintagma_verbal(Acao, [Obj], N, [_-Tipo | O], Tipo2) -->  
-	verbal_assis(Acao,  Obj, N, Tipo, Tipo2).
+sintagma_verbal(Acao, [Obj], N, [_-Tipo | _O], Tipo2) -->  
+	verbal_assis(Acao,  Obj, N, Tipo, Tipo2), {write('here2 '), write(Acao),nl}.
 
 %um sujeito e varios sintagmas verbais
 sintagma_verbal([Acao | OAcao], [Obj | OObj], N, _-Tipo, Tipo2) -->
@@ -172,52 +171,51 @@ sintagma_verbal(Acao, [Obj], N, _-Tipo, Tipo2) -->
 
 verbal_assis(Acao, Obj, N, Tipo, Tipo2) --> 
 	{nonvar(Tipo)}, % Tipo já está instanciado
-	forma_verbal(N, Acao-P), 
+	forma_verbal(N, Acao-_P), 
 	determinante(N2),
 	nome(N2, Obj-Tipo2),
-	{teste_semantico(Acao, Tipo,Tipo2)}. 
+	{write('VerbAssis: '),write(Acao),nl,teste_semantico(Acao, Tipo,Tipo2)}. 
 
 % Tipo não está instanciado, por isso não é efetuado um teste semântico aqui. 
 % Só feito depois (caso especial do quanto sao os hoteis, hoteis esta depois da forma verbal)
-
-verbal_assis(Acao, Obj, N, Tipo, Tipo2) --> 
-	forma_verbal(N, Acao-P), 
+verbal_assis(Acao, Obj, N, _Tipo, Tipo2) --> 
+	forma_verbal(N, Acao-_P), 
 	determinante(N2),
 	nome(N2, Obj-Tipo2). 
 
 verbal_assis(Acao, Obj, N, Tipo, Tipo2) -->
 	{nonvar(Tipo)}, % Tipo já está instanciado
-	forma_verbal(N, Acao-P), 
+	forma_verbal(N, Acao-_P), 
 	nome(_, Obj-Tipo2),
-	{teste_semantico(Acao, Tipo,Tipo2)}. 
+	{write('here AA: '), write(Obj), nl,teste_semantico(Acao, Tipo,Tipo2)}. 
 
-verbal_assis(Acao, Obj, N, Tipo, Tipo2) -->
-	forma_verbal(N, Acao-P), 
+verbal_assis(Acao, Obj, N, _Tipo, Tipo2) -->
+	forma_verbal(N, Acao-_P), 
 	nome(_, Obj-Tipo2). 
 
 verbal_assis(Acao, Obj, N, Tipo, Tipo2) --> 
 	{nonvar(Tipo)}, % Tipo já está instanciado
-	forma_verbal(N, Acao-P), 
+	forma_verbal(N, Acao-_P), 
 	preposicao(N2),
 	nome(N2, Obj-Tipo2),
 	{teste_semantico(Acao, Tipo,Tipo2)}. 
 	
-verbal_assis(Acao, Obj, N, Tipo, Tipo2) --> 
-	forma_verbal(N, Acao-P), 
+verbal_assis(Acao, Obj, N, _Tipo, Tipo2) --> 
+	forma_verbal(N, Acao-_P), 
 	preposicao(N2),
 	nome(N2, Obj-Tipo2). 
 	
 verbal_assis(Acao, Obj, N, Tipo, Tipo2) --> 
 	{nonvar(Tipo)},
-	forma_verbal(N, Acao-P), 
+	forma_verbal(N, Acao-_P), 
 	preposicao(N2),
-	nome(_N2, Obj-Tipo2),
+	nome(N2, Obj-Tipo2),
 	{teste_semantico(Acao, Tipo,Tipo2)}. 	
 
-verbal_assis(Acao, Obj, N, Tipo, Tipo2) --> 
-	forma_verbal(N, Acao-P), 
+verbal_assis(Acao, Obj, N, _Tipo, Tipo2) --> 
+	forma_verbal(N, Acao-_P), 
 	preposicao(N2),
-	nome(_N2, Obj-Tipo2). 	
+	nome(N2, Obj-Tipo2). 	
 
 %lugar
 novo_sujeito_l(NovoSuj) --> %incluir teste semantico!
