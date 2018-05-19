@@ -202,10 +202,7 @@ servico(9,['piscina']).
 /*------------------------*/
 
 % tem_quarto(IDHotel, IDQuarto, Preço).
-tem_quarto(1, 1, 100).
-tem_quarto(1, 2, 150).
-tem_quarto(1, 3, 170).
-tem_quarto(1, 4, 300).
+tem_quarto(1, 2, 100).
 
 /*------------------------*/
 /*       TEM SERVIÇO      */

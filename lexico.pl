@@ -26,10 +26,14 @@ nome(s-f, ['limpeza','de','quartos']-servico) --> ['limpeza','de','quartos'].
 nome(s-f, ['garagem','privativa']-servico) --> ['garagem','privativa'].
 nome(s-m, ['pequeno','almoco']-servico) --> ['pequeno','almoco'].
 
-nome(_, ['casal']-quarto) --> ['casal'].
-nome(_, ['solteiro']-quarto) --> ['solteiro'].
-nome(_, ['familia']-quarto) --> ['familia'].
-nome(_, ['suite']-quarto) --> ['suite'].
+nome(s-m, ['casal']-quarto) --> ['quarto','de','casal'].
+nome(p-m, ['casal']-quarto) --> ['quartos','de','casal'].
+nome(s-m, ['solteiro']-quarto) --> ['quarto','de','solteiro'].
+nome(p-m, ['solteiro']-quarto) --> ['quartos','de','solteiro'].
+nome(s-m, ['familia']-quarto) --> ['quarto','de','familia'].
+nome(p-m, ['familia']-quarto) --> ['quartos','de','familia'].
+nome(s-m, ['suite']-quarto) --> ['suite'].
+nome(p-m, ['suite']-quarto) --> ['suites'].
 
 nome(s-m, ['pais']-pais) --> ['pais'].
 nome(s-f, ['Albania']-pais) --> ['Albania'].

@@ -2,7 +2,6 @@
 % hotel(IDHotel, Nome, 	Estrelas, Tel, IDMorada, IDCidade)
 
 :-dynamic pergunta/1.
-:-dynamic 
 
 filtrar(HoteisAtuais, Obj-cidade, NovaLista) :-
     findall(IDHotel,
@@ -71,6 +70,16 @@ filtrar(HoteisAtuais, ter-Afirmativo, Obj-servico, NovaLista) :-
         hotel(IDHotel, _Nome, _Estrelas, _Tel, _IDMorada, _IDCidade),
         tem_servico(IDHotel, IDServico),
         servico(IDServico, Obj),
+        member(IDHotel, HoteisAtuais)
+    ) , NovaLista),
+    pergunta_atual(ter-Afirmativo).
+
+filtrar(HoteisAtuais, ter-Afirmativo, Obj-quarto, NovaLista) :-
+    findall(IDHotel,
+    (
+        hotel(IDHotel, _Nome, _Estrelas, _Tel, _IDMorada, _IDCidade),
+        quarto(IDQuarto, Obj, _Num),
+        tem_quarto(IDHotel, IDQuarto, Preco),
         member(IDHotel, HoteisAtuais)
     ) , NovaLista),
     pergunta_atual(ter-Afirmativo).
