@@ -49,7 +49,7 @@ nome(p-f, ['Estados', 'Unidos', 'da', 'America']-pais) --> ['nos','Estados', 'Un
 
 nome(s-m, [continente]-continente) --> [continente].
 nome(s-f, ['Europa']-continente) --> ['Europa'].
-nome(s-_, ['Africa']-continente) --> ['Africa']
+nome(s-_, ['Africa']-continente) --> ['Africa'].
 nome(s-f, ['America do Norte']-continente) --> ['America', 'do', 'Norte'].
 nome(s-f, ['America do Sul']-continente) --> ['America', 'do', 'Sul'].
 nome(s-f, ['Oceania']-continente) --> ['Oceania'].

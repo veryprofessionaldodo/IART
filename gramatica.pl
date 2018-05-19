@@ -26,7 +26,7 @@ frase_interrogativa(TipoP, Acao, Suj, Obj) -->
 /* 
 	PERGUNTAS COM O CONTEXTO DA PERGUNTA ANTERIOR
 */
-/*
+
 %Começa por E - lugar
 interrogativa_assis(TipoP, Acao, LSuj, [NovoSuj]) -->
 	conjuncao(_),
@@ -39,7 +39,7 @@ interrogativa_assis(TipoP, Acao, LSuj, [NovosSujs]) -->
 	novo_sujeito_s(NovosSujs),
 	{retract((lastData(TipoP, LSuj, Suj, Acao))), 
 		write('retract: '), write(TipoP), write(' '), write(LSuj), write(' '), write(Suj), write(' '), write(Acao),nl}.
-*/
+
 /*
 	PERGUNTAS SEM CONTEXTO DA PERGUNTA ANTERIOR
 */
@@ -121,7 +121,7 @@ sintagma_nominal_aux(Suj-Tipo, N-G) --> nome(N-G, Suj-Tipo).
 % TODO: verificação semantica que todos os tipos correspondem ao verbo
 
 %varios sujeitos e varios sintagmas verbais
-/*
+
 sintagma_verbal([Acao | OAcao], [Obj | OObj], N, [_-Tipo | O], Tipo2) -->
 	[que], verbal_assis(Acao, Obj, N, Tipo, Tipo2), [e], sintagma_verbal(OAcao, OObj, N, [_-Tipo | O], Tipo2).
 
@@ -145,7 +145,7 @@ sintagma_verbal([Acao | OAcao], [Obj | OObj], N, _-Tipo, Tipo2) -->
 %um sujeito e um sintagma verbal
 sintagma_verbal(Acao, [Obj], N, _-Tipo, Tipo2) -->
 	[que], verbal_assis(Acao, Obj, N, Tipo, Tipo2).
-*/
+
 sintagma_verbal(Acao, [Obj], N, _-Tipo, Tipo2) -->
 	verbal_assis(Acao, Obj, N, Tipo, Tipo2).
 

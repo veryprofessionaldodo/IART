@@ -56,24 +56,28 @@ FRASES QUE FUNCIONAM
     frase(Acao, Suj, Obj, ['Quantos','sao','os','hoteis','de','Tirana','?'],_).
     frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'tem', '3', 'estrelas', 'e', 'fica', 'em', 'Tirana', '.'],_).
     frase(Acao, Suj, Obj, ['Que', 'hoteis','ficam','na','Albania','?'],_).
+    frase(Acao, Suj, Obj, ['Que', 'hoteis','ficam','na','Europa','?'],_).
+    frase(Acao, Suj, Obj, ['Quantos','sao','os','hoteis','de','Tirana','?'],_).
+    frase(Acao, Suj, Obj, ['Quais', 'os', 'hoteis', 'parisienses','?'],_).
+*/
+
+/*
+FRASES QUE FUNCIONAM MAS ESTÃO INCORRETAS
+    frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Axis', 'tem', '3', 'estrelas', '.'],_).
+    frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Tipton', 'tem', '3', 'estrelas', 'e', 'ficam', 'em', 'Tirana', '.'],_).
+    frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Tipton', 'ficam', 'em', 'Tirana', 'e', 'tem', '3', 'estrelas', '.'],_).
 */
 
 /*
 FRASES QUE NÃO FUNCIONAM
-    frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Axis', 'tem', '3', 'estrelas', '.'],_).
+    frase(Acao, Suj, Obj, ['Quais', 'os', 'hoteis', 'parisienses', 'que', 'possuem', 'babysitting', 'e', 'pequeno','almoco', '?'],_).
+    frase(Acao, Suj, Obj, ['Quais', 'os', 'hoteis', 'parisienses', 'que', 'possuem', 'babysitting', '?'],_).
+    frase(Acao, Suj, Obj, ['O', 'Hotel', 'Vila', 'Gale', 'e', 'o', 'Hotel', 'Axis', 'ficam', 'na', 'Antuerpia', 'e', 'tem', '4', 'estrelas', '.'],_).
+    frase(Acao, Suj, Obj, ['O', 'Hotel', 'Vila', 'Gale', 'e', 'o', 'Hotel', 'Axis', 'tem', '4', 'estrelas', 'e', 'ficam', 'na', 'Antuerpia', '.'],_).
 */
 
 teste:-
-    %frase(Acao, Suj, Obj, ['Que', 'hoteis','ficam','na','Europa','?'],_).
-    %frase(Acao, Suj, Obj, ['Quantos','sao','os','hoteis','de','Tirana','?'],_).
-    %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Tipton', 'ficam', 'em', 'Tirana', '.'],_).
-    %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Tipton', 'ficam', 'em', 'Tirana', 'e', 'tem', '3', 'estrelas', '.'],_).
-    %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Tipton', 'tem', '3', 'estrelas', 'e', 'ficam', 'em', 'Tirana', '.'],_).
-    %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Vila', 'Gale', 'e', 'o', 'Hotel', 'Axis', 'tem', '4', 'estrelas', 'e', 'ficam', 'na', 'Antuerpia', '.'],_).
-    %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Vila', 'Gale', 'e', 'o', 'Hotel', 'Axis', 'ficam', 'na', 'Antuerpia', 'e', 'tem', '4', 'estrelas', '.'],_).
-    %frase(Acao, Suj, Obj, ['Quais', 'os', 'hoteis', 'parisienses','?'],_).
-    %frase(Acao, Suj, Obj, ['Quais', 'os', 'hoteis', 'parisienses', 'que', 'possuem', 'babysitting', '?'],_).
-    %frase(Acao, Suj, Obj, ['Quais', 'os', 'hoteis', 'parisienses', 'que', 'possuem', 'babysitting', 'e', 'pequeno','almoco', '?'],_).
+    frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Tipton', 'ficam', 'em', 'Tirana', '.'],_).
 
 
 teste2:-
