@@ -195,3 +195,11 @@ escreverResposta(quanto, Resposta):-
 
 escreverResposta(_, Resposta):-
 	nl,write('Resposta: '),writeList(Resposta),nl.
+
+% Para análise recursiva
+analise_lista(quanto, Lista) :-
+	nl,write('A resposta certa e : '), length(Lista, Comprimento), write(Comprimento).
+
+analise_lista(Quant, Lista) :-
+	nonvar(Quant), 
+	nl,write('A resposta certa e : '), writeListHoteis(Lista).

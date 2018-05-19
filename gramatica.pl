@@ -1,6 +1,7 @@
 :-reconsult('dados.pl').
 :-reconsult('lexico.pl').
 :-reconsult('verificacoes.pl').
+:-reconsult('filtros.pl').
 
 :-dynamic lastData/4.
 
@@ -14,9 +15,13 @@ frase(_,_):- write("erro sintaxe").*/
 
 %frase(Acao,Suj,Obj) --> frase_interrogativa(Acao, Suj, Obj), [?].
 
+/*
 frase(Acao,Suj,Obj) --> frase_interrogativa(TipoP, Acao, Suj, Obj), ['?'], 
-						{	write('FRASE: '),nl,write(TipoP),write(' '),write(Acao),write(' '),write(Suj),write(' '),write(Obj),nl,
-							verificacaoInterrogacaoTotal(TipoP, Suj, Obj, Acao, [])}.
+						%{write('FRASE: '),nl,write(TipoP),write(' '),write(Acao),write(' '),write(Suj),write(' '),write(Obj),nl,
+						verificacaoInterrogacaoTotal(TipoP, Suj, Obj, Acao, [])}.
+*/
+frase(_Acao, _Suj, _Obj) --> 
+	recursive_assis.
 
 frase(Acao,Suj,Obj) --> frase_afirmativa(Acao, Suj, Obj), [.].
 
@@ -26,7 +31,7 @@ frase_interrogativa(TipoP, Acao, Suj, Obj) -->
 /* 
 	PERGUNTAS COM O CONTEXTO DA PERGUNTA ANTERIOR
 */
-
+/*
 %Começa por E - lugar
 interrogativa_assis(TipoP, Acao, LSuj, [NovoSuj]) -->
 	conjuncao(_),
@@ -39,13 +44,13 @@ interrogativa_assis(TipoP, Acao, LSuj, [NovosSujs]) -->
 	novo_sujeito_s(NovosSujs),
 	{retract((lastData(TipoP, LSuj, Suj, Acao))), 
 		write('retract: '), write(TipoP), write(' '), write(LSuj), write(' '), write(Suj), write(' '), write(Acao),nl}.
-
+*/
 /*
 	PERGUNTAS SEM CONTEXTO DA PERGUNTA ANTERIOR
 */
 
 % Ex : Que/Quais serviços disponibiliza o Hotel X?
-
+/*
 interrogativa_assis(TipoP, Acao, LSuj, Obj) -->
 	% quantificador indica que tipo de pergunta está a ser feita
 	quantificador(TipoP, N), 
@@ -61,8 +66,9 @@ interrogativa_assis(TipoP, [Acao1 | Acao], LSuj, [Obj1 | Suj]) -->
 	sintagma_nominal(LSuj, N),
 	adjetivo(N,Obj1-Tipo, Acao1),
 	sintagma_verbal(Acao, Suj, N2, LSuj),
-	{write('Final result is '), write([Acao1 | Acao]), write(' '), write([Obj1 | Suj]), write(' '), write(LSuj)}. % adicionar lista ao assert
-
+	 % adicionar lista ao assert
+	{write('Final result is '), write([Acao1 | Acao]), write(' '), write([Obj1 | Suj]), write(' '), write(LSuj)}.
+*/
 %Ex: Quais os hoteis parisienses?
 interrogativa_assis(TipoP, Acao, LSuj, [Obj]) -->
 	% quantificador indica que tipo de pergunta está a ser feita
@@ -81,12 +87,26 @@ interrogativa_assis(TipoP, Acao, LSuj, Obj) -->
 	%{write('Final result is '), write(Acao), write(' '),write(N), write(' '), write(Obj), write(' '), write(LSuj)},
 	{assert((lastData(TipoP, LSuj, Obj, Acao)))}.
 
+% Ex : Quais os hotéis de categoria superior a 3 estrelas em Lisboa? 
+recursive_assis -->
+	{findall(IDHotel, hotel(IDHotel, _, _, _, _, _), Hoteis)},
+	recursive_assis1(Hoteis, ListaFinal), [.], {analise_lista(TipoP, ListaFinal)}.
 
-%Quantos (são) os hotéis do Porto?
+recursive_assis -->
+	quantificador(TipoP, N), 
+	{findall(IDHotel, hotel(IDHotel, _, _, _, _, _), Hoteis)},
+	recursive_assis1(Hoteis, ListaFinal), [?], {analise_lista(TipoP, ListaFinal)}.
 
+recursive_assis1(HoteisAtuais, ListaFinal) -->
+	sintagma_nominal(Suj-Tipo, N),
+	{filtrar(HoteisAtuais, Suj-Tipo, NovaLista), write(NovaLista)},
+	recursive_assis1(NovaLista, ListaFinal).
+
+	%{assert((lastData(TipoP, LSuj, Obj, Acao)))}.
+	
+recursive_assis1(ListaFinal, ListaFinal) --> {true}.
 /* 
 Quantos (são) os hotéis do Porto? (feito)
-Quais (são) os hotéis de categoria superior a 3 estrelas em Lisboa? 
 E em Coimbra? (feito)
 Que/Quais serviços disponibiliza o Hotel X? (feito)
 Quais os hotéis parisienses que possuem serviço de babysitting? (feito)
@@ -121,7 +141,7 @@ sintagma_nominal_aux(Suj-Tipo, N-G) --> nome(N-G, Suj-Tipo).
 % TODO: verificação semantica que todos os tipos correspondem ao verbo
 
 %varios sujeitos e varios sintagmas verbais
-
+/*
 sintagma_verbal([Acao | OAcao], [Obj | OObj], N, [_-Tipo | O], Tipo2) -->
 	[que], verbal_assis(Acao, Obj, N, Tipo, Tipo2), [e], sintagma_verbal(OAcao, OObj, N, [_-Tipo | O], Tipo2).
 
@@ -141,7 +161,7 @@ sintagma_verbal([Acao | OAcao], [Obj | OObj], N, _-Tipo, Tipo2) -->
 
 sintagma_verbal([Acao | OAcao], [Obj | OObj], N, _-Tipo, Tipo2) -->
 	verbal_assis(Acao, Obj, N, Tipo, Tipo2), [e], sintagma_verbal(OAcao, OObj, N, _-Tipo, Tipo2).
-
+*/
 %um sujeito e um sintagma verbal
 sintagma_verbal(Acao, [Obj], N, _-Tipo, Tipo2) -->
 	[que], verbal_assis(Acao, Obj, N, Tipo, Tipo2).
@@ -224,3 +244,4 @@ teste_semantico(Acao, Tipo1, Tipo2):-
 teste_semantico(Acao, Tipo1, Tipo2):-
 	P=..[Acao, Tipo2, Tipo1],
 	P.
+

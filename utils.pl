@@ -26,3 +26,10 @@ interLists([H1|T1], L2, [H1|Res]) :-
 interLists([_|T1], L2, Res) :-
     interLists(T1, L2, Res).
 
+% hotel(IDHotel, Nome, 	Estrelas, Tel, IDMorada, IDCidade)
+writeListHoteis([]).
+writeListHoteis([Head|Tail]) :-
+    nl, hotel(Head, Nome, _,_,_,_), listToString(Nome,'', String), 
+    writeListHoteis(Tail).
+
+

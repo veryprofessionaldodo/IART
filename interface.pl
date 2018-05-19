@@ -77,8 +77,8 @@ FRASES QUE NÃO FUNCIONAM
 */
 
 teste:-
-    frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Tipton', 'ficam', 'em', 'Tirana', '.'],_).
-
+    frase(Acao, Suj, Obj, ['Quais', 'os', 'hoteis', 'de', 'categoria', 'superior',
+         'a', '2', 'estrelas', 'em', 'Tirana', '?'],_).
 
 teste2:-
     %frase(Acao, Suj, Obj, ['E', 'em','Africa','?'],_).

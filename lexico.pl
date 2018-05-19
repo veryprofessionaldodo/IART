@@ -116,6 +116,12 @@ nome(_, 3-estrelas) --> ['3','estrelas'].
 nome(_, 4-estrelas) --> ['4','estrelas'].
 nome(_, 5-estrelas) --> ['5','estrelas'].
 
+nome(_, 1-estrelas) --> ['categoria','1','estrela'].
+nome(_, 2-estrelas) --> ['categoria','2','estrelas'].
+nome(_, 3-estrelas) --> ['categoria','3','estrelas'].
+nome(_, 4-estrelas) --> ['categoria','4','estrelas'].
+nome(_, 5-estrelas) --> ['categoria','5','estrelas'].
+
 nome(_, 1-estrelas) --> ['categoria','1'].
 nome(_, 2-estrelas) --> ['categoria','2'].
 nome(_, 3-estrelas) --> ['categoria','3'].
@@ -127,6 +133,11 @@ nome(_, 2-maisestrelas) --> ['mais','que','2', 'estrelas'].
 nome(_, 3-maisestrelas) --> ['mais','que','3', 'estrelas'].
 nome(_, 4-maisestrelas) --> ['mais','que','4', 'estrelas'].
 
+nome(_, 1-maisestrelas) --> ['categoria','superior','a', '1','estrela'].
+nome(_, 2-maisestrelas) --> ['categoria','superior','a', '2','estrelas'].
+nome(_, 3-maisestrelas) --> ['categoria','superior','a', '3','estrelas'].
+nome(_, 4-maisestrelas) --> ['categoria','superior','a', '4','estrelas'].
+
 nome(_, 1-maisestrelas) --> ['categoria','superior','a', '1'].
 nome(_, 2-maisestrelas) --> ['categoria','superior','a', '2'].
 nome(_, 3-maisestrelas) --> ['categoria','superior','a', '3'].
@@ -136,6 +147,11 @@ nome(_, 2-menosestrelas) --> ['menos','que','2', 'estrela'].
 nome(_, 3-menosestrelas) --> ['menos','que','3', 'estrelas'].
 nome(_, 4-menosestrelas) --> ['menos','que','4', 'estrelas'].
 nome(_, 5-menosestrelas) --> ['menos','que','5', 'estrelas'].
+
+nome(_, 2-menosestrelas) --> ['categoria','inferior','a','2','estrelas'].
+nome(_, 3-menosestrelas) --> ['categoria','inferior','a','3','estrelas'].
+nome(_, 4-menosestrelas) --> ['categoria','inferior','a','4','estrelas'].
+nome(_, 5-menosestrelas) --> ['categoria','inferior','a','5','estrelas'].
 
 nome(_, 2-menosestrelas) --> ['categoria','inferior','a','2'].
 nome(_, 3-menosestrelas) --> ['categoria','inferior','a','3'].
