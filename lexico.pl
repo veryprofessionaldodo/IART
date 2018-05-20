@@ -15,6 +15,13 @@ nome(s-m, ['Hotel','Ibis']-hotel) --> ['Hotel','Ibis'].
 nome(s-m, ['Hotel','Village']-hotel) --> ['Hotel','Village'].   
 nome(s-m, ['Hotel','Lusitano']-hotel) --> ['Hotel','Lusitano'].   
 
+nome(_, ['quarto']-quarto) --> ['quarto'].
+nome(_, ['quarto']-quarto) --> ['quartos'].
+nome(_, ['vista','de','mar']-propriedade) --> ['vista','de','mar'].
+nome(_, ['ar','condicionado']-propriedade) --> ['ar','condicionado'].
+nome(_, ['cofre']-propriedade) --> ['cofre'].
+nome(_, ['televisao']-propriedade) --> ['televisao'].
+
 nome(s-m, ['servico']-servico) --> ['servico'].
 nome(p-m, ['servicos']-servico) --> ['servicos'].
 nome(s-m, ['spa']-servico) --> ['spa'].

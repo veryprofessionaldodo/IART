@@ -40,8 +40,8 @@ verificacaoInterrogacao(TipoQ, Hoteis, _Suj-quarto, ter-Afirmativo) :-
 			quarto(IDQuarto, Quarto, _Num),
 			(
             Afirmativo == s -> 
-                tem_quarto(IDHotel, IDQuarto); 
-                \+ tem_quarto(IDHotel, IDQuarto)
+                tem_quarto(IDHotel, IDQuarto, _Preco, _Propriedades); 
+                \+ tem_quarto(IDHotel, IDQuarto, _Preco, _Propriedades)
             )
 		), Resposta),
 		escreverResposta(_,_,Resposta).
@@ -98,6 +98,28 @@ filtrar(HoteisAtuais, Obj-menosestrelas, NovaLista) :-
     ) , NovaLista), 
     remover_pergunta.
 
+filtrar(HoteisAtuais, Obj-quarto, NovaLista) :-
+    findall(IDHotel,
+    (
+        hotel(IDHotel, _Nome, _Estrelas, _Tel, _IDMorada, _IDCidade),
+        tem_quarto(IDHotel, _IDQuarto, _Preco),
+        member(IDHotel, HoteisAtuais)
+    ) , NovaLista), 
+    remover_pergunta.
+
+filtrar(HoteisAtuais, _Obj-quarto, HoteisAtuais).
+
+filtrar(HoteisAtuais, Obj-propriedade, NovaLista) :-
+    findall(IDHotel,
+    (
+        hotel(IDHotel, _Nome, _Estrelas, _Tel, _IDMorada, _IDCidade),
+        tem_quarto(IDHotel, IDQuarto, _Preco, ListaPropriedades),
+        prop_quarto(IDProp, Obj),
+        member(IDProp, ListaPropriedades),
+        member(IDHotel, HoteisAtuais)
+    ) , NovaLista), 
+    remover_pergunta.
+
 filtrar(HoteisAtuais, Obj-hotel, NovaLista) :- 
     findall(IDHotel,
     (
@@ -143,19 +165,23 @@ filtrar(HoteisAtuais, ter-Afirmativo, Obj-servico, NovaLista) :-
 
 filtrar(HoteisAtuais, ter-Afirmativo, Obj-quarto, NovaLista) :-
     assert(tipo_pergunta(ter,quarto)),
+    % Verifica se é um quarto válido
+    quarto(IDQuarto, Obj, _Num),
     findall(IDHotel,
     (
         hotel(IDHotel, _Nome, _Estrelas, _Tel, _IDMorada, _IDCidade),
         quarto(IDQuarto, Obj, _Num),
         (
             Afirmativo == s -> 
-                tem_quarto(IDHotel, IDQuarto, Preco); 
-                \+ tem_quarto(IDHotel, IDQuarto, Preco)
+                tem_quarto(IDHotel, IDQuarto, Preco, _); 
+                \+ tem_quarto(IDHotel, IDQuarto, Preco, _)
         ),
         member(IDHotel, HoteisAtuais)
     ) , NovaLista),
     pergunta_atual(ter-Afirmativo).
-    
+
+filtrar(HoteisAtuais, ter-Afirmativo, Obj-quarto, HoteisAtuais).
+
 filtrar(HoteisAtuais, ter-Afirmativo, Obj-estrelas, NovaLista) :-
     assert(tipo_pergunta(ter,estrelas)),
     findall(IDHotel,
@@ -306,6 +332,16 @@ analise_lista(Lista) :-
 analise_lista(quanto, Lista) :-
 	write('A resposta certa e : '), length(Lista, Comprimento), write(Comprimento).
 
+%Fica em cidade
+escreverResposta(ficar,_, Lista) :-
+    write('Os hoteis sao : '), nl,
+    sort(Lista, Distinta),
+    writeListHoteis(Distinta, ficar).
+
+% Para caso a de cima falhe
+escreverResposta(ficar,_,Lista) :-
+    !,write('Nao ha nada com a descricao dada'), nl.
+
 %Tem Servico
 escreverResposta(_,_, [Head|Tail]) :-
     servico(_, Head),
@@ -314,17 +350,12 @@ escreverResposta(_,_, [Head|Tail]) :-
     writeList(Distinta).
 
 %Tem Quarto
-escreverResposta(_,_, [Head|Tail]) :-
-    quarto(_, Head, _NumPessoas),
-    sort([Head|Tail], Distinta),
-    write('Os quartos sao : '), nl,
-    writeList(Distinta).
-
-%Fica em cidade
-escreverResposta(ficar,_, Lista) :-
-    write('Os hoteis sao : '), nl,
+escreverResposta(ter,quarto, Lista) :-
+    quarto(_, Head, NumPessoas),
     sort(Lista, Distinta),
-    writeListHoteis(Distinta, ficar).
+    write('Os quartos sao : '), nl,
+    writeListQuartos(Distinta).
+
 
 escreverResposta(_,_, []) :-
-    write('Nao ha nada com a com a descrição dada.'), nl.
+    !,write('Nao ha nada com a descricao dada.'), nl.

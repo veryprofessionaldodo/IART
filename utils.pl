@@ -34,3 +34,18 @@ writeListHoteis([Head|Tail], ficar) :-
     writeList(Nome), write(', que fica na morada '), writeList(Morada), write(', '), 
     writeList(Cidade), write('.'), nl,
     writeListHoteis(Tail, ficar).
+
+writeListQuartos([]).
+writeListQuartos([Head|Hotel]) :-
+    hotel(Head, NomeHotel, _,_,_,_), 
+    quarto(IDQuarto, Nome, NumPessoas),
+    tem_quarto(Head, IDQuarto, Preco, Propriedades),
+    writeList(Nome), write(', do '), writeList(NomeHotel), write(', que custa '), write(Preco),
+    write('euros, com as propriedades'), writePropriedades(Propriedades), nl,
+    writeListQuartos(Tail).
+
+writePropriedades([]).
+writePropriedades([Head|[]]) :-
+    prop_quarto(Head, Nome),  writeList(Nome), writePropriedades([]).
+writePropriedades([Head|Tail]) :- 
+    prop_quarto(Head, Nome),  writeList(Nome), write(', '), writePropriedades(Tail).

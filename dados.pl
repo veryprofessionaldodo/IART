@@ -3,16 +3,17 @@
 /*------------------------*/
 
 % hotel(IDHotel, Nome, 	Estrelas, Tel, IDMorada, IDCidade).
-hotel(1, ['Hotel', 'Tipton'], 3, '278421134', 1, 1).
-hotel(2, ['Hotel', 'Vila', 'Gale'], 3, '278421189', 1, 1).
-hotel(3, ['Hotel', 'Axis'], 3, '278421189', 1, 1). 
-hotel(4, ['Hotel', 'Continental'], 4, '278421189', 1, 2).
-hotel(5, ['Hotel', 'Ibis'], 4, '278421189', 1, 2).
-hotel(6, ['Hotel', 'Village'], 4, '278421189', 1, 2).
-hotel(7, ['Hotel', 'Lusitano'], 4,'278421189', 1, 2).
-hotel(8, ['Hotel', 'Angolano'], 4,'278421189', 1, 2).
-hotel(9, ['Hotel', 'Merci'], 3,'278421189', 1, 3).
-hotel(10, ['Hotel', 'Louvre'], 4,'278421189', 1, 3).
+hotel(1, ['Hotel', 'Tipton'], 3, '278421134', 1, 43).
+hotel(2, ['Hotel', 'Vila', 'Gale'], 3, '278421189', 1, 44).
+hotel(3, ['Hotel', 'Axis'], 3, '278421189', 1, 45). 
+hotel(4, ['Hotel', 'Continental'], 4, '278421189', 1, 46).
+hotel(5, ['Hotel', 'Ibis'], 4, '278421189', 1, 47).
+hotel(6, ['Hotel', 'Village'], 4, '278421189', 1, 48).
+hotel(7, ['Hotel', 'Lusitano'], 4,'278421189', 1, 49).
+hotel(8, ['Hotel', 'Angolano'], 4,'278421189', 1, 50).
+hotel(9, ['Hotel', 'Merci'], 3,'278421189', 1, 22).
+hotel(10, ['Hotel', 'Louvre'], 4,'278421189', 1, 22).
+hotel(10, ['Hotel', 'Avante'], 4,'278421189', 1, 44).
 
 /*------------------------*/
 /*        QUARTOS         */
@@ -30,8 +31,10 @@ quarto(5, ['suite'], 5).
 /*------------------------*/
 
 % prop_quarto(IDProp, NomePropriedade).
-prop_quarto(1,['vista','para','o','mar']).
+prop_quarto(1,['vista','de','mar']).
 prop_quarto(2,['ar', 'condicionado']).
+prop_quarto(3,['cofre']).
+prop_quarto(4,['televisao']).
 
 /*------------------------*/
 /*      CONTINENTES       */
@@ -203,8 +206,8 @@ servico(9,['piscina']).
 /*       TEM QUARTO       */
 /*------------------------*/
 
-% tem_quarto(IDHotel, IDQuarto, Preço).
-tem_quarto(1, 2, 100).
+% tem_quarto(IDHotel, IDQuarto, Preço, [Propriedades]).
+tem_quarto(1, 2, 100, [1,2,3,4]).
 
 /*------------------------*/
 /*       TEM SERVIÇO      */

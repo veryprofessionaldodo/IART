@@ -12,11 +12,11 @@
 frase(_,_):- retract(erroSem), write("Erro Semantico").
 frase(_,_):- write("erro sintaxe").*/
 
-% Criado para casos especiais
-frase --> frase_interrogativa, ['?'].
-
 frase --> 
 	recursive_assis.
+
+% Criado para casos especiais
+frase --> frase_interrogativa, ['?'].
 
 frase_interrogativa -->
 	interrogativa_assis.
@@ -49,14 +49,14 @@ recursive_assis -->
 recursive_assis -->
 	{findall(IDHotel, hotel(IDHotel, _, _, _, _, _), Hoteis)},
 	recursive_assis1(Hoteis, ListaFinal), terminal(ListaFinal).
-
+/*
 recursive_assis -->
 	{findall(IDHotel, hotel(IDHotel, _, _, _, _, _), Hoteis)},
 	([e] ; ['E']), recursive_assis1(Hoteis, ListaFinal), terminal(ListaFinal).
-
+*/
 terminal(ListaFinal) --> [.], {!, analise_lista(ListaFinal)}.
 terminal(ListaFinal) --> [?], {!, analise_lista(_, ListaFinal)}.
-
+/*
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	[que], forma_verbal(N, TipoV-A), %Afirmativo ou negativo
 	sintagma_nominal(Suj-Tipo, N2),
@@ -69,24 +69,25 @@ recursive_assis1(HoteisAtuais, ListaFinal) -->
 	{filtrar(HoteisAtuais, TipoV-A, Suj-Tipo, NovaLista)},
 	{verifica_filtro(HoteisAtuais, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
-
+*/
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	forma_verbal(N, TipoV-A), %Afirmativo ou negativo
 	sintagma_nominal(Suj-Tipo, N2),
 	{filtrar(HoteisAtuais, TipoV-A, Suj-Tipo, NovaLista)},
 	{verifica_filtro(HoteisAtuais, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
-
+/*
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	[e], sintagma_nominal(Suj-Tipo, _N),
 	{filtrar_append(HoteisAtuais, Suj-Tipo, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
-
+*/
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	sintagma_nominal(Suj-Tipo, _N),
 	{filtrar(HoteisAtuais, Suj-Tipo, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
 
+/*
 % Frases contem adjetivos que podem servir de verbos (ex: parisiense)
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	[e], sintagma_nominal(_Suj-_Tipo, N),
@@ -109,7 +110,7 @@ recursive_assis1(HoteisAtuais, ListaFinal) -->
 	% Se no caso de uma afiramação respostas tenham sido filtradas, implica que estava com erros
 	{verifica_filtro(HoteisAtuais, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
- 
+ */
 
 recursive_assis1(ListaFinal, ListaFinal) --> {true}.
 
