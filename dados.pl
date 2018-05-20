@@ -180,7 +180,7 @@ cidade(55, ['Luanda'], 18).
 
 % morada(IDMorada, NomeMorada, IDCidade).
 
-morada(1, ['Rua','Bouca','da','Cavadinha'], 14).
+morada(1, ['Rua','Bouca','da','Cavadinha'], 1).
 morada(1, ['Rua','Bouca','da','Cavadinha'], 2).
 morada(1, ['Rua','Bouca','da','Cavadinha'], 3).
 

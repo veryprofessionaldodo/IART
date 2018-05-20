@@ -52,7 +52,7 @@ recursive_assis -->
 
 recursive_assis -->
 	{findall(IDHotel, hotel(IDHotel, _, _, _, _, _), Hoteis)},
-	[e], recursive_assis1(Hoteis, ListaFinal), terminal(ListaFinal).
+	([e] ; ['E']), recursive_assis1(Hoteis, ListaFinal), terminal(ListaFinal).
 
 terminal(ListaFinal) --> [.], {!, analise_lista(ListaFinal)}.
 terminal(ListaFinal) --> [?], {!, analise_lista(_, ListaFinal)}.
