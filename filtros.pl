@@ -16,25 +16,33 @@
 /* ------------------ */
 
 % Servicos tem X e Y?
-verificacaoInterrogacao(TipoQ, Hoteis, _Suj-servico, ter) :-
+verificacaoInterrogacao(TipoQ, Hoteis, _Suj-servico, ter-Afirmativo) :-
 	(TipoQ == que ; TipoQ == qual),
 	findall(Servico, 
 		(
 			hotel(IDHotel, Hotel, _Estrelas, _Tlm, _IdMorada, _IDCidade),
 			member(IDHotel, Hoteis),
 			servico(IDServico, Servico),
-			tem_servico(IDHotel, IDServico)
+			(
+            Afirmativo == s -> 
+                tem_servico(IDHotel, IDServico); 
+                \+ tem_servico(IDHotel, IDServico)
+            )
 		), Resposta),
 		escreverResposta(_,_,Resposta).
 
 % Que quartos tem X e Y?
-verificacaoInterrogacao(TipoQ, Hoteis, _Suj-quarto, ter) :-
+verificacaoInterrogacao(TipoQ, Hoteis, _Suj-quarto, ter-Afirmativo) :-
 		findall(Quarto,
 		(
 			hotel(IDHotel, Hotel, _Estrelas, _Tlm, _IdMorada, _IDCidade),
 			member(IDHotel, Hoteis),
 			quarto(IDQuarto, Quarto, _Num),
-			tem_quarto(IDHotel, IDQuarto)
+			(
+            Afirmativo == s -> 
+                tem_quarto(IDHotel, IDQuarto); 
+                \+ tem_quarto(IDHotel, IDQuarto)
+            )
 		), Resposta),
 		escreverResposta(_,_,Resposta).
 
@@ -116,14 +124,20 @@ filtrar_append(HoteisAtuais, Obj-hotel, NovaLista) :-
     ) , TmpList), append(HoteisAtuais, TmpList, NovaLista).
 
 % FILTROS QUE INCLUEM VERBOS
+%( condition -> then_clause ; else_clause )
 filtrar(HoteisAtuais, ter-Afirmativo, Obj-servico, NovaLista) :-
     assert(tipo_pergunta(ter,servico)),
     findall(IDHotel,
     (
         hotel(IDHotel, _Nome, _Estrelas, _Tel, _IDMorada, _IDCidade),
-        tem_servico(IDHotel, IDServico),
         servico(IDServico, Obj),
+        (
+            Afirmativo == s -> 
+                tem_servico(IDHotel, IDServico); 
+                \+ tem_servico(IDHotel, IDServico)
+        ),
         member(IDHotel, HoteisAtuais)
+        
     ) , NovaLista),
     pergunta_atual(ter-Afirmativo).
 
@@ -133,7 +147,11 @@ filtrar(HoteisAtuais, ter-Afirmativo, Obj-quarto, NovaLista) :-
     (
         hotel(IDHotel, _Nome, _Estrelas, _Tel, _IDMorada, _IDCidade),
         quarto(IDQuarto, Obj, _Num),
-        tem_quarto(IDHotel, IDQuarto, Preco),
+        (
+            Afirmativo == s -> 
+                tem_quarto(IDHotel, IDQuarto, Preco); 
+                \+ tem_quarto(IDHotel, IDQuarto, Preco)
+        ),
         member(IDHotel, HoteisAtuais)
     ) , NovaLista),
     pergunta_atual(ter-Afirmativo).
@@ -142,7 +160,12 @@ filtrar(HoteisAtuais, ter-Afirmativo, Obj-estrelas, NovaLista) :-
     assert(tipo_pergunta(ter,estrelas)),
     findall(IDHotel,
     (
-        hotel(IDHotel, _Nome, Obj, _Tel, _IDMorada, _IDCidade),
+        hotel(IDHotel, _Nome, Estrelas, _Tel, _IDMorada, _IDCidade),
+        (
+            Afirmativo == s -> 
+                Estrelas == Obj; 
+                \+ Estrelas == Obj
+        ),
         member(IDHotel, HoteisAtuais)
     ) , NovaLista),
     pergunta_atual(ter-Afirmativo).
@@ -152,7 +175,12 @@ filtrar(HoteisAtuais, ter-Afirmativo, Obj-maisestrelas, NovaLista) :-
     findall(IDHotel,
     (
         hotel(IDHotel, _Nome, Estrelas, _Tel, _IDMorada, _IDCidade),
-        Estrelas > Obj,
+        (
+            Afirmativo == s -> 
+                Estrelas > Obj; 
+                Estrelas =< Obj
+        ),
+
         member(IDHotel, HoteisAtuais)
     ) , NovaLista),
     pergunta_atual(ter-Afirmativo).
@@ -162,7 +190,11 @@ filtrar(HoteisAtuais, ter-Afirmativo, Obj-menosestrelas, NovaLista) :-
     findall(IDHotel,
     (
         hotel(IDHotel, _Nome, Estrelas, _Tel, _IDMorada, _IDCidade),
-        Estrelas < Obj,
+        (
+            Afirmativo == s -> 
+                Estrelas < Obj; 
+                Estrelas >= Obj
+        ),
         member(IDHotel, HoteisAtuais)
     ) , NovaLista),
     pergunta_atual(ter-Afirmativo).
@@ -172,7 +204,12 @@ filtrar(HoteisAtuais, ficar-Afirmativo, Obj-cidade, NovaLista) :-
     findall(IDHotel,
     (
         cidade(IDCidade, Obj, _IDPais),
-        hotel(IDHotel, _Nome, Estrelas, _Tel, _IDMorada, IDCidade),
+        hotel(IDHotel, _Nome, Estrelas, _Tel, _IDMorada, Cidade),
+        (
+            Afirmativo == s -> 
+                IDCidade == Cidade; 
+                \+ IDCidade == Cidade
+        ),
         member(IDHotel, HoteisAtuais)
     ) , NovaLista),
     pergunta_atual(ficar-Afirmativo).
@@ -182,8 +219,13 @@ filtrar(HoteisAtuais, ficar-Afirmativo, Obj-pais, NovaLista) :-
     findall(IDHotel,
     (
         cidade(IDCidade, _NomeCidade, IDPais),
-        pais(IDPais, Obj, _IDContinente),
+        pais(Pais, _NomePais, _IDContinente),
         hotel(IDHotel, _NomeHotel, Estrelas, _Tel, _IDMorada, IDCidade),
+        (
+            Afirmativo == s -> 
+                IDPais == Pais; 
+                \+ IDPais == Pais
+        ),
         member(IDHotel, HoteisAtuais)
     ) , NovaLista),
     pergunta_atual(ficar-Afirmativo).
@@ -194,8 +236,13 @@ filtrar(HoteisAtuais, ficar-Afirmativo, Obj-continente, NovaLista) :-
     (
         cidade(IDCidade, _NomeCidade, IDPais),
         pais(IDPais, _NomePais, IDContinente),
-        continente(IDContinente, Obj),
+        continente(Continente, Obj),
         hotel(IDHotel, _NomeHotel, Estrelas, _Tel, _IDMorada, IDCidade),
+        (
+            Afirmativo == s -> 
+                Continente == IDContinente; 
+                \+ Continente == IDContinente
+        ),
         member(IDHotel, HoteisAtuais)
     ) , NovaLista),
     pergunta_atual(ter-Afirmativo).

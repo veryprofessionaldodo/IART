@@ -21,6 +21,7 @@ nome(s-m, ['spa']-servico) --> ['spa'].
 nome(s-m, ['ginasio']-servico) --> ['ginasio'].
 nome(s-m, ['casino']-servico) --> ['casino'].
 nome(s-m, ['wifi']-servico) --> ['wifi'].
+nome(s-m, ['piscina']-servico) --> ['piscina'].
 nome(s-m, ['babysitting']-servico) --> ['babysitting'].
 nome(s-f, ['limpeza','de','quartos']-servico) --> ['limpeza','de','quartos'].
 nome(s-f, ['garagem','privativa']-servico) --> ['garagem','privativa'].
