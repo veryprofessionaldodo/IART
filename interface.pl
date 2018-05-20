@@ -4,11 +4,10 @@
 :-reconsult('gramatica.pl').
 
 inicio:- 
-    write('Escreve a tua pergunta! Termina com \'.\' ou \'?\' para a questao ser valida.\nPergunta: '),
+    nl, write('Escreve a tua pergunta! Termina com \'.\' ou \'?\' para a questao ser valida.\nPergunta: '),
     read_line(user_input, X), 
-    parse_input(X, [], [], ListWords), 
-    write(ListWords),write('\n'),!,
-    frase(_Acao, _Suj, _Obj, ListWords, _).    
+    parse_input(X, [], [], ListWords), !,
+    frase(ListWords, _), inicio.    
 
     %write(Response).
 
@@ -81,7 +80,7 @@ O Hotel X fica em Faro e possui 4 estrelas. (feito)
 
 
 teste:-
-    frase(Acao, Suj, Obj, ['Que', 'servicos','tem','o','Hotel','Tipton','?'],_).
+    frase(['Que', 'servicos','possuem','o','Hotel','Tipton','e','o','Hotel','Axis','?'],_).
     %frase(['Que', 'hoteis','ficam','em','Tirana','?'],_),
     %frase(['e', 'em','Durres','?'],_).
     %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'tem', 'quarto', 'de', 'casal','.'],_).

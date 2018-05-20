@@ -262,19 +262,22 @@ analise_lista(quanto, Lista) :-
 %Tem Servico
 escreverResposta(_,_, [Head|Tail]) :-
     servico(_, Head),
+    sort([Head|Tail], Distinta),
     write('Os servicos sao : '), nl,
-    writeList([Head|Tail]).
+    writeList(Distinta).
 
 %Tem Quarto
 escreverResposta(_,_, [Head|Tail]) :-
     quarto(_, Head, _NumPessoas),
+    sort([Head|Tail], Distinta),
     write('Os quartos sao : '), nl,
-    writeList([Head|Tail]).
+    writeList(Distinta).
 
 %Fica em cidade
-escreverResposta(ficar,_, [Head|Tail]) :-
+escreverResposta(ficar,_, Lista) :-
     write('Os hoteis sao : '), nl,
-    writeListHoteis([Head|Tail], ficar).
+    sort(Lista, Distinta),
+    writeListHoteis(Distinta, ficar).
 
 escreverResposta(_,_, []) :-
     write('Nao ha nada com a com a descrição dada.'), nl.

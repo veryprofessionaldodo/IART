@@ -12,12 +12,11 @@
 frase(_,_):- retract(erroSem), write("Erro Semantico").
 frase(_,_):- write("erro sintaxe").*/
 
-frase --> 
-	recursive_assis.
-
-
 % Criado para casos especiais
 frase --> frase_interrogativa, ['?'].
+
+frase --> 
+	recursive_assis.
 
 frase_interrogativa -->
 	interrogativa_assis.
@@ -25,12 +24,18 @@ frase_interrogativa -->
 %Estruturas simples e específicas para o contexto do trabalho, com menos foco na recursividade
 interrogativa_assis -->
 	% quantificador indica que tipo de pergunta está a ser feita
-	quantificador(TipoP, N), 
-	sintagma_nominal(Suj-Tipo, N),
-	forma_verbal(N, Acao-Afirmativo),
+	quantificador(TipoP, N-G), 
+	sintagma_nominal(Suj-Tipo, N-G),
+	forma_verbal(N2, Acao-Afirmativo),
 	{findall(IDHotel, hotel(IDHotel,_,_,_,_,_), HoteisAtuais)},
 	recursive_assis1(HoteisAtuais, ListaFinal), 
-	{!, verificacaoInterrogacao(TipoP, ListaFinal, Suj-Tipo, Acao)},
+	{!,length(ListaFinal, Comp),
+	(
+		(Comp > 1, N2 == p)
+		;
+		(Comp < 2, N2 == s)
+	)},
+	{verificacaoInterrogacao(TipoP, ListaFinal, Suj-Tipo, Acao)},
 	{assert((lastData(TipoP, LSuj, Obj, Acao)))}.
 
 

@@ -20,15 +20,6 @@ listToString([Head|Tail], TmpString, String) :-
     atom_concat(Tmp2, ' ', TmpFinal),
     listToString(Tail, TmpFinal, String).
 
-interLists([], _, []).
-
-interLists([H1|T1], L2, [H1|Res]) :-
-    member(H1, L2),
-    interLists(T1, L2, Res).
-
-interLists([_|T1], L2, Res) :-
-    interLists(T1, L2, Res).
-
 % hotel(IDHotel, Nome, 	Estrelas, Tel, IDMorada, IDCidade)
 writeListHoteis([]).
 writeListHoteis([Head|Tail]) :-
