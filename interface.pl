@@ -74,8 +74,8 @@ O Hotel X fica em Faro e possui 4 estrelas. (feito)
 teste:-
     %frase(['Que', 'servicos','nao','possui','o','Hotel','Tipton','?'],_).
     %frase(['O','Hotel','Tipton','nao','fica','em','Paris','.'],_).
-    frase(['Que', 'hoteis','tem','quarto','com','vista','de','mar','?'],_).
-    %frase(['Que', 'hoteis','ficam','em','Tirana','?'],_),
+    %frase(['Que', 'hoteis','tem','quarto','com','vista','de','mar','?'],_).
+    frase(['Que', 'hoteis','ficam','em','Tirana','?'],_).
     %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'tem', 'quarto', 'de', 'casal','.'],_).
     %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Axis', 'tem', '3', 'estrelas', '.'],_).
     %frase(Acao, Suj, Obj, ['Quais', 'os', 'hoteis', 'de', 'categoria', 'superior','a', '2', 'estrelas', 'em', 'Tirana', '?'],_).

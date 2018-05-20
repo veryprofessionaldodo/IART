@@ -28,11 +28,11 @@ writeListHoteis([Head|Tail]) :-
 
 writeListHoteis([], _).
 writeListHoteis([Head|Tail], ficar) :-
-    hotel(Head, Nome, _,_,IDMorada,IDCidade), 
+    hotel(Head, Nome, Estrelas,_,IDMorada,IDCidade), 
     morada(IDMorada, Morada, IDCidade),
     cidade(IDCidade, Cidade, _IDPais),
     writeList(Nome), write(', que fica na morada '), writeList(Morada), write(', '), 
-    writeList(Cidade), write('.'), nl,
+    writeList(Cidade), write('.'), write(' Tem '), write(Estrelas), write(' estrela(s).') nl,
     writeListHoteis(Tail, ficar).
 
 writeListQuartos([]).

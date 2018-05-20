@@ -225,6 +225,21 @@ filtrar(HoteisAtuais, ter-Afirmativo, Obj-menosestrelas, NovaLista) :-
     ) , NovaLista),
     pergunta_atual(ter-Afirmativo).
 
+filtrar(HoteisAtuais, ficar-Afirmativo, Obj-morada, NovaLista) :-
+    assert(tipo_pergunta(ficar, _)),
+    findall(IDHotel,
+    (
+        morada(IDMorada, Obj, _IDCidade),
+        hotel(IDHotel, _Nome, Estrelas, _Tel, Morada, _Cidade),
+        (
+            Afirmativo == s -> 
+                IDMorada == Morada; 
+                \+ IDMorada == Morada
+        ),
+        member(IDHotel, HoteisAtuais)
+    ) , NovaLista),
+    pergunta_atual(ficar-Afirmativo).
+
 filtrar(HoteisAtuais, ficar-Afirmativo, Obj-cidade, NovaLista) :-
     assert(tipo_pergunta(ficar, _)),
     findall(IDHotel,
