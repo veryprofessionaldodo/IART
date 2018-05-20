@@ -175,6 +175,20 @@ nome(_, 3-menosestrelas) --> ['categoria','inferior','a','3'].
 nome(_, 4-menosestrelas) --> ['categoria','inferior','a','4'].
 nome(_, 5-menosestrelas) --> ['categoria','inferior','a','5'].
 
+nome(s-_, ['Rua', 'Bouca', 'da', 'Cavadinha']-morada) --> ['Rua', 'Bouca', 'da', 'Cavadinha'].
+nome(s-_, ['Avenida','Fernando','da','Costa','Silva']-morada) --> ['Avenida','Fernando','da','Costa','Silva'].
+nome(s-_, ['Rua','da','Liberdade']-morada) --> ['Rua','da','Liberdade'].
+nome(s-_, ['Rua','Camões']-morada) --> ['Rua','Camões'].
+nome(s-_, ['Rua','da','Nossa','Senhora']-morada) --> ['Rua','da','Nossa','Senhora'].
+nome(s-_, ['Avenida', 'do', 'Estudante']-morada) --> ['Avenida', 'do', 'Estudante'].
+nome(s-_, ['Rua','dos','Ladrões']-morada) --> ['Rua','dos','Ladrões'].
+nome(s-_, ['Avenida', 'Joao', 'Borges', 'da', 'Cunha']-morada) --> ['Avenida', 'Joao', 'Borges', 'da', 'Cunha'].
+nome(s-_, ['Avenue','de','la','Jonchere']-morada) --> ['Avenue','de','la','Jonchere'].
+nome(s-_, ['Les','Fauvettes']-morada) --> ['Les','Fauvettes'].
+nome(s-_, ['Betaniankatu']-morada) --> ['Betaniankatu'].
+nome(s-_, ['Anklamer', 'Street']-morada) --> ['Anklamer', 'Street'].
+nome(s-_, ['Rue','du','Houyoux']-morada) --> ['Rue','du','Houyoux'].
+
 /*----------------------*/
 /*     DETERMINANTES    */
 /*----------------------*/

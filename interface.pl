@@ -9,8 +9,6 @@ inicio:-
     parse_input(X, [], [], ListWords), !,
     frase(ListWords, _), inicio.    
 
-    %write(Response).
-
 parse_input([], [], Words, Words).
 parse_input([Head|Body], CurrWord, TmpList, Words) :-
     char_code(Char, Head),
@@ -43,40 +41,3 @@ is_ending_char(Head, NewList, FinalList) :-
 
 is_ending_char(_, FinalList, FinalList).
 
-%Quantos (são) os hotéis do Porto?
-/*
-FRASES QUE FUNCIONAM
-    frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'fica', 'em', 'Tirana', '.'],_).
-    frase(Acao, Suj, Obj, ['Que', 'hoteis','ficam','em','Tirana','?'],_).
-    frase(Acao, Suj, Obj, ['O','Hotel','Tipton','tem','categoria','superior','a','3', '.'],_).
-    frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'tem', 'categoria', '3', '.'],_).
-    frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'tem', '3', 'estrelas', 'e', 'fica', 'em', 'Tirana', '.'],_).
-    frase(Acao, Suj, Obj, ['Que', 'hoteis','ficam','na','Albania','?'],_).
-    frase(Acao, Suj, Obj, ['Quais', 'os', 'hoteis', 'parisienses','com','categoria','superior','a','3','?'],_).
-    frase(Acao, Suj, Obj, ['Quantos','sao','os','hoteis','de','Tirana','?'],_).
-    frase(Acao, Suj, Obj, ['Quais', 'os', 'hoteis','que', 'possuem', 'babysitting', 'e', 'wifi', '?'],_).
-    frase(Acao, Suj, Obj, ['Quantos','sao','os','hoteis','de','Tirana','?'],_).
-    frase(Acao, Suj, Obj, ['Quais', 'os', 'hoteis', 'parisienses', 'que', 'possuem', 'babysitting', '?'],_).
-    frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Tipton', 'tem', '3', 'estrelas', 'e', 'ficam', 'em', 'Tirana', '.'],_).
-    frase(Acao, Suj, Obj, ['O', 'Hotel', 'Vila', 'Gale', 'e', 'o', 'Hotel', 'Axis', 'ficam', 'na', 'Albania', 'e', 'tem', '3', 'estrelas', '.'],_).
-*/
-
-/* 
-Quantos (são) os hotéis do Porto? (feito)
-Quais os hotéis de categoria superior a 3 estrelas em Lisboa? (feito)
-E em Coimbra? (feito)
-Que/Quais serviços disponibiliza o Hotel X? (feito)
-Quais os hotéis parisienses que possuem serviço de babysitting? (feito)
-Quais os hotéis de Faro que possuem categoria inferior a 4 e quartos com vista de mar? 
-O Hotel X fica em Faro e possui 4 estrelas. (feito)
-*/
-
-teste:-
-    %frase(['Que', 'servicos','nao','possui','o','Hotel','Tipton','?'],_).
-    %frase(['O','Hotel','Tipton','nao','fica','em','Paris','.'],_).
-    %frase(['Que', 'hoteis','tem','quarto','com','vista','de','mar','?'],_).
-    frase(['Que', 'hoteis','ficam','em','Tirana','?'],_).
-    %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'tem', 'quarto', 'de', 'casal','.'],_).
-    %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Axis', 'tem', '3', 'estrelas', '.'],_).
-    %frase(Acao, Suj, Obj, ['Quais', 'os', 'hoteis', 'de', 'categoria', 'superior','a', '2', 'estrelas', 'em', 'Tirana', '?'],_).
-    %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Vila', 'Gale', 'e', 'o', 'Hotel', 'Axis', 'ficam', 'na', 'Antuerpia', 'e', 'tem', '4', 'estrelas', '.'],_).
