@@ -81,14 +81,10 @@ O Hotel X fica em Faro e possui 4 estrelas. (feito)
 
 
 teste:-
-    %frase(Acao, Suj, Obj, ['Que', 'servicos','tem','o','Hotel','Tipton','?'],_).
-    frase(Acao, Suj, Obj, ['Que', 'hoteis','ficam','na','Europa','?'],_).
+    frase(Acao, Suj, Obj, ['Que', 'servicos','tem','o','Hotel','Tipton','?'],_).
+    %frase(['Que', 'hoteis','ficam','em','Tirana','?'],_),
+    %frase(['e', 'em','Durres','?'],_).
     %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'tem', 'quarto', 'de', 'casal','.'],_).
     %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'e', 'o', 'Hotel', 'Axis', 'tem', '3', 'estrelas', '.'],_).
     %frase(Acao, Suj, Obj, ['Quais', 'os', 'hoteis', 'de', 'categoria', 'superior','a', '2', 'estrelas', 'em', 'Tirana', '?'],_).
     %frase(Acao, Suj, Obj, ['O', 'Hotel', 'Vila', 'Gale', 'e', 'o', 'Hotel', 'Axis', 'ficam', 'na', 'Antuerpia', 'e', 'tem', '4', 'estrelas', '.'],_).
-
-teste2:-
-    %frase(Acao, Suj, Obj, ['E', 'em','Africa','?'],_).
-    %frase(Acao, Suj, Obj, ['E', 'na','Antuerpia','?'],_).
-    frase(Acao, Suj, Obj, ['E','o','Hotel','Axis','?'],_).

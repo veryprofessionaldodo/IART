@@ -127,39 +127,39 @@ cidade(6, ['Munique'], 2).
 cidade(7, ['Antuerpia'], 3).
 cidade(8, ['Bruges'], 3).
 cidade(9, ['Bruxelas'], 3).
-cidade(10, 'Zagreb', 4).
-cidade(11, 'Rijeka', 4).
-cidade(12, 'Split', 4).
-cidade(13, 'Copenhaga', 5).
-cidade(14, 'Aarhus', 5).
-cidade(15, 'Odense', 5).
-cidade(16, 'Tallinn', 6).
-cidade(17, 'Tartu', 6).
-cidade(18, 'Narva', 6).
-cidade(19, 'Helsinquia', 7).
-cidade(20, 'Tampere', 7).
-cidade(21, 'Turku', 7).
+cidade(10, ['Zagreb'], 4).
+cidade(11, ['Rijeka'], 4).
+cidade(12, ['Split'], 4).
+cidade(13, ['Copenhaga'], 5).
+cidade(14, ['Aarhus'], 5).
+cidade(15, ['Odense'], 5).
+cidade(16, ['Tallinn'], 6).
+cidade(17, ['Tartu'], 6).
+cidade(18, ['Narva'], 6).
+cidade(19, ['Helsinquia'], 7).
+cidade(20, ['Tampere'], 7).
+cidade(21, ['Turku'], 7).
 cidade(22, ['Paris'], 8).
-cidade(23, 'Bordeus', 8).
-cidade(24, 'Lyon', 8).
-cidade(25, 'Nice', 8).
-cidade(26, 'Cannes', 8).
-cidade(27, 'Atenas', 9).
-cidade(28, 'Fira', 9).
-cidade(29, 'Rodes', 9).
-cidade(30, 'Reikiavik', 10).
-cidade(31, 'Keflavik', 10).
-cidade(32, 'Seyoisfjorour', 10). %Seyoisfjörour
-cidade(33, 'Vilnius', 11).
-cidade(34, 'Kaunas', 11).
-cidade(35, 'Klaipeda', 11). %Klaipèda
-cidade(36, 'Skopje', 12).
-cidade(37, 'Ohrid', 12).
-cidade(38, 'Amesterdao', 13).
-cidade(39, 'Roterdao', 13).
-cidade(40, 'Kinderdijk', 13).
-cidade(41, 'Haia', 13).
-cidade(42, 'Delft', 13).
+cidade(23, ['Bordeus'], 8).
+cidade(24, ['Lyon'], 8).
+cidade(25, ['Nice'], 8).
+cidade(26, ['Cannes'], 8).
+cidade(27, ['Atenas'], 9).
+cidade(28, ['Fira'], 9).
+cidade(29, ['Rodes'], 9).
+cidade(30, ['Reikiavik'], 10).
+cidade(31, ['Keflavik'], 10).
+cidade(32, ['Seyoisfjorour'], 10). %Seyoisfjörour
+cidade(33, ['Vilnius'], 11).
+cidade(34, ['Kaunas'], 11).
+cidade(35, ['Klaipeda'], 11). %Klaipèda
+cidade(36, ['Skopje'], 12).
+cidade(37, ['Ohrid'], 12).
+cidade(38, ['Amesterdao'], 13).
+cidade(39, ['Roterdao'], 13).
+cidade(40, ['Kinderdijk'], 13).
+cidade(41, ['Haia'], 13).
+cidade(42, ['Delft'], 13).
 cidade(43, ['Lisboa'], 14).
 cidade(44, ['Porto'], 14).
 cidade(45, ['Guimaraes'], 14).
@@ -174,13 +174,15 @@ cidade(53, ['Sao','Petersburgo'], 15).
 cidade(54, ['Kiev'], 16).
 cidade(55, ['Luanda'], 18).
 
-
 /*------------------------*/
 /*        MORADAS         */
 /*------------------------*/
 
 % morada(IDMorada, NomeMorada, IDCidade).
-morada(1, ['Rua','Bouca','da','Cavadinha'], 1).
+
+morada(1, ['Rua','Bouca','da','Cavadinha'], 14).
+morada(1, ['Rua','Bouca','da','Cavadinha'], 2).
+morada(1, ['Rua','Bouca','da','Cavadinha'], 3).
 
 /*------------------------*/
 /*        SERVIÇOS        */

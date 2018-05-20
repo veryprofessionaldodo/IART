@@ -1,11 +1,15 @@
 :-reconsult(utils).
 
-% Para caso seja para fazer [e] a perguntas ou a sujeitos
+% Para caso haja [e] manter qual é a pergunta a ser feita
 :-dynamic pergunta/1.
 
 % Para oferecer uma melhor resposta
 :-dynamic tipo_pergunta/2.
 :-dynamic hasErrors/0.
+
+
+% Para caso seja para fazer [e] a perguntas ou a sujeitos
+:-dynamic e_pergunta/0.
 
 /* ------------------ */
 /* 	  INTERROGAÇÕES   */
@@ -219,7 +223,7 @@ pergunta_atual(NovoVerbo-Afirmativo) :-
     assert(pergunta(NovoVerbo-Afirmativo)).
 
 remover_pergunta :-
-    retract(pergunta(_-_)).
+    retract(e_pergunta).
 
 % Caso não haja perguntas ainda
 remover_pergunta.
@@ -227,6 +231,22 @@ remover_pergunta.
 /* ------------------------ */
 /*        RESPOSTAS         */
 /* -------------------------*/
+
+% RESPOSTAS ESPECIFICAS
+analise_lista(Quant, Lista) :-
+	nonvar(Quant), 
+    tipo_pergunta(Verbo, TipoInformacao),
+	escreverResposta(Verbo, TipoInformacao, Lista).
+
+% Para caso de pergunta iniciada com [e]
+analise_lista(_, Lista) :-
+    tipo_pergunta(Verbo, TipoInformacao),
+    escreverResposta(Verbo, TipoInformacao, Lista).
+
+% RESPOSTA GENÉRICA
+analise_lista(Quant, Lista) :-
+	nonvar(Quant), 
+	nl,write('A resposta certa e : '), writeListHoteis(Lista).
 
 analise_lista(Lista) :-
 	retract(hasErrors),
@@ -237,13 +257,7 @@ analise_lista(Lista) :-
 	write('A informacao esta de acordo com a nossa base de dados').
 
 analise_lista(quanto, Lista) :-
-	nl,write('A resposta certa e : '), length(Lista, Comprimento), write(Comprimento).
-
-% RESPOSTAS ESPECIFICAS
-analise_lista(Quant, Lista) :-
-	nonvar(Quant), 
-    retract(tipo_pergunta(Verbo, TipoInformacao)),
-	escreverResposta(Verbo, TipoInformacao, Lista).
+	write('A resposta certa e : '), length(Lista, Comprimento), write(Comprimento).
 
 %Tem Servico
 escreverResposta(_,_, [Head|Tail]) :-
@@ -257,12 +271,10 @@ escreverResposta(_,_, [Head|Tail]) :-
     write('Os quartos sao : '), nl,
     writeList([Head|Tail]).
 
-%Tem Quarto
+%Fica em cidade
 escreverResposta(ficar,_, [Head|Tail]) :-
     write('Os hoteis sao : '), nl,
     writeListHoteis([Head|Tail], ficar).
 
-% RESPOSTA GENÉRICA
-analise_lista(Quant, Lista) :-
-	nonvar(Quant), 
-	nl,write('A resposta certa e : '), writeListHoteis(Lista).
+escreverResposta(_,_, []) :-
+    write('Nao ha nada com a com a descrição dada.'), nl.

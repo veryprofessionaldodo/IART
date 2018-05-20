@@ -40,6 +40,6 @@ writeListHoteis([Head|Tail], ficar) :-
     hotel(Head, Nome, _,_,IDMorada,IDCidade), 
     morada(IDMorada, Morada, IDCidade),
     cidade(IDCidade, Cidade, _IDPais),
-    writeList(Nome), write(', que fica na morada '), write(Morada), 
-    write(Cidade), write('.'),
+    writeList(Nome), write(', que fica na morada '), writeList(Morada), write(', '), 
+    writeList(Cidade), write('.'), nl,
     writeListHoteis(Tail, ficar).
