@@ -44,7 +44,6 @@ is_ending_char(Head, NewList, FinalList) :-
 is_ending_char(_, FinalList, FinalList).
 
 %Quantos (são) os hotéis do Porto?
-
 /*
 FRASES QUE FUNCIONAM
     frase(Acao, Suj, Obj, ['O', 'Hotel', 'Tipton', 'fica', 'em', 'Tirana', '.'],_).
@@ -62,10 +61,6 @@ FRASES QUE FUNCIONAM
     frase(Acao, Suj, Obj, ['O', 'Hotel', 'Vila', 'Gale', 'e', 'o', 'Hotel', 'Axis', 'ficam', 'na', 'Albania', 'e', 'tem', '3', 'estrelas', '.'],_).
 */
 
-/*
-FRASES QUE FUNCIONAM MAS ESTÃO INCORRETAS
-*/
-
 /* 
 Quantos (são) os hotéis do Porto? (feito)
 Quais os hotéis de categoria superior a 3 estrelas em Lisboa? (feito)
@@ -75,7 +70,6 @@ Quais os hotéis parisienses que possuem serviço de babysitting? (feito)
 Quais os hotéis de Faro que possuem categoria inferior a 4 e quartos com vista de mar? 
 O Hotel X fica em Faro e possui 4 estrelas. (feito)
 */
-
 
 teste:-
     %frase(['Que', 'servicos','nao','possui','o','Hotel','Tipton','?'],_).

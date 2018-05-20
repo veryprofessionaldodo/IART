@@ -2,15 +2,10 @@
 :-reconsult('lexico.pl').
 :-reconsult('filtros.pl').
 
-:-dynamic lastData/4.
 
 /*----------------------*/
 /* ESTRUTURA DAS FRASES */
 /*----------------------*/
-
-/*
-frase(_,_):- retract(erroSem), write("Erro Semantico").
-frase(_,_):- write("erro sintaxe").*/
 
 frase --> 
 	recursive_assis.
@@ -35,9 +30,7 @@ interrogativa_assis -->
 		;
 		(Comp < 2, N2 == s)
 	)},
-	{verificacaoInterrogacao(TipoP, ListaFinal, Suj-Tipo, Acao)},
-	{assert((lastData(TipoP, LSuj, Obj, Acao)))}.
-
+	{verificacaoInterrogacao(TipoP, ListaFinal, Suj-Tipo, Acao)}.
 
 % Ex : Quais os hotéis de categoria superior a 3 estrelas em Lisboa? 
 recursive_assis -->
@@ -49,14 +42,14 @@ recursive_assis -->
 recursive_assis -->
 	{findall(IDHotel, hotel(IDHotel, _, _, _, _, _), Hoteis)},
 	recursive_assis1(Hoteis, ListaFinal), terminal(ListaFinal).
-/*
+
 recursive_assis -->
 	{findall(IDHotel, hotel(IDHotel, _, _, _, _, _), Hoteis)},
 	([e] ; ['E']), recursive_assis1(Hoteis, ListaFinal), terminal(ListaFinal).
-*/
+
 terminal(ListaFinal) --> [.], {!, analise_lista(ListaFinal)}.
 terminal(ListaFinal) --> [?], {!, analise_lista(_, ListaFinal)}.
-/*
+
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	[que], forma_verbal(N, TipoV-A), %Afirmativo ou negativo
 	sintagma_nominal(Suj-Tipo, N2),
@@ -69,25 +62,25 @@ recursive_assis1(HoteisAtuais, ListaFinal) -->
 	{filtrar(HoteisAtuais, TipoV-A, Suj-Tipo, NovaLista)},
 	{verifica_filtro(HoteisAtuais, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
-*/
+
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	forma_verbal(N, TipoV-A), %Afirmativo ou negativo
 	sintagma_nominal(Suj-Tipo, N2),
 	{filtrar(HoteisAtuais, TipoV-A, Suj-Tipo, NovaLista)},
 	{verifica_filtro(HoteisAtuais, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
-/*
+
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	[e], sintagma_nominal(Suj-Tipo, _N),
 	{filtrar_append(HoteisAtuais, Suj-Tipo, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
-*/
+
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	sintagma_nominal(Suj-Tipo, _N),
 	{filtrar(HoteisAtuais, Suj-Tipo, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
 
-/*
+
 % Frases contem adjetivos que podem servir de verbos (ex: parisiense)
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	[e], sintagma_nominal(_Suj-_Tipo, N),
@@ -110,7 +103,7 @@ recursive_assis1(HoteisAtuais, ListaFinal) -->
 	% Se no caso de uma afiramação respostas tenham sido filtradas, implica que estava com erros
 	{verifica_filtro(HoteisAtuais, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
- */
+
 
 recursive_assis1(ListaFinal, ListaFinal) --> {true}.
 
