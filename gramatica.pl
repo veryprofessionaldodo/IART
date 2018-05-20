@@ -1,11 +1,8 @@
 :-reconsult('dados.pl').
 :-reconsult('lexico.pl').
-:-reconsult('verificacoes.pl').
 :-reconsult('filtros.pl').
 
 :-dynamic lastData/4.
-
-
 
 /*----------------------*/
 /* ESTRUTURA DAS FRASES */
@@ -42,9 +39,8 @@ interrogativa_assis -->
 	sintagma_nominal(Suj-Tipo, N),
 	forma_verbal(N, Acao-Afirmativo),
 	{findall(IDHotel, hotel(IDHotel,_,_,_,_,_), HoteisAtuais)},
-	recursive_assis1(HoteisAtuais, ListaFinal),
-	{write(ListaFinal)},
-	{verificacaoInterrogacao(TipoP, ListaFinal, Suj-Tipo, Acao)},
+	recursive_assis1(HoteisAtuais, ListaFinal), 
+	{!, verificacaoInterrogacao(TipoP, ListaFinal, Suj-Tipo, Acao)},
 	{assert((lastData(TipoP, LSuj, Obj, Acao)))}.
 /*
 	PERGUNTAS SEM CONTEXTO DA PERGUNTA ANTERIOR
@@ -53,23 +49,23 @@ interrogativa_assis -->
 % O Com Erros apenas é usado nas afirmações porque só aqui é que são feitas comparações diretas
 recursive_assis -->
 	{findall(IDHotel, hotel(IDHotel, _, _, _, _, _), Hoteis)},
-	recursive_assis1(Hoteis, ListaFinal), [.], {analise_lista(ListaFinal)}.
+	recursive_assis1(Hoteis, ListaFinal), [.], {!, analise_lista(ListaFinal)}.
 
 % Ex : Quais os hotéis de categoria superior a 3 estrelas em Lisboa? 
 
 recursive_assis -->
 	quantificador(TipoP, _N), 
 	{findall(IDHotel, hotel(IDHotel, _, _, _, _, _), Hoteis)},
-	recursive_assis1(Hoteis, ListaFinal), [?], {analise_lista(TipoP, ListaFinal)}.
+	recursive_assis1(Hoteis, ListaFinal), [?], {!, analise_lista(TipoP, ListaFinal)}.
 
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	[e], sintagma_nominal(Suj-Tipo, _N),
-	{filtrar_append(HoteisAtuais, Suj-Tipo, NovaLista), write(NovaLista)},
+	{filtrar_append(HoteisAtuais, Suj-Tipo, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
 
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	sintagma_nominal(Suj-Tipo, _N),
-	{filtrar(HoteisAtuais, Suj-Tipo, NovaLista), write(NovaLista)},
+	{filtrar(HoteisAtuais, Suj-Tipo, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
 
 
@@ -77,21 +73,21 @@ recursive_assis1(HoteisAtuais, ListaFinal) -->
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	[e], sintagma_nominal(_Suj-_Tipo, N),
 	adjetivo(N,Obj-TipoV, Acao),
-	{filtrar(HoteisAtuais, Acao-A, Obj-Tipo, NovaLista), write(NovaLista)},
+	{filtrar(HoteisAtuais, Acao-A, Obj-Tipo, NovaLista)},
 	{verifica_filtro(HoteisAtuais, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
 
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	sintagma_nominal(Suj-Tipo, _N),
 	adjetivo(N,Obj-TipoV, Acao),
-	{filtrar(HoteisAtuais, Acao-A, Obj-TipoV, NovaLista), write(NovaLista)},
+	{filtrar(HoteisAtuais, Acao-A, Obj-TipoV, NovaLista)},
 	{verifica_filtro(HoteisAtuais, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
 
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	[e], [que], forma_verbal(N, TipoV-A), %Afirmativo ou negativo
 	sintagma_nominal(Suj-Tipo, N-G),
-	{filtrar(HoteisAtuais, TipoV-A, Suj-Tipo, NovaLista), write(NovaLista)},
+	{filtrar(HoteisAtuais, TipoV-A, Suj-Tipo, NovaLista)},
 	% Se no caso de uma afiramação respostas tenham sido filtradas, implica que estava com erros
 	{verifica_filtro(HoteisAtuais, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
@@ -99,21 +95,21 @@ recursive_assis1(HoteisAtuais, ListaFinal) -->
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	[que], forma_verbal(N, TipoV-A), %Afirmativo ou negativo
 	sintagma_nominal(Suj-Tipo, N2),
-	{filtrar(HoteisAtuais, TipoV-A, Suj-Tipo, NovaLista), write(NovaLista)},
+	{filtrar(HoteisAtuais, TipoV-A, Suj-Tipo, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
 	
 
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	[e], forma_verbal(N, TipoV-A), %Afirmativo ou negativo
 	sintagma_nominal(Suj-Tipo, N2),
-	{filtrar(HoteisAtuais, TipoV-A, Suj-Tipo, NovaLista), write(NovaLista)},
+	{filtrar(HoteisAtuais, TipoV-A, Suj-Tipo, NovaLista)},
 	{verifica_filtro(HoteisAtuais, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
 
 recursive_assis1(HoteisAtuais, ListaFinal) -->
 	forma_verbal(N, TipoV-A), %Afirmativo ou negativo
 	sintagma_nominal(Suj-Tipo, N2),
-	{filtrar(HoteisAtuais, TipoV-A, Suj-Tipo, NovaLista), write(NovaLista)},
+	{filtrar(HoteisAtuais, TipoV-A, Suj-Tipo, NovaLista)},
 	{verifica_filtro(HoteisAtuais, NovaLista)},
 	recursive_assis1(NovaLista, ListaFinal).
 

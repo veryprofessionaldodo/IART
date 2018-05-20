@@ -241,7 +241,6 @@ forma_verbal(p, ter-s) --> [disponibilizam].
 forma_verbal(s, ter-n) --> [nao,disponibiliza].
 forma_verbal(p, ter-n) --> [nao,disponibilizam].
 
-
 forma_verbal(_, ter-s) --> [e].
 forma_verbal(_, ter-s) --> [sao].
 
